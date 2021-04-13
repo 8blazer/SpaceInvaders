@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreenEnemy : MonoBehaviour
+public class OrangeEnemy : MonoBehaviour
 {
-    int health = 3;
+    int health = 15;
     public float moveSpeed;
     public float shootSpeed;
     public float bulletSpeed;
     public GameObject bulletPrefab;
     float timer;
     bool moveRight;
+    GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -24,7 +26,8 @@ public class GreenEnemy : MonoBehaviour
         if (timer > shootSpeed)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
+            bullet.transform.up = (player.transform.position - transform.position);
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
             timer = 0;
         }
         if (moveRight)
@@ -33,7 +36,6 @@ public class GreenEnemy : MonoBehaviour
             if (transform.position.x > 8.5f)
             {
                 moveRight = false;
-                transform.position += new Vector3(0, -.5f, 0);
             }
         }
         else
@@ -42,7 +44,6 @@ public class GreenEnemy : MonoBehaviour
             if (transform.position.x < -8.5f)
             {
                 moveRight = true;
-                transform.position += new Vector3(0, -.5f, 0);
             }
         }
         if (health < 1)

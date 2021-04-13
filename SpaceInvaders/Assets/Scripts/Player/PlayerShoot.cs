@@ -17,6 +17,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject laserPrefab;
     public GameObject shellPrefab;
     public float shellSpeed;
+    public GameObject rocketPrefab;
     public int shellCount = 10;
     bool canShoot = true;
     float burnoutTimer;
@@ -81,7 +82,7 @@ public class PlayerShoot : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
 
             ammoMax = 50;   //These lines of code in each weapon block should be replaced by the pickup script later
-            reloadTime = .08f;
+            reloadTime = .12f;
             ammoRegenTime = .015f;
         }
         else if (weapon == "minigun")
@@ -93,7 +94,7 @@ public class PlayerShoot : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
 
             ammoMax = 75;
-            reloadTime = .04f;
+            reloadTime = .08f;
             ammoRegenTime = .015f;
         }
         else if (weapon == "shotgun")
@@ -128,9 +129,13 @@ public class PlayerShoot : MonoBehaviour
             reloadTime = 1f;
             ammoRegenTime = 1.5f;
         }
-        else if (weapon == "missile")
+        else if (weapon == "rocket")
         {
+            GameObject rocket = Instantiate(rocketPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
 
+            ammoMax = 10;
+            reloadTime = .5f;
+            ammoRegenTime = 1f;
         }
     }
 }

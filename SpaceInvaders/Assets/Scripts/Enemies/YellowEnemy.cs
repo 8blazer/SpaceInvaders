@@ -2,48 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreenEnemy : MonoBehaviour
+public class YellowEnemy : MonoBehaviour
 {
-    int health = 3;
     public float moveSpeed;
-    public float shootSpeed;
-    public float bulletSpeed;
-    public GameObject bulletPrefab;
-    float timer;
-    bool moveRight;
-    // Start is called before the first frame update
+    GameObject player;
+    int health = 60;
+
     void Start()
     {
-        
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > shootSpeed)
+        if (transform.position.y > -2.5f)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
-            timer = 0;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
         }
-        if (moveRight)
+        else if (player.transform.position.x - transform.position.x > .3f)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
-            if (transform.position.x > 8.5f)
-            {
-                moveRight = false;
-                transform.position += new Vector3(0, -.5f, 0);
-            }
+        }
+        else if (player.transform.position.x - transform.position.x < -.3f)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
-            if (transform.position.x < -8.5f)
-            {
-                moveRight = true;
-                transform.position += new Vector3(0, -.5f, 0);
-            }
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
         if (health < 1)
         {
