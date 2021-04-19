@@ -120,9 +120,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.02, y: 0.02}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.15
 --- !u!114 &4502845164591404031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,3 +137,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 1
   rocketSprite: {fileID: 7431529995326980795, guid: 36e57921d5a0a0246a45961dbe182929, type: 3}
+  rocketDetectionRange: 0
+  rocketSpeed: 0
