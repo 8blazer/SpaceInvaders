@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1229923301264845823}
   - component: {fileID: 8844386866209630429}
   - component: {fileID: 705486660}
+  - component: {fileID: 408868285}
   m_Layer: 0
   m_Name: YellowBoss
   m_TagString: Untagged
@@ -117,14 +118,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02e323ff75c4f64a8e4c35bfb38c7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splitTime: 3
+  babyHealth: 
+  splitTime: 5
   transitionTime: 1
   morph1: {fileID: 9100000, guid: 7dcbc75f6ff63d14d964ce52282dbc7c, type: 2}
   morph2: {fileID: 9100000, guid: a79998a70ac0d134b9dff522febb4dc8, type: 2}
   babyPrefab: {fileID: 5326088220954669780, guid: 8799dd6dbbf3d3e4d9679cfef76dd627, type: 3}
   mainBossPrefab: {fileID: 7759331638915858367, guid: 5e01852588a66bc48ad4b988f7522bd9, type: 3}
   bigBossSprite: {fileID: 5344142011847959885, guid: 10a797582153a10409de9236f2a26437, type: 3}
-  mediumBossSprite: {fileID: 1157060139570310617, guid: 10a797582153a10409de9236f2a26437, type: 3}
+  mainBossSprite: {fileID: 21300000, guid: f462d9f95e2a7b740a6973a92d4e2a52, type: 3}
   moveSpeed: 3
 --- !u!50 &705486660
 Rigidbody2D:
@@ -147,3 +149,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &408868285
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354710469473625894}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 0.15}
+  m_EdgeRadius: 0

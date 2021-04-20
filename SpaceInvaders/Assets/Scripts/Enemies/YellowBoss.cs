@@ -5,14 +5,7 @@ using UnityEngine;
 public class YellowBoss : MonoBehaviour
 {
     int health = 150;
-    public int babyHealth1 = 50;
-    public int babyHealth2 = 50;
-    public int babyHealth3 = 50;
-    public int babyHealth4 = 50;
-    public int babyHealth5 = 50;
-    public int babyHealth6 = 50;
-    public int babyHealth7 = 50;
-    public int babyHealth8 = 50;
+    public List<int> babyHealth = new List<int>();
     int size = 9;
     float babyX;
     float babyY;
@@ -25,7 +18,7 @@ public class YellowBoss : MonoBehaviour
     public GameObject babyPrefab;
     public GameObject mainBossPrefab;
     public Sprite bigBossSprite;
-    public Sprite mediumBossSprite;
+    public Sprite mainBossSprite;
 
     bool moveRight = true;
     public float moveSpeed;
@@ -33,24 +26,27 @@ public class YellowBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        babyHealth.Add(75);
+        babyHealth.Add(75);
+        babyHealth.Add(75);
+        babyHealth.Add(75);
+        babyHealth.Add(75);
+        babyHealth.Add(75);
+        babyHealth.Add(75);
+        babyHealth.Add(75);
     }
 
     // Update is called once per frame
     void Update()
     {
-        splitTimer += Time.deltaTime;
+        if (GetComponent<SpriteRenderer>().sprite == bigBossSprite)
+        {
+            splitTimer += Time.deltaTime;
+        }
         if (splitTimer > splitTime)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            if (size > 6)
-            {
-                GetComponent<Animator>().runtimeAnimatorController = morph1;
-            }
-            else
-            {
-                GetComponent<Animator>().runtimeAnimatorController = morph2;
-            }
+            GetComponent<Animator>().runtimeAnimatorController = morph1;
 
             transitionTimer += Time.deltaTime;
             if (transitionTimer > transitionTime)
@@ -61,7 +57,7 @@ public class YellowBoss : MonoBehaviour
                 while (i < size - 1)
                 {
                     GameObject baby = Instantiate(babyPrefab, new Vector3(babyX, babyY, 0), Quaternion.identity);
-                    //baby.GetComponent<YellowBossBaby>().health =      somehow detect which health to give it
+                    baby.GetComponent<YellowBossBaby>().health = babyHealth[i];
                     if (babyX == transform.position.x + 1f)
                     {
                         babyX = transform.position.x - 1f;
@@ -77,14 +73,17 @@ public class YellowBoss : MonoBehaviour
                     }
                     i++;
                 }
-                GameObject mainBoss = Instantiate(mainBossPrefab, transform.position, Quaternion.identity);
-                //mainBoss.GetComponent<MainBoss>().health = health;       need to make this script
 
                 transitionTimer = 0;
                 splitTimer = 0;
+                GetComponent<Animator>().runtimeAnimatorController = null;
+                GetComponent<SpriteRenderer>().sprite = mainBossSprite;
+                transform.localScale = new Vector3(8, 8, 0);
+                size = 1;
+                babyHealth.Clear();
             }
         }
-        else if (moveRight)
+        else if (GetComponent<SpriteRenderer>().sprite == bigBossSprite && moveRight)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
             if (transform.position.x > 7f)
@@ -92,12 +91,63 @@ public class YellowBoss : MonoBehaviour
                 moveRight = false;
             }
         }
-        else
+        else if (GetComponent<SpriteRenderer>().sprite == bigBossSprite)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
             if (transform.position.x < -7f)
             {
                 moveRight = true;
+            }
+        }
+        else if (moveRight)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + 3, 0);
+            if (transform.position.x > 7.75f)
+            {
+                moveRight = false;
+            }
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - 3, 0);
+            if (transform.position.x < -7.75f)
+            {
+                moveRight = true;
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "YellowBaby(Clone)" && collision.gameObject.GetComponent<YellowBossBaby>().rejoin)
+        {
+            size++;
+            babyHealth.Add(collision.gameObject.GetComponent<YellowBossBaby>().health);
+            GetComponent<SpriteRenderer>().sprite = bigBossSprite;
+            if (transform.localScale.x > 6)
+            {
+                transform.localScale = new Vector3(2, 2, 0);
+            }
+            transform.localScale += new Vector3(.25f, .25f, 0);
+            Destroy(collision.gameObject);
+        }
+
+        if (GetComponent<SpriteRenderer>().sprite == mainBossSprite)
+        {
+            if (collision.gameObject.tag == "Bullet")
+            {
+                health--;
+                health--;
+                Destroy(collision.gameObject);
+            }
+            else if (collision.gameObject.tag == "Laser")
+            {
+                health--;
+            }
+            else if (collision.gameObject.tag == "Rocket")
+            {
+                health = health - 8;
+                Destroy(collision.gameObject);
             }
         }
     }
