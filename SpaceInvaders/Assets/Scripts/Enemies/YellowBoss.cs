@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YellowBoss : MonoBehaviour
 {
-    int health = 150;
+    int health = 175;
     public List<int> babyHealth = new List<int>();
     int size = 9;
     float babyX;
@@ -26,14 +26,14 @@ public class YellowBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        babyHealth.Add(75);
-        babyHealth.Add(75);
-        babyHealth.Add(75);
-        babyHealth.Add(75);
-        babyHealth.Add(75);
-        babyHealth.Add(75);
-        babyHealth.Add(75);
-        babyHealth.Add(75);
+        babyHealth.Add(40);
+        babyHealth.Add(40);
+        babyHealth.Add(40);
+        babyHealth.Add(40);
+        babyHealth.Add(40);
+        babyHealth.Add(40);
+        babyHealth.Add(40);
+        babyHealth.Add(40);
     }
 
     // Update is called once per frame
@@ -114,6 +114,11 @@ public class YellowBoss : MonoBehaviour
             {
                 moveRight = true;
             }
+        }
+
+        if (health < 1)
+        {
+            Destroy(gameObject);
         }
     }
 

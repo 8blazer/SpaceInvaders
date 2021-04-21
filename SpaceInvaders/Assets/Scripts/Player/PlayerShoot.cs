@@ -40,7 +40,7 @@ public class PlayerShoot : MonoBehaviour
                 burnoutTimer = 0;
             }
         }
-        if (ammo > 0 && Input.GetKey(KeyCode.Space) && reloadTimer > reloadTime && canShoot && (weapon == "machinegun" || weapon == "minigun" || weapon == "missile"))
+        if (ammo > 0 && Input.GetKey(KeyCode.Space) && reloadTimer > reloadTime && canShoot && (weapon == "machinegun" || weapon == "minigun" || weapon == "missile") && GetComponent<PlayerMovement>().canMove)
         {
             ammoRegenTimer = 0;
             reloadTimer = 0;
@@ -51,7 +51,7 @@ public class PlayerShoot : MonoBehaviour
                 canShoot = false;
             }
         }
-        else if (ammo > 0 && Input.GetKeyDown(KeyCode.Space) && reloadTimer > reloadTime && canShoot)
+        else if (ammo > 0 && Input.GetKeyDown(KeyCode.Space) && reloadTimer > reloadTime && canShoot && GetComponent<PlayerMovement>().canMove)
         {
             ammoRegenTimer = 0;
             reloadTimer = 0;

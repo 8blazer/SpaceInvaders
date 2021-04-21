@@ -13,6 +13,7 @@ public class YellowBossBaby : MonoBehaviour
     float waitTimer;
     GameObject player;
     GameObject mainBoss;
+    public GameObject miniPrefab;
     Transform destination;
     public float moveSpeed;
     // Start is called before the first frame update
@@ -67,12 +68,25 @@ public class YellowBossBaby : MonoBehaviour
 
         if (rejoin)
         {
-            GetComponent<Rigidbody2D>().velocity = (mainBoss.transform.position - transform.position).normalized * moveSpeed;
+            if (mainBoss == null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = (mainBoss.transform.position - transform.position).normalized * moveSpeed;
+            }
         }
 
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, health * .02f);
-        if (health < 25)
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, health * .025f);
+        if (health < 20)
         {
+            GameObject mini = Instantiate(miniPrefab, transform.position + new Vector3(.5f, 0, 0), Quaternion.identity);
+            mini.GetComponent<YellowBossMini>().moveSpeed = Random.Range(5.0f, 10.0f);
+            mini.GetComponent<YellowBossMini>().shootSpeed = Random.Range(2.0f, 5.0f);
+            mini = Instantiate(miniPrefab, transform.position + new Vector3(-.5f, 0, 0), Quaternion.identity);
+            mini.GetComponent<YellowBossMini>().moveSpeed = Random.Range(5.0f, 10.0f);
+            mini.GetComponent<YellowBossMini>().shootSpeed = Random.Range(2.0f, 5.0f);
             Destroy(gameObject);
         }
     }

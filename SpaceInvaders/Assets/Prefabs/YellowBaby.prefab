@@ -127,6 +127,7 @@ MonoBehaviour:
   health: 0
   rejoin: 0
   waitTime: 1
+  miniPrefab: {fileID: 5375537009887895331, guid: 447b4aefecfd10f42a6b3f9cdb18a019, type: 3}
   moveSpeed: 8
 --- !u!50 &4902064735325464560
 Rigidbody2D:

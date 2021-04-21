@@ -1,0 +1,170 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UFO_Boss : MonoBehaviour
+{
+    int health = 300;
+    public float moveSpeed;
+    public float shootSpeed;
+    public float bulletSpeed;
+    public GameObject bulletPrefab;
+    public GameObject laserPrefab;
+    bool moveRight;
+    bool canMove = true;
+    GameObject player;
+    public Sprite firstPhase;
+    public Sprite gunPhase;
+    public Sprite laserPhase;
+    float phaseTimer;
+    public RuntimeAnimatorController gun;
+    public RuntimeAnimatorController laserUp;
+    public RuntimeAnimatorController laserDown;
+    public float enemyTime;
+    float enemyTimer;
+    float shootTimer;
+    float laserTimer;
+    public float laserTime;
+
+    public GameObject greenPrefab;
+    public GameObject yellowPrefab;
+    public GameObject orangePrefab;
+    public GameObject redPrefab;
+    public GameObject purplePrefab;
+    public GameObject cyanPrefab;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GameObject.Find("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (canMove)
+        {
+            if (moveRight)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                if (transform.position.x > 7.5f)
+                {
+                    moveRight = false;
+                }
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                if (transform.position.x < -7.5f)
+                {
+                    moveRight = true;
+                }
+            }
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            phaseTimer += Time.deltaTime;
+            if (phaseTimer > 2)
+            {
+                canMove = true;
+                if (health < 200)
+                {
+                    GetComponent<SpriteRenderer>().sprite = gunPhase;
+                }
+            }
+            enemyTimer = 0;
+        }
+
+        enemyTimer += Time.deltaTime;
+        if (enemyTimer > enemyTime)
+        {
+            int i = Random.Range(1, 7);
+            if (i == 1)
+            {
+                Instantiate(greenPrefab, transform.position + new Vector3(0, -.4f, 0), Quaternion.identity);
+            }
+            else if (i == 2)
+            {
+                Instantiate(yellowPrefab, transform.position + new Vector3(0, -.4f, 0), Quaternion.identity);
+            }
+            else if (i == 3)
+            {
+                Instantiate(redPrefab, transform.position + new Vector3(0, -.4f, 0), Quaternion.identity);
+            }
+            else if (i == 4)
+            {
+                Instantiate(orangePrefab, transform.position + new Vector3(0, -.4f, 0), Quaternion.identity);
+            }
+            else if (i == 5)
+            {
+                Instantiate(purplePrefab, transform.position + new Vector3(0, -.4f, 0), Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(cyanPrefab, transform.position + new Vector3(0, -.4f, 0), Quaternion.identity);
+            }
+
+            enemyTimer = 0;
+        }
+
+        if (health < 200 && GetComponent<SpriteRenderer>().sprite == firstPhase)
+        {
+            canMove = false;
+            GetComponent<Animator>().runtimeAnimatorController = gun;
+            enemyTime++;
+            moveSpeed += 2;
+        }
+        else if (health < 100 && enemyTime == 6)
+        {
+            enemyTime++;
+            moveSpeed += 2;
+        }
+
+        if (health < 100)
+        {
+            laserTimer += Time.deltaTime;
+            if (laserTimer > laserTime)
+            {
+                GetComponent<Animator>().runtimeAnimatorController = laserUp;
+            }
+        }
+        else if (health < 200)
+        {
+            shootTimer += Time.deltaTime;
+            if (shootTimer > shootSpeed)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(.7f, -.85f, 0), Quaternion.identity);
+                bullet.transform.up = (player.transform.position - transform.position);
+                bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
+                bullet = Instantiate(bulletPrefab, transform.position + new Vector3(-.7f, -.85f, 0), Quaternion.identity);
+                bullet.transform.up = (player.transform.position - transform.position);
+                bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
+                shootTimer = 0;
+            }
+        }
+        if (health < 1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            health--;
+            health--;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Laser")
+        {
+            health--;
+        }
+        if (collision.gameObject.tag == "Rocket")
+        {
+            health = health - 8;
+            Destroy(collision.gameObject);
+        }
+    }
+}
