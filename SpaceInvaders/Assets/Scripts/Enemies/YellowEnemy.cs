@@ -6,7 +6,7 @@ public class YellowEnemy : MonoBehaviour
 {
     public float moveSpeed;
     GameObject player;
-    int health = 60;
+    int health = 50;
 
     void Start()
     {

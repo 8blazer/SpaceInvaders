@@ -11,38 +11,51 @@ public class GreenEnemy : MonoBehaviour
     public GameObject bulletPrefab;
     float timer;
     bool moveRight;
+    bool spawned = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        shootSpeed = Random.Range(1.5f, 3.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > shootSpeed)
+        if (spawned)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
-            timer = 0;
-        }
-        if (moveRight)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
-            if (transform.position.x > 8.5f)
+            timer += Time.deltaTime;
+            if (timer > shootSpeed)
             {
-                moveRight = false;
-                transform.position += new Vector3(0, -.5f, 0);
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
+                timer = 0;
+                shootSpeed = Random.Range(1.5f, 3.1f);
+            }
+            if (moveRight)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                if (transform.position.x > 8.5f)
+                {
+                    moveRight = false;
+                    transform.position += new Vector3(0, -.5f, 0);
+                }
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                if (transform.position.x < -8.5f)
+                {
+                    moveRight = true;
+                    transform.position += new Vector3(0, -.5f, 0);
+                }
             }
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
-            if (transform.position.x < -8.5f)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            if (transform.position.y < 4)
             {
-                moveRight = true;
-                transform.position += new Vector3(0, -.5f, 0);
+                spawned = true;
             }
         }
         if (health < 1)

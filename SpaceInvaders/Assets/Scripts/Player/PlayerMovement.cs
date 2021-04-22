@@ -97,7 +97,10 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "E_Bullet")
         {
             Death();
-            Destroy(collision.gameObject);
+            if (collision.gameObject.name != "UFO_Laser")
+            {
+                Destroy(collision.gameObject);
+            }
         }
         else if (collision.gameObject.tag == "Enemy")
         {

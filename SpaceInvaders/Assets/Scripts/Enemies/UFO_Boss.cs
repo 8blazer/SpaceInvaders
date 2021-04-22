@@ -9,13 +9,12 @@ public class UFO_Boss : MonoBehaviour
     public float shootSpeed;
     public float bulletSpeed;
     public GameObject bulletPrefab;
-    public GameObject laserPrefab;
+    GameObject laser;
     bool moveRight;
     bool canMove = true;
     GameObject player;
     public Sprite firstPhase;
     public Sprite gunPhase;
-    public Sprite laserPhase;
     float phaseTimer;
     public RuntimeAnimatorController gun;
     public RuntimeAnimatorController laserUp;
@@ -25,6 +24,9 @@ public class UFO_Boss : MonoBehaviour
     float shootTimer;
     float laserTimer;
     public float laserTime;
+    float laserChargeTimer;
+    public float laserChargeTime;
+    bool laserMovement;
 
     public GameObject greenPrefab;
     public GameObject yellowPrefab;
@@ -37,6 +39,7 @@ public class UFO_Boss : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        laser = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -60,6 +63,11 @@ public class UFO_Boss : MonoBehaviour
                     moveRight = true;
                 }
             }
+            if (health < 100)
+            {
+                GetComponent<Animator>().runtimeAnimatorController = null;
+                GetComponent<SpriteRenderer>().sprite = gunPhase;
+            }
         }
         else
         {
@@ -73,7 +81,10 @@ public class UFO_Boss : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = gunPhase;
                 }
             }
-            enemyTimer = 0;
+            if (health > 100)
+            {
+                enemyTimer = 0;
+            }
         }
 
         enemyTimer += Time.deltaTime;
@@ -127,6 +138,67 @@ public class UFO_Boss : MonoBehaviour
             if (laserTimer > laserTime)
             {
                 GetComponent<Animator>().runtimeAnimatorController = laserUp;
+                canMove = false;
+                if (moveRight)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed * 1.5f, 0);
+                    if (transform.position.x > 6.5f)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        laserChargeTimer += Time.deltaTime;
+                        if (laserChargeTimer > laserChargeTime)
+                        {
+                            laser.GetComponent<BoxCollider2D>().enabled = true;
+                            laser.GetComponent<SpriteRenderer>().enabled = true;
+                            laserMovement = true;
+                        }
+                    }
+                    if (laserMovement)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed * -1.5f, 0);
+                        if (transform.position.x < -6.5f)
+                        {
+                            laser.GetComponent<BoxCollider2D>().enabled = false;
+                            laser.GetComponent<SpriteRenderer>().enabled = false;
+                            GetComponent<Animator>().runtimeAnimatorController = laserDown;
+                            laserTimer = 0;
+                            laserChargeTimer = 0;
+                            laserMovement = false;
+                            canMove = true;
+                            laserTime = Random.Range(2, 6);
+                        }
+                    }
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed * -1.5f, 0);
+                    if (transform.position.x < -6.5f)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                        laserChargeTimer += Time.deltaTime;
+                        if (laserChargeTimer > laserChargeTime)
+                        {
+                            laser.GetComponent<BoxCollider2D>().enabled = true;
+                            laser.GetComponent<SpriteRenderer>().enabled = true;
+                            laserMovement = true;
+                        }
+                    }
+                    if (laserMovement)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed * 1.5f, 0);
+                        if (transform.position.x > 6.5f)
+                        {
+                            laser.GetComponent<BoxCollider2D>().enabled = false;
+                            laser.GetComponent<SpriteRenderer>().enabled = false;
+                            GetComponent<Animator>().runtimeAnimatorController = laserDown;
+                            laserTimer = 0;
+                            laserChargeTimer = 0;
+                            laserMovement = false;
+                            canMove = true;
+                            laserTime = Random.Range(2, 6);
+                        }
+                    }
+                }
             }
         }
         else if (health < 200)
