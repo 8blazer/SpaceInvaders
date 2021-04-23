@@ -18,16 +18,19 @@ public class EyeBoss : MonoBehaviour
     bool moveRight;
     GameObject player;
     GameObject eye;
+    GameObject gameManager;
     public GameObject bulletPrefab;
     RaycastHit2D[] collisions;
     public RuntimeAnimatorController eyeCharge1;
     public RuntimeAnimatorController eyeCharge2;
     public RuntimeAnimatorController eyeCharge3;
+    bool spawned = false;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
         eye = transform.GetChild(0).gameObject;
     }
 
@@ -121,28 +124,41 @@ public class EyeBoss : MonoBehaviour
             }
         }
 
-        if (moving)
+        if (spawned)
         {
-            if (moveRight)
+            if (moving)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((300 - health) / 10), 0);
-                if (transform.position.x > 7.5f)
+                if (moveRight)
                 {
-                    moveRight = false;
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((300 - health) / 10), 0);
+                    if (transform.position.x > 7.5f)
+                    {
+                        moveRight = false;
+                    }
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((300 - health) / 10), 0);
+                    if (transform.position.x < -7.5f)
+                    {
+                        moveRight = true;
+                    }
                 }
             }
-            else
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            shootTimer = 0;
+            if (transform.position.y < 2.6f)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((300 - health) / 10), 0);
-                if (transform.position.x < -7.5f)
-                {
-                    moveRight = true;
-                }
+                spawned = true;
             }
         }
 
         if (health < 1)
         {
+            gameManager.GetComponent<Game_Manager>().BossDeath();
             Destroy(gameObject);
         }
     }

@@ -19,9 +19,11 @@ public class YellowBoss : MonoBehaviour
     public GameObject mainBossPrefab;
     public Sprite bigBossSprite;
     public Sprite mainBossSprite;
+    bool spawned = false;
 
     bool moveRight = true;
     public float moveSpeed;
+    GameObject gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -34,90 +36,105 @@ public class YellowBoss : MonoBehaviour
         babyHealth.Add(40);
         babyHealth.Add(40);
         babyHealth.Add(40);
+
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<SpriteRenderer>().sprite == bigBossSprite)
+        if (spawned)
         {
-            splitTimer += Time.deltaTime;
-        }
-        if (splitTimer > splitTime)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            GetComponent<Animator>().runtimeAnimatorController = morph1;
-
-            transitionTimer += Time.deltaTime;
-            if (transitionTimer > transitionTime)
+            if (GetComponent<SpriteRenderer>().sprite == bigBossSprite)
             {
-                int i = 0;
-                babyX = transform.position.x - 1f;
-                babyY = transform.position.y + 1;
-                while (i < size - 1)
+                splitTimer += Time.deltaTime;
+            }
+            if (splitTimer > splitTime)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                GetComponent<Animator>().runtimeAnimatorController = morph1;
+
+                transitionTimer += Time.deltaTime;
+                if (transitionTimer > transitionTime)
                 {
-                    GameObject baby = Instantiate(babyPrefab, new Vector3(babyX, babyY, 0), Quaternion.identity);
-                    baby.GetComponent<YellowBossBaby>().health = babyHealth[i];
-                    if (babyX == transform.position.x + 1f)
+                    int i = 0;
+                    babyX = transform.position.x - 1f;
+                    babyY = transform.position.y + 1;
+                    while (i < size - 1)
                     {
-                        babyX = transform.position.x - 1f;
-                        babyY -= 1f;
+                        GameObject baby = Instantiate(babyPrefab, new Vector3(babyX, babyY, 0), Quaternion.identity);
+                        baby.GetComponent<YellowBossBaby>().health = babyHealth[i];
+                        if (babyX == transform.position.x + 1f)
+                        {
+                            babyX = transform.position.x - 1f;
+                            babyY -= 1f;
+                        }
+                        else if (i == 3)
+                        {
+                            babyX += 2f;
+                        }
+                        else
+                        {
+                            babyX += 1f;
+                        }
+                        i++;
                     }
-                    else if (i == 3)
-                    {
-                        babyX += 2f;
-                    }
-                    else 
-                    {
-                        babyX += 1f;
-                    }
-                    i++;
-                }
 
-                transitionTimer = 0;
-                splitTimer = 0;
-                GetComponent<Animator>().runtimeAnimatorController = null;
-                GetComponent<SpriteRenderer>().sprite = mainBossSprite;
-                transform.localScale = new Vector3(8, 8, 0);
-                size = 1;
-                babyHealth.Clear();
+                    transitionTimer = 0;
+                    splitTimer = 0;
+                    GetComponent<Animator>().runtimeAnimatorController = null;
+                    GetComponent<SpriteRenderer>().sprite = mainBossSprite;
+                    transform.localScale = new Vector3(8, 8, 0);
+                    size = 1;
+                    babyHealth.Clear();
+                }
             }
-        }
-        else if (GetComponent<SpriteRenderer>().sprite == bigBossSprite && moveRight)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
-            if (transform.position.x > 7f)
+            else if (GetComponent<SpriteRenderer>().sprite == bigBossSprite && moveRight)
             {
-                moveRight = false;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                if (transform.position.x > 7f)
+                {
+                    moveRight = false;
+                }
             }
-        }
-        else if (GetComponent<SpriteRenderer>().sprite == bigBossSprite)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
-            if (transform.position.x < -7f)
+            else if (GetComponent<SpriteRenderer>().sprite == bigBossSprite)
             {
-                moveRight = true;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                if (transform.position.x < -7f)
+                {
+                    moveRight = true;
+                }
             }
-        }
-        else if (moveRight)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + 3, 0);
-            if (transform.position.x > 7.75f)
+            else if (moveRight)
             {
-                moveRight = false;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + 3, 0);
+                if (transform.position.x > 7.75f)
+                {
+                    moveRight = false;
+                }
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - 3, 0);
+                if (transform.position.x < -7.75f)
+                {
+                    moveRight = true;
+                }
             }
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - 3, 0);
-            if (transform.position.x < -7.75f)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            if (transform.position.y < 3.3f)
             {
-                moveRight = true;
+                spawned = true;
             }
         }
 
+
         if (health < 1)
         {
+            gameManager.GetComponent<Game_Manager>().BossDeath();
             Destroy(gameObject);
         }
     }

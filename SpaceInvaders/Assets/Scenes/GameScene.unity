@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d450496936327c4b8be27c583695d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: 2
+  wave: 1
   greenEnemy: {fileID: 686695695955476333, guid: 8da220aeffd41a5429ea15ba14e12e58, type: 3}
   redEnemy: {fileID: 4777398271308564363, guid: 4678138c6ae0bfc4990a696dd95b81a2, type: 3}
   yellowEnemy: {fileID: 5624299260351591926, guid: 7f7469f09a37818449c999b0e1580a3a, type: 3}
@@ -507,6 +507,8 @@ MonoBehaviour:
   enemyPerWave: 10
   enemyTime: 2
   initialEnemyCount: 25
+  enemiesLeft: 0
+  wavePart: 1
 --- !u!1 &1523250838
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +678,7 @@ MonoBehaviour:
   ammoMax: 50
   reloadTime: 0.05
   ammoRegenTime: 0.05
-  weapon: machinegun
+  weapon: rocket
   bulletPrefab: {fileID: 7747813893219318393, guid: 5ddcd77faaa05d74b86281382c81072d, type: 3}
   bulletSpeed: 10
   laserPrefab: {fileID: 3799989413107922731, guid: 034a3428a0b5b034283f8a34915183cc, type: 3}

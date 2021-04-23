@@ -10,6 +10,7 @@ public class PurpleEnemy : MonoBehaviour
     public float bulletSpeed;
     public GameObject bulletPrefab;
     GameObject player;
+    GameObject gameManager;
     float shootTimer;
     public float poofPower;
     public float poofLoss;
@@ -19,6 +20,8 @@ public class PurpleEnemy : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
+        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
     }
 
     // Update is called once per frame
@@ -72,6 +75,7 @@ public class PurpleEnemy : MonoBehaviour
 
         if (health < 1)
         {
+            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
             Destroy(gameObject);
         }
     }

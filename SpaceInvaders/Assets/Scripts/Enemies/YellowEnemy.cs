@@ -6,11 +6,14 @@ public class YellowEnemy : MonoBehaviour
 {
     public float moveSpeed;
     GameObject player;
+    GameObject gameManager;
     int health = 50;
 
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
+        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
     }
 
     // Update is called once per frame
@@ -35,6 +38,7 @@ public class YellowEnemy : MonoBehaviour
         if (health < 1)
         {
             Destroy(gameObject);
+            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
         }
     }
 

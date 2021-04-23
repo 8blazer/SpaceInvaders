@@ -9,82 +9,98 @@ public class CyanEnemy : MonoBehaviour
     float tempVertSpeed;
     public float vertSpeedChange;
     GameObject player;
+    GameObject gameManager;
     int health = 10;
     bool moveRight;
     bool swooping = false;
     float timer;
     public float swoopTime;
+    bool spawned = false;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
+        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > swoopTime)
+        if (spawned)
         {
-            if (swoopTime < 2)
+            timer += Time.deltaTime;
+            if (timer > swoopTime)
             {
-                swoopTime += Random.Range(0, 3);
+                if (swoopTime < 3)
+                {
+                    swoopTime += Random.Range(0, 3);
+                }
+                else if (swoopTime > 5)
+                {
+                    swoopTime += Random.Range(-2, 0);
+                }
+                else
+                {
+                    swoopTime += Random.Range(-1, 2);
+                }
+                swooping = true;
+                tempVertSpeed = vertSpeed;
+                timer = 0;
+                if (player.transform.position.x > transform.position.x)
+                {
+                    moveRight = true;
+                }
+                else
+                {
+                    moveRight = false;
+                }
             }
-            else if (swoopTime > 4)
+            if (swooping)
             {
-                swoopTime += Random.Range(-2, 0);
+                if (moveRight)
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, tempVertSpeed);
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, tempVertSpeed);
+                }
+                if (-vertSpeed < tempVertSpeed)
+                {
+                    swooping = false;
+                }
+                tempVertSpeed += vertSpeedChange * Time.deltaTime;
+                timer = 0;
             }
-            else
+            if (moveRight && !swooping)
             {
-                swoopTime += Random.Range(-1, 2);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, 0);
+                if (transform.position.x > 8.5f)
+                {
+                    moveRight = false;
+                }
             }
-            swooping = true;
-            tempVertSpeed = vertSpeed;
-            timer = 0;
-            if (player.transform.position.x > transform.position.x)
+            else if (!swooping)
             {
-                moveRight = true;
-            }
-            else
-            {
-                moveRight = false;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, 0);
+                if (transform.position.x < -8.5f)
+                {
+                    moveRight = true;
+                }
             }
         }
-        if (swooping)
+        else
         {
-            if (moveRight)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -horizSpeed);
+            if (transform.position.y < 3.5f)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, tempVertSpeed);
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, tempVertSpeed);
-            }
-            if (-vertSpeed < tempVertSpeed)
-            {
-                swooping = false;
-            }
-            tempVertSpeed += vertSpeedChange * Time.deltaTime;
-            timer = 0;
-        }
-        if (moveRight && !swooping)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, 0);
-            if (transform.position.x > 8.5f)
-            {
-                moveRight = false;
-            }
-        }
-        else if (!swooping)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, 0);
-            if (transform.position.x < -8.5f)
-            {
-                moveRight = true;
+                spawned = true;
             }
         }
         if (health < 1)
         {
+            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
             Destroy(gameObject);
         }
     }

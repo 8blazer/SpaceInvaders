@@ -12,43 +12,59 @@ public class OrangeEnemy : MonoBehaviour
     float timer;
     bool moveRight;
     GameObject player;
+    GameObject gameManager;
+    bool spawned = false;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
+        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > shootSpeed)
+        if (spawned)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.transform.up = (player.transform.position - transform.position);
-            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
-            timer = 0;
-        }
-        if (moveRight)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
-            if (transform.position.x > 8.5f)
+            timer += Time.deltaTime;
+            if (timer > shootSpeed)
             {
-                moveRight = false;
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.transform.up = (player.transform.position - transform.position);
+                bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
+                timer = 0;
+            }
+            if (moveRight)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                if (transform.position.x > 8.5f)
+                {
+                    moveRight = false;
+                }
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                if (transform.position.x < -8.5f)
+                {
+                    moveRight = true;
+                }
+            }
+            if (health < 1)
+            {
+                gameManager.GetComponent<Game_Manager>().enemiesLeft--;
+                Destroy(gameObject);
             }
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
-            if (transform.position.x < -8.5f)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            if (transform.position.y < 3.5f)
             {
-                moveRight = true;
+                spawned = true;
             }
-        }
-        if (health < 1)
-        {
-            Destroy(gameObject);
         }
     }
 

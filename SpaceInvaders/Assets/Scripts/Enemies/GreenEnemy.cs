@@ -9,13 +9,18 @@ public class GreenEnemy : MonoBehaviour
     public float shootSpeed;
     public float bulletSpeed;
     public GameObject bulletPrefab;
+    GameObject gameManager;
     float timer;
     bool moveRight;
     bool spawned = false;
+    float spawnY;
     // Start is called before the first frame update
     void Start()
     {
         shootSpeed = Random.Range(1.5f, 3.1f);
+        gameManager = GameObject.Find("GameManager");
+        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
+        spawnY = Random.Range(3.0f, 4.6f);
     }
 
     // Update is called once per frame
@@ -29,7 +34,7 @@ public class GreenEnemy : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
                 timer = 0;
-                shootSpeed = Random.Range(1.5f, 3.1f);
+                shootSpeed = Random.Range(3.0f, 4.6f);
             }
             if (moveRight)
             {
@@ -37,7 +42,7 @@ public class GreenEnemy : MonoBehaviour
                 if (transform.position.x > 8.5f)
                 {
                     moveRight = false;
-                    transform.position += new Vector3(0, -.5f, 0);
+                    transform.position += new Vector3(0, -1f, 0);
                 }
             }
             else
@@ -46,20 +51,21 @@ public class GreenEnemy : MonoBehaviour
                 if (transform.position.x < -8.5f)
                 {
                     moveRight = true;
-                    transform.position += new Vector3(0, -.5f, 0);
+                    transform.position += new Vector3(0, -1f, 0);
                 }
             }
         }
         else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
-            if (transform.position.y < 4)
+            if (transform.position.y < spawnY)
             {
                 spawned = true;
             }
         }
-        if (health < 1)
+        if (health < 1 || transform.position.y < -4.5f)
         {
+            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
             Destroy(gameObject);
         }
     }
@@ -80,6 +86,11 @@ public class GreenEnemy : MonoBehaviour
         {
             health = health - 8;
             Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
+            Destroy(gameObject);
         }
     }
 }

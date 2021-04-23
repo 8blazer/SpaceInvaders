@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public int ammo = 100;
+    public int ammo = 100;      //make sniper bullets deal 10 damage, rockets explode for area effect, laser needs to work at all
     public int ammoMax = 100;
     public float reloadTime = .02f;
     float reloadTimer;
@@ -40,13 +40,13 @@ public class PlayerShoot : MonoBehaviour
                 burnoutTimer = 0;
             }
         }
-        if (ammo > 0 && Input.GetKey(KeyCode.Space) && reloadTimer > reloadTime && canShoot && (weapon == "machinegun" || weapon == "minigun" || weapon == "missile") && GetComponent<PlayerMovement>().canMove)
+        if (ammo > 0 && Input.GetKey(KeyCode.Space) && reloadTimer > reloadTime && canShoot && (weapon == "machinegun" || weapon == "minigun") && GetComponent<PlayerMovement>().canMove)
         {
             ammoRegenTimer = 0;
             reloadTimer = 0;
             Fire();
 
-            if (ammo == 0)
+            if (ammo < 1)
             {
                 canShoot = false;
             }
@@ -93,7 +93,7 @@ public class PlayerShoot : MonoBehaviour
             bullet = Instantiate(bulletPrefab, transform.position + new Vector3(.2f, .1f, 0), Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
 
-            ammoMax = 75;
+            ammoMax = 50;
             reloadTime = .08f;
             ammoRegenTime = .015f;
         }
@@ -125,17 +125,17 @@ public class PlayerShoot : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 5);
 
-            ammoMax = 10;
-            reloadTime = 1f;
-            ammoRegenTime = 1.5f;
+            ammoMax = 20;
+            reloadTime = .75f;
+            ammoRegenTime = 1f;
         }
         else if (weapon == "rocket")
         {
             GameObject rocket = Instantiate(rocketPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
 
-            ammoMax = 10;
-            reloadTime = .5f;
-            ammoRegenTime = 1f;
+            ammoMax = 15;
+            reloadTime = .3f;
+            ammoRegenTime = .75f;
         }
     }
 }

@@ -13,6 +13,7 @@ public class UFO_Boss : MonoBehaviour
     bool moveRight;
     bool canMove = true;
     GameObject player;
+    GameObject gameManager;
     public Sprite firstPhase;
     public Sprite gunPhase;
     float phaseTimer;
@@ -27,6 +28,7 @@ public class UFO_Boss : MonoBehaviour
     float laserChargeTimer;
     public float laserChargeTime;
     bool laserMovement;
+    bool spawned = false;
 
     public GameObject greenPrefab;
     public GameObject yellowPrefab;
@@ -39,51 +41,63 @@ public class UFO_Boss : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
         laser = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (spawned)
         {
-            if (moveRight)
+            if (canMove)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
-                if (transform.position.x > 7.5f)
+                if (moveRight)
                 {
-                    moveRight = false;
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                    if (transform.position.x > 7.5f)
+                    {
+                        moveRight = false;
+                    }
+                }
+                else
+                {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                    if (transform.position.x < -7.5f)
+                    {
+                        moveRight = true;
+                    }
+                }
+                if (health < 100)
+                {
+                    GetComponent<Animator>().runtimeAnimatorController = null;
+                    GetComponent<SpriteRenderer>().sprite = gunPhase;
                 }
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
-                if (transform.position.x < -7.5f)
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                phaseTimer += Time.deltaTime;
+                if (phaseTimer > 2)
                 {
-                    moveRight = true;
+                    canMove = true;
+                    if (health < 200)
+                    {
+                        GetComponent<SpriteRenderer>().sprite = gunPhase;
+                    }
                 }
-            }
-            if (health < 100)
-            {
-                GetComponent<Animator>().runtimeAnimatorController = null;
-                GetComponent<SpriteRenderer>().sprite = gunPhase;
+                if (health > 100)
+                {
+                    enemyTimer = 0;
+                }
             }
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            phaseTimer += Time.deltaTime;
-            if (phaseTimer > 2)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            if (transform.position.y < 3.5f)
             {
-                canMove = true;
-                if (health < 200)
-                {
-                    GetComponent<SpriteRenderer>().sprite = gunPhase;
-                }
-            }
-            if (health > 100)
-            {
-                enemyTimer = 0;
+                spawned = true;
             }
         }
 
@@ -217,6 +231,8 @@ public class UFO_Boss : MonoBehaviour
         }
         if (health < 1)
         {
+            gameManager.GetComponent<Game_Manager>().BossDeath();
+            Destroy(gameManager);
             Destroy(gameObject);
         }
     }
