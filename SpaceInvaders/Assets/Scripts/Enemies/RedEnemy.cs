@@ -7,13 +7,14 @@ public class RedEnemy : MonoBehaviour
     public float moveSpeed;
     GameObject player;
     GameObject gameManager;
+    int health = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("GameManager");
-        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
+        gameManager.GetComponent<Game_Manager>().AddEnemy();
     }
 
     // Update is called once per frame
@@ -21,25 +22,26 @@ public class RedEnemy : MonoBehaviour
     {
         transform.up = (player.transform.position - transform.position) * -1;
         GetComponent<Rigidbody2D>().velocity = transform.up * -moveSpeed;
+        if (health < 1)
+        {
+            gameManager.GetComponent<Game_Manager>().KillEnemy();
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket")
         {
-            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            health = 0;
         }
-        if (collision.gameObject.tag == "Laser")
+        else if (collision.gameObject.tag == "Laser")
         {
-            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
-            Destroy(gameObject);
+            health = 0;
         }
-        if (collision.gameObject.tag == "Player")
+        else if (collision.gameObject.tag == "Player")
         {
-            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
-            Destroy(gameObject);
+            health = 0;
         }
     }
 }

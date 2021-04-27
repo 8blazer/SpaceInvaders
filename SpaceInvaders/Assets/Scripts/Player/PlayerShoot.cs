@@ -19,7 +19,7 @@ public class PlayerShoot : MonoBehaviour
     public float shellSpeed;
     public GameObject rocketPrefab;
     public int shellCount = 10;
-    bool canShoot = true;
+    public bool canShoot = true;
     float burnoutTimer;
     public Text ammoText;
     

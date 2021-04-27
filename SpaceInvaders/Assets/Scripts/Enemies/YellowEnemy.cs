@@ -13,7 +13,7 @@ public class YellowEnemy : MonoBehaviour
     {
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("GameManager");
-        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
+        gameManager.GetComponent<Game_Manager>().AddEnemy();
     }
 
     // Update is called once per frame
@@ -37,8 +37,8 @@ public class YellowEnemy : MonoBehaviour
         }
         if (health < 1)
         {
+            gameManager.GetComponent<Game_Manager>().KillEnemy();
             Destroy(gameObject);
-            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
         }
     }
 
@@ -50,11 +50,11 @@ public class YellowEnemy : MonoBehaviour
             health--;
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Laser")
+        else if (collision.gameObject.tag == "Laser")
         {
             health--;
         }
-        if (collision.gameObject.tag == "Rocket")
+        else if (collision.gameObject.tag == "Rocket")
         {
             health = health - 8;
             Destroy(collision.gameObject);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class Game_Manager : MonoBehaviour
     public int enemiesLeft;
     public int wavePart = 1;
     bool bossSpawned = false;
+    bool upgrading = false;
+    public Canvas upgradeCanvas;
+    public Text text;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +41,12 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        text.text = enemiesLeft.ToString();
+        
         if (initialSpawned)
         {
             enemyTimer += Time.deltaTime;
-            if (enemyCount < enemyPerWave && enemyTimer > enemyTime && !bossSpawned)
+            if (enemyCount < enemyPerWave && enemyTimer > enemyTime && !bossSpawned && !upgrading)
             {
                 if (wave == 1)
                 {
@@ -204,17 +211,27 @@ public class Game_Manager : MonoBehaviour
                 enemyTimer = 0;
             }
 
-            if (!bossSpawned)
+            if (!bossSpawned && !upgrading)
             {
                 if (enemiesLeft == 0 && wavePart == 3)
                 {
-                    wavePart = 1;
-                    initialSpawned = false;
-                    initialEnemyCount++;
-                    enemyCount = 0;
-                    enemyPerWave++;
-                    enemyTime -= .1f;
-                    wave++;
+                    if (wave == 2 || wave == 6 || wave == 10)
+                    {
+                        upgrading = true;
+                        player.GetComponent<PlayerMovement>().enabled = false;
+                        player.GetComponent<PlayerShoot>().enabled = false;
+                        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
+                    }
+                    else
+                    {
+                        wavePart = 1;
+                        initialSpawned = false;
+                        initialEnemyCount++;
+                        enemyCount = 0;
+                        enemyPerWave++;
+                        enemyTime -= .1f;
+                        wave++;
+                    }
                 }
                 else if (enemiesLeft < 6 && wavePart < 3)
                 {
@@ -416,5 +433,16 @@ public class Game_Manager : MonoBehaviour
     {
         bossSpawned = false;
         wave++;
+        upgrading = true;
+    }
+
+    public void AddEnemy()
+    {
+        enemiesLeft++;
+    }
+
+    public void KillEnemy()
+    {
+        enemiesLeft--;
     }
 }

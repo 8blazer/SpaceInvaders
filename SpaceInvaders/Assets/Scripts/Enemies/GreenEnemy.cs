@@ -19,7 +19,7 @@ public class GreenEnemy : MonoBehaviour
     {
         shootSpeed = Random.Range(1.5f, 3.1f);
         gameManager = GameObject.Find("GameManager");
-        gameManager.GetComponent<Game_Manager>().enemiesLeft++;
+        gameManager.GetComponent<Game_Manager>().AddEnemy();
         spawnY = Random.Range(3.0f, 4.6f);
     }
 
@@ -65,7 +65,7 @@ public class GreenEnemy : MonoBehaviour
         }
         if (health < 1 || transform.position.y < -4.5f)
         {
-            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
+            gameManager.GetComponent<Game_Manager>().KillEnemy();
             Destroy(gameObject);
         }
     }
@@ -78,18 +78,18 @@ public class GreenEnemy : MonoBehaviour
             health--;
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Laser")
+        else if (collision.gameObject.tag == "Laser")
         {
             health--;
         }
-        if (collision.gameObject.tag == "Rocket")
+        else if (collision.gameObject.tag == "Rocket")
         {
             health = health - 8;
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Player")
+        else if (collision.gameObject.tag == "Player")
         {
-            gameManager.GetComponent<Game_Manager>().enemiesLeft--;
+            gameManager.GetComponent<Game_Manager>().KillEnemy();
             Destroy(gameObject);
         }
     }
