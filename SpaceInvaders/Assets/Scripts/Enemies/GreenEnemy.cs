@@ -10,6 +10,7 @@ public class GreenEnemy : MonoBehaviour
     public float bulletSpeed;
     public GameObject bulletPrefab;
     GameObject gameManager;
+    GameObject upgradeCanvas;
     float timer;
     bool moveRight;
     bool spawned = false;
@@ -18,6 +19,7 @@ public class GreenEnemy : MonoBehaviour
     void Start()
     {
         shootSpeed = Random.Range(1.5f, 3.1f);
+        upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
         gameManager.GetComponent<Game_Manager>().AddEnemy();
         spawnY = Random.Range(3.0f, 4.6f);
@@ -76,15 +78,75 @@ public class GreenEnemy : MonoBehaviour
         {
             health--;
             health--;
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+            {
+                health = 0;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Laser")
         {
             health--;
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+            {
+                health = 0;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
         }
         else if (collision.gameObject.tag == "Rocket")
         {
             health = health - 8;
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+            {
+                health = 0;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Player")

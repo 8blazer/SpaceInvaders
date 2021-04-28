@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 30868639}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Reflect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &30868639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +496,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 181110374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Speed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &181110374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,7 +809,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 276049499}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: DMG
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &276049499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +942,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 335289693}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: SuperShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &335289693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,7 +1316,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633477843}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: EnemyJam
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &633477843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,7 +1449,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 658911721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Ammo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &658911721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1510,7 +1582,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 685010807}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Dodge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &685010807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2026,7 +2110,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 913365066}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &913365066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2147,7 +2243,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 955725381}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Shield
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &955725381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2650,7 +2758,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1266338852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: ExCrit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1266338852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2850,7 +2970,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1389962029}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Invincibility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1389962029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2947,7 +3079,9 @@ MonoBehaviour:
   initialEnemyCount: 25
   enemiesLeft: 0
   wavePart: 1
+  upgrading: 0
   upgradeCanvas: {fileID: 1986268401}
+  UI_Canvas: {fileID: 252086777}
   text: {fileID: 1377180800}
   player: {fileID: 1523250838}
 --- !u!1 &1426507772
@@ -3032,7 +3166,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1426507775}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: UltraShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1426507775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3153,7 +3299,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1471866463}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: ExDMG
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1471866463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3336,6 +3494,7 @@ MonoBehaviour:
   respawnTime: 1
   deathParticles: {fileID: 2050021374}
   canMove: 1
+  upgradeCanvas: {fileID: 1986268401}
 --- !u!212 &1523250841
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3396,7 +3555,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523250838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.89, z: 0}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2050021375}
@@ -3532,7 +3691,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1617155270}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: ExSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1617155270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3890,7 +4061,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1674559638}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Doppelganger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1674559638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4090,7 +4273,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1829621321}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: EnemyFreeze
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1829621321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4211,7 +4406,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1861676577}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: Crit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1861676577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4341,8 +4548,9 @@ GameObject:
   - component: {fileID: 1986268401}
   - component: {fileID: 1986268400}
   - component: {fileID: 1986268399}
+  - component: {fileID: 1986268403}
   m_Layer: 5
-  m_Name: Upgrade_Canvas
+  m_Name: UpgradeCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4447,6 +4655,46 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1986268403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986268398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b74c9ed6026a354da1149dfbaa9ef43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 1418810920}
+  player: {fileID: 1523250838}
+  UI_Canvas: {fileID: 252086777}
+  dmgBought: 0
+  exDmgBought: 0
+  critBought: 0
+  exCritBought: 0
+  deathBought: 0
+  dodgeBought: 0
+  exDodgeBought: 0
+  dmg: {fileID: 276049498}
+  exDMG: {fileID: 1471866462}
+  ammo: {fileID: 658911720}
+  crit: {fileID: 1861676576}
+  exCrit: {fileID: 1266338851}
+  death: {fileID: 913365065}
+  dodge: {fileID: 685010806}
+  exDodge: {fileID: 2112788163}
+  shield: {fileID: 955725380}
+  speed: {fileID: 181110373}
+  exSpeed: {fileID: 1617155269}
+  reflect: {fileID: 30868638}
+  superShot: {fileID: 335289692}
+  ultraShot: {fileID: 1426507774}
+  doppelganger: {fileID: 1674559637}
+  enemyJam: {fileID: 633477842}
+  enemyFreeze: {fileID: 1829621320}
+  invincibility: {fileID: 1389962028}
 --- !u!1 &2050021372
 GameObject:
   m_ObjectHideFlags: 0
@@ -9335,7 +9583,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2112788164}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986268403}
+        m_TargetAssemblyTypeName: Upgrades, Assembly-CSharp
+        m_MethodName: ExDodge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2112788164
 MonoBehaviour:
   m_ObjectHideFlags: 0

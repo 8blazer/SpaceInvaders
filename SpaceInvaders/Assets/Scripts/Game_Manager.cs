@@ -27,8 +27,9 @@ public class Game_Manager : MonoBehaviour
     public int enemiesLeft;
     public int wavePart = 1;
     bool bossSpawned = false;
-    bool upgrading = false;
+    public bool upgrading = false;
     public Canvas upgradeCanvas;
+    public Canvas UI_Canvas;
     public Text text;
     public GameObject player;
 
@@ -218,18 +219,26 @@ public class Game_Manager : MonoBehaviour
                     if (wave == 2 || wave == 6 || wave == 10)
                     {
                         upgrading = true;
+                        UI_Canvas.GetComponent<Canvas>().enabled = false;
+                        upgradeCanvas.GetComponent<Canvas>().enabled = true;
                         player.GetComponent<PlayerMovement>().enabled = false;
                         player.GetComponent<PlayerShoot>().enabled = false;
                         player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
-                    }
-                    else
-                    {
+                        wave++;
+
                         wavePart = 1;
                         initialSpawned = false;
                         initialEnemyCount++;
                         enemyCount = 0;
                         enemyPerWave++;
                         enemyTime -= .1f;
+                    }
+                    else
+                    {
+                        wavePart = 1;
+                        initialSpawned = false;
+                        enemyCount = 0;
+                        enemyPerWave++;
                         wave++;
                     }
                 }
@@ -244,7 +253,7 @@ public class Game_Manager : MonoBehaviour
                 }
             }
         }
-        else
+        else if (!upgrading)
         {
             int i = 0;
             while (i < initialEnemyCount && !bossSpawned)
@@ -427,13 +436,29 @@ public class Game_Manager : MonoBehaviour
             }
             initialSpawned = true;
         }
+        else
+        {
+            initialSpawned = true;
+        }
     }
 
     public void BossDeath()
     {
         bossSpawned = false;
-        wave++;
         upgrading = true;
+        UI_Canvas.GetComponent<Canvas>().enabled = false;
+        upgradeCanvas.GetComponent<Canvas>().enabled = true;
+        player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<PlayerShoot>().enabled = false;
+        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
+        wave++;
+
+        wavePart = 1;
+        initialSpawned = false;
+        initialEnemyCount++;
+        enemyCount = 0;
+        enemyPerWave++;
+        enemyTime -= .1f;
     }
 
     public void AddEnemy()

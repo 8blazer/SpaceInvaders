@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     int health = 3;
     public ParticleSystem deathParticles;
     public bool canMove = true;
+    public Canvas upgradeCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -94,9 +95,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        int i = Random.Range(1, 101);
         if (collision.gameObject.tag == "E_Bullet")
         {
-            Death();
+            if (upgradeCanvas.GetComponent<Upgrades>().exDodgeBought && i > 50)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dodgeBought && i > 75)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else
+            {
+                Death();
+            }
             if (collision.gameObject.name != "UFO_Laser")
             {
                 Destroy(collision.gameObject);
@@ -104,7 +117,18 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Enemy")
         {
-            Death();
+            if (upgradeCanvas.GetComponent<Upgrades>().exDodgeBought && i > 50)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dodgeBought && i > 75)
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else
+            {
+                Death();
+            }
         }
     }
 }
