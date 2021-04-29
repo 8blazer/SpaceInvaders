@@ -25,7 +25,7 @@ public class YellowBossBaby : MonoBehaviour
         }
 
         player = GameObject.Find("Player");
-        mainBoss = GameObject.Find("YellowBoss");
+        mainBoss = GameObject.Find("YellowBoss(Clone)");
     }
 
     // Update is called once per frame

@@ -29,6 +29,7 @@ public class UFO_Boss : MonoBehaviour
     public float laserChargeTime;
     bool laserMovement;
     bool spawned = false;
+    GameObject upgradeCanvas;
 
     public GameObject greenPrefab;
     public GameObject yellowPrefab;
@@ -41,6 +42,7 @@ public class UFO_Boss : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
         laser = transform.GetChild(0).gameObject;
     }
@@ -237,21 +239,74 @@ public class UFO_Boss : MonoBehaviour
         }
     }
 
+    public void Laser()
+    {
+        health--;
+        if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+        {
+            health -= 2;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+        {
+            health--;
+        }
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+        {
+            health -= 3;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+        {
+            health -= 2;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {
             health--;
             health--;
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
+            if (player.GetComponent<PlayerShoot>().weapon == "sniper")
+            {
+                health -= 13;
+            }
             Destroy(collision.gameObject);
-        }
-        if (collision.gameObject.tag == "Laser")
-        {
-            health--;
         }
         if (collision.gameObject.tag == "Rocket")
         {
             health = health - 8;
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
             Destroy(collision.gameObject);
         }
     }

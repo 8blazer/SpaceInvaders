@@ -99,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.6}
+  m_Size: {x: 0.7, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &4403048447259993616
 Rigidbody2D:
@@ -149,3 +149,9 @@ MonoBehaviour:
   vertSpeed: -10
   vertSpeedChange: 6
   swoopTime: 3
+  lifeDrop: {fileID: 5518201233025428409, guid: 12a0a5c314a8ba04597f6ae9b321bf48, type: 3}
+  minigunDrop: {fileID: 6755424283559179131, guid: 3607d818628f62f4c9e64a1af4aa26cc, type: 3}
+  laserDrop: {fileID: 738882051191185003, guid: 4bf16c0435908c74585a538a4e385ff5, type: 3}
+  shotgunDrop: {fileID: 9211844773864518727, guid: 63ba7db98bc24674f878b2bd843c4b60, type: 3}
+  sniperDrop: {fileID: 1706859342547301220, guid: 0532b5c6bc7b3ad49bc84adfad22ce3b, type: 3}
+  rocketDrop: {fileID: 2134132142184691096, guid: 9e6a9d5a6b927ff4aaa94e38f4e75469, type: 3}

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public int ammo = 100;      //make sniper bullets deal 10 damage, rockets explode for area effect, laser needs to work at all
+    public int ammo = 100;      //rockets explode for area effect, laser needs to work at all
     public int ammoMax = 100;
+    public bool ammoUpgrade = false;
     public float reloadTime = .02f;
     float reloadTimer;
     public float ammoRegenTime = .01f;
@@ -22,7 +23,8 @@ public class PlayerShoot : MonoBehaviour
     public bool canShoot = true;
     float burnoutTimer;
     public Text ammoText;
-    
+    RaycastHit2D[] collisions;
+
     void Update()
     {
         ammoText.text = "Ammo: " + ammo.ToString();
@@ -115,19 +117,66 @@ public class PlayerShoot : MonoBehaviour
         else if (weapon == "laser")
         {
             GameObject laser = Instantiate(laserPrefab, transform.position + new Vector3(0, 7.5f, 0), Quaternion.identity);
+            float xOffset = -.02f;
+            while (xOffset < .02f)
+            {
+                collisions = Physics2D.RaycastAll(transform.position, transform.up, 10);
+                int i = 0;
+                while (i < collisions.Length)
+                {
+                    if (collisions[i].transform.gameObject.name == "GreenEnemy(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<GreenEnemy>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "YellowEnemy(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<YellowEnemy>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "RedEnemy(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<RedEnemy>().health = 0;
+                    }
+                    else if (collisions[i].transform.gameObject.name == "CyanEnemy(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<CyanEnemy>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "PurpleEnemy(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<PurpleEnemy>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "OrangeEnemy(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<OrangeEnemy>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "EyeBoss(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<EyeBoss>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "YellowBoss(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<YellowBoss>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "FinalBoss(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<UFO_Boss>().Laser();
+                    }
+                    i++;
+                }
+                xOffset += .02f;
+            }
 
-            ammoMax = 10;
+            ammoMax = 15;
             reloadTime = .075f;
             ammoRegenTime = .2f;
         }
         else if (weapon == "sniper")
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 5);
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 4f);
 
             ammoMax = 20;
-            reloadTime = .75f;
-            ammoRegenTime = 1f;
+            reloadTime = .4f;
+            ammoRegenTime = .6f;
         }
         else if (weapon == "rocket")
         {

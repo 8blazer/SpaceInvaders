@@ -26,11 +26,15 @@ public class EyeBoss : MonoBehaviour
     public RuntimeAnimatorController eyeCharge3;
     bool spawned = false;
 
+    GameObject upgradeCanvas;
+    public GameObject lifeDrop;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("GameManager");
+        upgradeCanvas = GameObject.Find("UpgradeCanvas");
         eye = transform.GetChild(0).gameObject;
     }
 
@@ -159,7 +163,29 @@ public class EyeBoss : MonoBehaviour
         if (health < 1)
         {
             gameManager.GetComponent<Game_Manager>().BossDeath();
+            //Instantiate(lifeDrop, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
+    }
+
+    public void Laser()
+    {
+        health--;
+        if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+        {
+            health -= 2;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+        {
+            health--;
+        }
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+        {
+            health -= 3;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+        {
+            health -= 2;
         }
     }
 
@@ -168,15 +194,47 @@ public class EyeBoss : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             health -= 2;
+            if (player.GetComponent<PlayerShoot>().weapon == "sniper")
+            {
+                health -= 13;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
             Destroy(collision.gameObject);
-        }
-        if (collision.gameObject.tag == "Laser")
-        {
-            health--;
         }
         if (collision.gameObject.tag == "Rocket")
         {
             health -= 8;
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
             Destroy(collision.gameObject);
         }
 

@@ -194,7 +194,14 @@ public class Upgrades : MonoBehaviour
 
     public void Ammo()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        player.GetComponent<PlayerShoot>().ammoUpgrade = true;
+        offenseTwoBought = true;
     }
 
     public void Crit()
@@ -259,7 +266,14 @@ public class Upgrades : MonoBehaviour
 
     public void Shield()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        defenseTwoBought = true;
+        player.GetComponent<PlayerAbility>().shieldBought = true;
     }
 
     public void Speed()

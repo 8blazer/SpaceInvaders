@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,10 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public float flashTime;
     float respawnTimer;
     public float respawnTime;
-    int health = 3;
+    public int lives = 3;
     public ParticleSystem deathParticles;
     public bool canMove = true;
     public Canvas upgradeCanvas;
+    public Text livesText;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        livesText.text = lives.ToString();
+
         if (canMove)
         {
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && transform.position.x > -8)
@@ -87,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().enabled = false;
             deathParticles.Play();
-            health--;
+            lives--;
             canMove = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         }

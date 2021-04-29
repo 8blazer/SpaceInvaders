@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -30,7 +29,6 @@ public class Game_Manager : MonoBehaviour
     public bool upgrading = false;
     public Canvas upgradeCanvas;
     public Canvas UI_Canvas;
-    public Text text;
     public GameObject player;
 
     // Start is called before the first frame update
@@ -42,8 +40,6 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = enemiesLeft.ToString();
-        
         if (initialSpawned)
         {
             enemyTimer += Time.deltaTime;

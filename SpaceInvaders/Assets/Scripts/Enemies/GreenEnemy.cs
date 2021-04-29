@@ -11,16 +11,26 @@ public class GreenEnemy : MonoBehaviour
     public GameObject bulletPrefab;
     GameObject gameManager;
     GameObject upgradeCanvas;
+    GameObject player;
     float timer;
     bool moveRight;
     bool spawned = false;
     float spawnY;
+
+    public GameObject lifeDrop;
+    public GameObject minigunDrop;
+    public GameObject laserDrop;
+    public GameObject shotgunDrop;
+    public GameObject sniperDrop;
+    public GameObject rocketDrop;
+
     // Start is called before the first frame update
     void Start()
     {
         shootSpeed = Random.Range(1.5f, 3.1f);
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
+        player = GameObject.Find("Player");
         gameManager.GetComponent<Game_Manager>().AddEnemy();
         spawnY = Random.Range(3.0f, 4.6f);
     }
@@ -68,7 +78,57 @@ public class GreenEnemy : MonoBehaviour
         if (health < 1 || transform.position.y < -4.5f)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
+            int i = Random.Range(1, 401);
+            if (i == 1)
+            {
+                Instantiate(lifeDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 2)
+            {
+                Instantiate(minigunDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 3)
+            {
+                Instantiate(laserDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 4)
+            {
+                Instantiate(rocketDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 5)
+            {
+                Instantiate(shotgunDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 6)
+            {
+                Instantiate(sniperDrop, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
+        }
+    }
+
+    public void Laser()
+    {
+        health--;
+        if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+        {
+            health -= 2;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+        {
+            health--;
+        }
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+        {
+            health -= 3;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+        {
+            health = 0;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+        {
+            health -= 2;
         }
     }
 
@@ -98,31 +158,11 @@ public class GreenEnemy : MonoBehaviour
             {
                 health -= 2;
             }
+            if (player.GetComponent<PlayerShoot>().weapon == "sniper")
+            {
+                health -= 13;
+            }
             Destroy(collision.gameObject);
-        }
-        else if (collision.gameObject.tag == "Laser")
-        {
-            health--;
-            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
-            {
-                health -= 2;
-            }
-            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
-            {
-                health--;
-            }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
-            {
-                health -= 3;
-            }
-            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
-            {
-                health = 0;
-            }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
-            {
-                health -= 2;
-            }
         }
         else if (collision.gameObject.tag == "Rocket")
         {

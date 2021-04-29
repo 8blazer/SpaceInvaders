@@ -7,7 +7,14 @@ public class RedEnemy : MonoBehaviour
     public float moveSpeed;
     GameObject player;
     GameObject gameManager;
-    int health = 1;
+    public int health = 1;
+
+    public GameObject lifeDrop;
+    public GameObject minigunDrop;
+    public GameObject laserDrop;
+    public GameObject shotgunDrop;
+    public GameObject sniperDrop;
+    public GameObject rocketDrop;
 
     // Start is called before the first frame update
     void Start()
@@ -25,21 +32,38 @@ public class RedEnemy : MonoBehaviour
         if (health < 1)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
+            int i = Random.Range(1, 401);
+            if (i == 1)
+            {
+                Instantiate(lifeDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 2)
+            {
+                Instantiate(minigunDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 3)
+            {
+                Instantiate(laserDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 4)
+            {
+                Instantiate(rocketDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 5)
+            {
+                Instantiate(shotgunDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 6)
+            {
+                Instantiate(sniperDrop, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket")
-        {
-            health = 0;
-        }
-        else if (collision.gameObject.tag == "Laser")
-        {
-            health = 0;
-        }
-        else if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket" || collision.gameObject.tag == "Player")
         {
             health = 0;
         }
