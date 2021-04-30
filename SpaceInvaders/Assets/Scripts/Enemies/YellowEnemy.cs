@@ -156,7 +156,6 @@ public class YellowEnemy : MonoBehaviour
             {
                 health -= 2;
             }
-            Destroy(collision.gameObject);
         }
     }
 }

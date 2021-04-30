@@ -182,7 +182,6 @@ public class OrangeEnemy : MonoBehaviour
             {
                 health -= 2;
             }
-            Destroy(collision.gameObject);
         }
     }
 }

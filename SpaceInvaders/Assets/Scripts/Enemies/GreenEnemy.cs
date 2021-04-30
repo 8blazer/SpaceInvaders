@@ -187,7 +187,6 @@ public class GreenEnemy : MonoBehaviour
             {
                 health -= 2;
             }
-            Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Player")
         {

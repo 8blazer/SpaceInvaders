@@ -66,6 +66,10 @@ public class RedEnemy : MonoBehaviour
         if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket" || collision.gameObject.tag == "Player")
         {
             health = 0;
+            if (collision.gameObject.tag == "Bullet")
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 }

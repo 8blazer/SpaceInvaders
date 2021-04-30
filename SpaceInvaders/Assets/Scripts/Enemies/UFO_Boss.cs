@@ -307,7 +307,6 @@ public class UFO_Boss : MonoBehaviour
             {
                 health -= 2;
             }
-            Destroy(collision.gameObject);
         }
     }
 }

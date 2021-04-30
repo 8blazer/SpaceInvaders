@@ -103,7 +103,7 @@ public class CyanEnemy : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -horizSpeed);
-            if (transform.position.y < 3.5f)
+            if (transform.position.y < 3.3f)
             {
                 spawned = true;
             }
@@ -220,7 +220,6 @@ public class CyanEnemy : MonoBehaviour
             {
                 health -= 2;
             }
-            Destroy(collision.gameObject);
         }
     }
 }

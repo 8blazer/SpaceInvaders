@@ -14,12 +14,14 @@ public class YellowBossMini : MonoBehaviour
     bool moveRight;
     GameObject player;
     GameObject mainBoss;
+    GameObject upgradeCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         mainBoss = GameObject.Find("YellowBoss");
+        upgradeCanvas = GameObject.Find("UpgradeCanvas");
     }
 
     // Update is called once per frame
@@ -87,6 +89,31 @@ public class YellowBossMini : MonoBehaviour
         }
     }
 
+    public void Laser()
+    {
+        health--;
+        if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+        {
+            health -= 2;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+        {
+            health--;
+        }
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+        {
+            health -= 3;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+        {
+            health = 0;
+        }
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+        {
+            health -= 2;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
@@ -94,10 +121,6 @@ public class YellowBossMini : MonoBehaviour
             health--;
             health--;
             Destroy(collision.gameObject);
-        }
-        if (collision.gameObject.tag == "Laser")
-        {
-            health--;
         }
         if (collision.gameObject.tag == "Rocket")
         {

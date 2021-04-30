@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     public Canvas upgradeCanvas;
     public Text livesText;
+    public GameObject bulletPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -109,6 +110,11 @@ public class PlayerMovement : MonoBehaviour
             else if (upgradeCanvas.GetComponent<Upgrades>().dodgeBought && i > 75)
             {
                 GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().reflectBought && i > 40)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, collision.transform.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = collision.GetComponent<Rigidbody2D>().velocity * -1;
             }
             else
             {

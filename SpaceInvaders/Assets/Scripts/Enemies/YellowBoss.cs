@@ -228,7 +228,6 @@ public class YellowBoss : MonoBehaviour
                 {
                     health -= 2;
                 }
-                Destroy(collision.gameObject);
             }
         }
     }

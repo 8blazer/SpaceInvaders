@@ -23,6 +23,7 @@ public class Upgrades : MonoBehaviour
     public bool deathBought;
     public bool dodgeBought;
     public bool exDodgeBought;
+    public bool reflectBought;
     bool superShotBought;
 
     public Button dmg;
@@ -173,6 +174,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -185,6 +187,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -197,6 +200,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -209,6 +213,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -221,6 +226,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -233,6 +239,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -245,6 +252,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -257,6 +265,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -269,6 +278,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -281,6 +291,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -293,6 +304,7 @@ public class Upgrades : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().upgrading = false;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -302,36 +314,93 @@ public class Upgrades : MonoBehaviour
 
     public void Reflect()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        defenseTwoBought = true;
+        reflectBought = true;
     }
 
     public void SuperShot()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        abilityOneBought = true;
+        superShotBought = true;
+        player.GetComponent<PlayerAbility>().activeAbility = "SuperShot";
     }
 
     public void UltraShot()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        abilityTwoBought = true;
+        player.GetComponent<PlayerAbility>().activeAbility = "UltraShot";
     }
 
     public void Doppelganger()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        abilityTwoBought = true;
+        player.GetComponent<PlayerAbility>().activeAbility = "Doppelganger";
     }
 
     public void EnemyJam()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        abilityOneBought = true;
+        player.GetComponent<PlayerAbility>().activeAbility = "EnemyJam";
     }
 
     public void EnemyFreeze()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        abilityTwoBought = true;
+        player.GetComponent<PlayerAbility>().activeAbility = "EnemyFreeze";
     }
 
     public void Invincibility()
     {
-
+        gameManager.GetComponent<Game_Manager>().upgrading = false;
+        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerShoot>().enabled = true;
+        player.GetComponent<BoxCollider2D>().enabled = true;
+        player.transform.position = new Vector3(0, -4, 0);
+        UI_Canvas.GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        abilityTwoBought = true;
+        player.GetComponent<PlayerAbility>().activeAbility = "Invincibility";
     }
 }

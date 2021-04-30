@@ -235,7 +235,6 @@ public class EyeBoss : MonoBehaviour
             {
                 health -= 2;
             }
-            Destroy(collision.gameObject);
         }
 
         if (health < 100)

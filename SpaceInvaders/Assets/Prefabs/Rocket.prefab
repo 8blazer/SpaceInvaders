@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7277676969681302359}
   - component: {fileID: 7277676969681302355}
   - component: {fileID: 7277676969681302354}
+  - component: {fileID: -6457096738228477885}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Rocket
@@ -145,7 +146,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363210be9d329c34584c211274416c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 10
+  lifeTime: 15
   rocketSprite: {fileID: 7431529995326980795, guid: 36e57921d5a0a0246a45961dbe182929, type: 3}
   rocketDetectionRange: 2
   rocketSpeed: 5
+--- !u!95 &-6457096738228477885
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277676969681302358}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2346f96cb6d1f3849961db9260f0c6ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

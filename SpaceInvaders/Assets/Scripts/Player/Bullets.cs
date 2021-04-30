@@ -11,6 +11,7 @@ public class Bullets : MonoBehaviour
     GameObject enemyDetected;
     public float rocketDetectionRange;
     public float rocketSpeed;
+    bool rocketExplode = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,12 @@ public class Bullets : MonoBehaviour
         if (timer > lifeTime)
         {
             Destroy(gameObject);
+        }
+
+        if (rocketExplode && timer < lifeTime - .5f)
+        {
+            timer = lifeTime - .45f;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
 
         if (GetComponent<SpriteRenderer>().sprite == rocketSprite)
@@ -55,6 +62,16 @@ public class Bullets : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = transform.up * rocketSpeed;
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (GetComponent<SpriteRenderer>().sprite == rocketSprite && collision.gameObject.tag == "Enemy")
+        {
+            GetComponent<Animator>().enabled = true;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            rocketExplode = true;
         }
     }
 }

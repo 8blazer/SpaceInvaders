@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public int ammo = 100;      //rockets explode for area effect, laser needs to work at all
-    public int ammoMax = 100;
+    public int ammo = 50;
+    public int ammoMax = 50;
     public bool ammoUpgrade = false;
-    public float reloadTime = .02f;
+    public float reloadTime = .12f;
     float reloadTimer;
-    public float ammoRegenTime = .01f;
+    public float ammoRegenTime = .015f;
     float ammoRegenTimer;
     public string weapon = "minigun";
     public GameObject bulletPrefab;
@@ -82,10 +82,6 @@ public class PlayerShoot : MonoBehaviour
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
-
-            ammoMax = 50;   //These lines of code in each weapon block should be replaced by the pickup script later
-            reloadTime = .12f;
-            ammoRegenTime = .015f;
         }
         else if (weapon == "minigun")
         {
@@ -94,10 +90,6 @@ public class PlayerShoot : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
             bullet = Instantiate(bulletPrefab, transform.position + new Vector3(.2f, .1f, 0), Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
-
-            ammoMax = 50;
-            reloadTime = .08f;
-            ammoRegenTime = .015f;
         }
         else if (weapon == "shotgun")
         {
@@ -109,16 +101,12 @@ public class PlayerShoot : MonoBehaviour
                 shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * (shellSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
                 i++;
             }
-
-            ammoMax = 10;
-            reloadTime = .75f;
-            ammoRegenTime = 1f;
         }
         else if (weapon == "laser")
         {
             GameObject laser = Instantiate(laserPrefab, transform.position + new Vector3(0, 7.5f, 0), Quaternion.identity);
-            float xOffset = -.02f;
-            while (xOffset < .02f)
+            float xOffset = -.04f;
+            while (xOffset < .04f)
             {
                 collisions = Physics2D.RaycastAll(transform.position, transform.up, 10);
                 int i = 0;
@@ -160,31 +148,28 @@ public class PlayerShoot : MonoBehaviour
                     {
                         collisions[i].transform.GetComponent<UFO_Boss>().Laser();
                     }
+                    else if (collisions[i].transform.gameObject.name == "YellowBaby(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<YellowBossBaby>().Laser();
+                    }
+                    else if (collisions[i].transform.gameObject.name == "YellowBossMini(Clone)")
+                    {
+                        collisions[i].transform.GetComponent<YellowBossMini>().Laser();
+                    }
                     i++;
                 }
                 xOffset += .02f;
             }
-
-            ammoMax = 15;
-            reloadTime = .075f;
-            ammoRegenTime = .2f;
         }
         else if (weapon == "sniper")
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
+            bullet.transform.localScale = new Vector3(1.2f, 1.2f, 1);
             bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 4f);
-
-            ammoMax = 20;
-            reloadTime = .4f;
-            ammoRegenTime = .6f;
         }
         else if (weapon == "rocket")
         {
             GameObject rocket = Instantiate(rocketPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
-
-            ammoMax = 15;
-            reloadTime = .3f;
-            ammoRegenTime = .75f;
         }
     }
 }

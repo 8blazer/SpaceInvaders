@@ -195,7 +195,6 @@ public class PurpleEnemy : MonoBehaviour
             {
                 health -= 2;
             }
-            Destroy(collision.gameObject);
         }
     }
 }
