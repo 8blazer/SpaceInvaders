@@ -41,6 +41,10 @@ public class GreenEnemy : MonoBehaviour
         if (spawned)
         {
             timer += Time.deltaTime;
+            if (player.GetComponent<PlayerAbility>().jammed)
+            {
+                timer = 0;
+            }
             if (timer > shootSpeed)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
@@ -161,8 +165,15 @@ public class GreenEnemy : MonoBehaviour
             if (player.GetComponent<PlayerShoot>().weapon == "sniper")
             {
                 health -= 13;
+                if (Random.Range(1, 3) == 1)
+                {
+                    Destroy(collision.gameObject);
+                }
             }
-            Destroy(collision.gameObject);
+            else
+            {
+                Destroy(collision.gameObject);
+            }
         }
         else if (collision.gameObject.tag == "Rocket")
         {

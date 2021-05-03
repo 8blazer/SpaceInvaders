@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public Canvas upgradeCanvas;
     public Text livesText;
     public GameObject bulletPrefab;
+    public GameObject doppelganger;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!canMove)
         {
+            doppelganger.GetComponent<Doppelganger>().canMove = false;
             respawnTimer += Time.deltaTime;
             if (respawnTimer > respawnTime)
             {
@@ -63,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!GetComponent<BoxCollider2D>().enabled && canMove)
         {
+            doppelganger.GetComponent<Doppelganger>().canMove = true;
             invincTimer += Time.deltaTime;
             flashTimer += Time.deltaTime;
             if (flashTimer > flashTime)

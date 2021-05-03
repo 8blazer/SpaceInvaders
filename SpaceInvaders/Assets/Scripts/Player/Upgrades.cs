@@ -205,6 +205,31 @@ public class Upgrades : MonoBehaviour
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
         player.GetComponent<PlayerShoot>().ammoUpgrade = true;
+        if (player.GetComponent<PlayerShoot>().weapon == "machinegun")
+        {
+            player.GetComponent<PlayerShoot>().ammoMax = 75;
+        }
+        else if (player.GetComponent<PlayerShoot>().weapon == "minigun")
+        {
+            player.GetComponent<PlayerShoot>().ammoMax = 60;
+        }
+        else if (player.GetComponent<PlayerShoot>().weapon == "shotgun")
+        {
+            player.GetComponent<PlayerShoot>().ammoMax = 15;
+        }
+        else if (player.GetComponent<PlayerShoot>().weapon == "sniper")
+        {
+            player.GetComponent<PlayerShoot>().ammoMax = 25;
+        }
+        else if (player.GetComponent<PlayerShoot>().weapon == "rocket")
+        {
+            player.GetComponent<PlayerShoot>().ammoMax = 20;
+        }
+        else
+        {
+            player.GetComponent<PlayerShoot>().ammoMax = 20;
+        }
+        player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
         offenseTwoBought = true;
     }
 

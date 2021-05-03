@@ -129,12 +129,54 @@ public class YellowBossBaby : MonoBehaviour
         {
             health--;
             health--;
-            Destroy(collision.gameObject);
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
+            if (player.GetComponent<PlayerShoot>().weapon == "sniper")
+            {
+                health -= 13;
+                if (Random.Range(1, 3) == 1)
+                {
+                    Destroy(collision.gameObject);
+                }
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+            }
         }
         if (collision.gameObject.tag == "Rocket")
         {
             health = health - 8;
-            Destroy(collision.gameObject);
+            if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
+            {
+                health -= 2;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
+            {
+                health--;
+            }
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            {
+                health -= 3;
+            }
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            {
+                health -= 2;
+            }
         }
     }
 }

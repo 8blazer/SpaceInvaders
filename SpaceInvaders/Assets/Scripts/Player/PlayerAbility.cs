@@ -9,7 +9,6 @@ public class PlayerAbility : MonoBehaviour
     public bool shieldBought = false;
     public float shieldTimer;
     public float shieldTime;
-    public bool ability = false;
     public string activeAbility;
     public Slider abilityCharge;
     public Image fill;
@@ -20,6 +19,13 @@ public class PlayerAbility : MonoBehaviour
     public Sprite handleFull;
     public Image background;
     public Sprite backgroundSprite;
+    public GameObject doppelganger;
+    public bool jammed;
+    public int jamTime;
+    float jamTimer;
+    public bool frozen;
+    public int freezeTime;
+    float freezeTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +36,14 @@ public class PlayerAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ability)
+        if (activeAbility != "" && !frozen && !jammed)
         {
             abilityCharge.value += Time.deltaTime;
             background.enabled = true;
             fill.enabled = true;
             handle.enabled = true;
         }
-        else
+        else if (activeAbility == "")
         {
             background.enabled = false;
             fill.enabled = false;
@@ -60,15 +66,18 @@ public class PlayerAbility : MonoBehaviour
                 }
                 else if (activeAbility == "Doppelganger")
                 {
-
+                    doppelganger.transform.position = transform.position;
+                    doppelganger.GetComponent<BoxCollider2D>().enabled = true;
+                    doppelganger.GetComponent<Doppelganger>().enabled = true;
+                    doppelganger.GetComponent<SpriteRenderer>().enabled = true;
                 }
                 else if (activeAbility == "EnemyJam")
                 {
-
+                    jammed = true;
                 }
                 else if (activeAbility == "EnemyFreeze")
                 {
-
+                    frozen = true;
                 }
                 else
                 {
@@ -94,6 +103,25 @@ public class PlayerAbility : MonoBehaviour
         {
             shield.GetComponent<SpriteRenderer>().enabled = false;
             shield.GetComponent<BoxCollider2D>().enabled = false;
+        }
+
+        if (jammed)
+        {
+            jamTimer += Time.deltaTime;
+            if (jamTimer > jamTime)
+            {
+                jammed = false;
+                jamTimer = 0;
+            }
+        }
+        else if (frozen)
+        {
+            freezeTimer += Time.deltaTime;
+            if (freezeTimer > freezeTime)
+            {
+                frozen = false;
+                freezeTimer = 0;
+            }
         }
     }
 }

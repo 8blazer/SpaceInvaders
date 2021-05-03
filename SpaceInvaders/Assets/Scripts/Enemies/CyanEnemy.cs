@@ -194,8 +194,15 @@ public class CyanEnemy : MonoBehaviour
             if (player.GetComponent<PlayerShoot>().weapon == "sniper")
             {
                 health -= 13;
+                if (Random.Range(1, 3) == 1)
+                {
+                    Destroy(collision.gameObject);
+                }
             }
-            Destroy(collision.gameObject);
+            else
+            {
+                Destroy(collision.gameObject);
+            }
         }
         if (collision.gameObject.tag == "Rocket")
         {

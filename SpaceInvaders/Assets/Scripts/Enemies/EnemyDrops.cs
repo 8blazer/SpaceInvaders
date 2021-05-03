@@ -31,7 +31,14 @@ public class EnemyDrops : MonoBehaviour
             else if (gameObject.name == "MinigunDrop(Clone)")
             {
                 collision.GetComponent<PlayerShoot>().weapon = "minigun";
-                collision.GetComponent<PlayerShoot>().ammoMax = 40;
+                if (collision.GetComponent<PlayerShoot>().ammoUpgrade)
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 60;
+                }
+                else
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 40;
+                }
                 collision.GetComponent<PlayerShoot>().reloadTime = .12f;
                 collision.GetComponent<PlayerShoot>().ammoRegenTime = .015f;
                 Destroy(gameObject);
@@ -39,7 +46,14 @@ public class EnemyDrops : MonoBehaviour
             else if (gameObject.name == "ShotgunDrop(Clone)")
             {
                 collision.GetComponent<PlayerShoot>().weapon = "shotgun";
-                collision.GetComponent<PlayerShoot>().ammoMax = 10;
+                if (collision.GetComponent<PlayerShoot>().ammoUpgrade)
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 15;
+                }
+                else
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 10;
+                }
                 collision.GetComponent<PlayerShoot>().reloadTime = .6f;
                 collision.GetComponent<PlayerShoot>().ammoRegenTime = .8f;
                 Destroy(gameObject);
@@ -47,7 +61,14 @@ public class EnemyDrops : MonoBehaviour
             else if (gameObject.name == "LaserDrop(Clone)")
             {
                 collision.GetComponent<PlayerShoot>().weapon = "laser";
-                collision.GetComponent<PlayerShoot>().ammoMax = 15;
+                if (collision.GetComponent<PlayerShoot>().ammoUpgrade)
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 20;
+                }
+                else
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 15;
+                }
                 collision.GetComponent<PlayerShoot>().reloadTime = .075f;
                 collision.GetComponent<PlayerShoot>().ammoRegenTime = .3f;
                 Destroy(gameObject);
@@ -55,7 +76,14 @@ public class EnemyDrops : MonoBehaviour
             else if (gameObject.name == "RocketDrop(Clone)")
             {
                 collision.GetComponent<PlayerShoot>().weapon = "rocket";
-                collision.GetComponent<PlayerShoot>().ammoMax = 15;
+                if (collision.GetComponent<PlayerShoot>().ammoUpgrade)
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 20;
+                }
+                else
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 15;
+                }
                 collision.GetComponent<PlayerShoot>().reloadTime = .3f;
                 collision.GetComponent<PlayerShoot>().ammoRegenTime = .75f;
                 Destroy(gameObject);
@@ -63,7 +91,14 @@ public class EnemyDrops : MonoBehaviour
             else if (gameObject.name == "SniperDrop(Clone)")
             {
                 collision.GetComponent<PlayerShoot>().weapon = "sniper";
-                collision.GetComponent<PlayerShoot>().ammoMax = 20;
+                if (collision.GetComponent<PlayerShoot>().ammoUpgrade)
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 25;
+                }
+                else
+                {
+                    collision.GetComponent<PlayerShoot>().ammoMax = 20;
+                }
                 collision.GetComponent<PlayerShoot>().reloadTime = .3f;
                 collision.GetComponent<PlayerShoot>().ammoRegenTime = .4f;
                 Destroy(gameObject);

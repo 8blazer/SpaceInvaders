@@ -68,7 +68,18 @@ public class RedEnemy : MonoBehaviour
             health = 0;
             if (collision.gameObject.tag == "Bullet")
             {
-                Destroy(collision.gameObject);
+                if (player.GetComponent<PlayerShoot>().weapon == "sniper")
+                {
+                    health -= 13;
+                    if (Random.Range(1, 3) == 1)
+                    {
+                        Destroy(collision.gameObject);
+                    }
+                }
+                else
+                {
+                    Destroy(collision.gameObject);
+                }
             }
         }
     }

@@ -67,12 +67,15 @@ public class PurpleEnemy : MonoBehaviour
                 poof = true;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, poofPower);
             }
-            while (i < 5)
+            if (!player.GetComponent<PlayerAbility>().jammed)
             {
-                GameObject shell = Instantiate(bulletPrefab, transform.position + new Vector3(0f, .1f, 0), Quaternion.identity);
-                shell.transform.Rotate(0, 0, Random.Range(-30, 31));
-                shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * -(bulletSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
-                i++;
+                while (i < 5)
+                {
+                    GameObject shell = Instantiate(bulletPrefab, transform.position + new Vector3(0f, .1f, 0), Quaternion.identity);
+                    shell.transform.Rotate(0, 0, Random.Range(-30, 31));
+                    shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * -(bulletSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
+                    i++;
+                }
             }
             shootTimer = 0;
             poofTimer = 0;
@@ -168,9 +171,15 @@ public class PurpleEnemy : MonoBehaviour
             if (player.GetComponent<PlayerShoot>().weapon == "sniper")
             {
                 health -= 13;
+                if (Random.Range(1, 3) == 1)
+                {
+                    Destroy(collision.gameObject);
+                }
             }
-
-            Destroy(collision.gameObject);
+            else
+            {
+                Destroy(collision.gameObject);
+            }
         }
         if (collision.gameObject.tag == "Rocket")
         {
