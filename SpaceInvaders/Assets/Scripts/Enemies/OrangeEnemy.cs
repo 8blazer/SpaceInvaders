@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrangeEnemy : MonoBehaviour
 {
-    int health = 15;
+    float health = 15;
     public float moveSpeed;
     public float shootSpeed;
     public float bulletSpeed;
@@ -38,7 +38,7 @@ public class OrangeEnemy : MonoBehaviour
         if (spawned)
         {
             timer += Time.deltaTime;
-            if (player.GetComponent<PlayerAbility>().jammed)
+            if (player.GetComponent<PlayerAbility>().jammed || player.GetComponent<PlayerAbility>().frozen)
             {
                 timer = 0;
             }
@@ -104,6 +104,11 @@ public class OrangeEnemy : MonoBehaviour
                 spawned = true;
             }
         }
+
+        if (player.GetComponent<PlayerAbility>().frozen)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
     }
 
     public void Laser()
@@ -117,15 +122,15 @@ public class OrangeEnemy : MonoBehaviour
         {
             health--;
         }
-        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
         {
             health -= 3;
         }
-        else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+        else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 101) == 1)
         {
             health = 0;
         }
-        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
         {
             health -= 2;
         }
@@ -145,15 +150,15 @@ public class OrangeEnemy : MonoBehaviour
             {
                 health--;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 101) == 1)
             {
                 health = 0;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
                 health -= 2;
             }
@@ -181,18 +186,22 @@ public class OrangeEnemy : MonoBehaviour
             {
                 health--;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 151) == 1)
+            else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 101) == 1)
             {
                 health = 0;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
                 health -= 2;
             }
+        }
+        else if (collision.gameObject.tag == "SuperShot")
+        {
+            health -= collision.transform.localScale.x;
         }
     }
 }

@@ -59,11 +59,16 @@ public class RedEnemy : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        if (player.GetComponent<PlayerAbility>().frozen)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket" || collision.gameObject.tag == "Player" || collision.gameObject.tag == "SuperShot")
         {
             health = 0;
             if (collision.gameObject.tag == "Bullet")

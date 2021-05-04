@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EyeBoss : MonoBehaviour
 {
-    int health = 300;
+    float health = 300;
     public float moveSpeed;
     public float shootSpeed;
     float shootTimer;
@@ -163,7 +163,6 @@ public class EyeBoss : MonoBehaviour
         if (health < 1)
         {
             gameManager.GetComponent<Game_Manager>().BossDeath();
-            //Instantiate(lifeDrop, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -179,11 +178,11 @@ public class EyeBoss : MonoBehaviour
         {
             health--;
         }
-        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
         {
             health -= 3;
         }
-        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
         {
             health -= 2;
         }
@@ -206,11 +205,11 @@ public class EyeBoss : MonoBehaviour
             {
                 health--;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
                 health -= 2;
             }
@@ -227,14 +226,18 @@ public class EyeBoss : MonoBehaviour
             {
                 health--;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 92)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 96)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
                 health -= 2;
             }
+        }
+        else if (collision.gameObject.tag == "SuperShot")
+        {
+            health -= collision.transform.localScale.x;
         }
 
         if (health < 100)

@@ -13,12 +13,15 @@ public class PlayerShoot : MonoBehaviour
     public float ammoRegenTime = .015f;
     float ammoRegenTimer;
     public string weapon = "minigun";
+    public string superWeapon = "";
     public GameObject bulletPrefab;
     public float bulletSpeed;
     public GameObject laserPrefab;
     public GameObject shellPrefab;
     public float shellSpeed;
     public GameObject rocketPrefab;
+    public GameObject superShot;
+    public GameObject ultraShot;
     public int shellCount = 10;
     public bool canShoot = true;
     float burnoutTimer;
@@ -78,98 +81,111 @@ public class PlayerShoot : MonoBehaviour
     void Fire()
     {
         ammo--;
-        if (weapon == "machinegun")
+        if (superWeapon == "")
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
-        }
-        else if (weapon == "minigun")
-        {
-            ammo--;
-            GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(-.2f, .1f, 0), Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
-            bullet = Instantiate(bulletPrefab, transform.position + new Vector3(.2f, .1f, 0), Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
-        }
-        else if (weapon == "shotgun")
-        {
-            int i = 0;
-            while (i < shellCount)
+            if (weapon == "machinegun")
             {
-                GameObject shell = Instantiate(shellPrefab, transform.position + new Vector3(0f, .1f, 0), Quaternion.identity);
-                shell.transform.Rotate(0, 0, Random.Range(-30, 31));
-                shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * (shellSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
-                i++;
+                GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
             }
-        }
-        else if (weapon == "laser")
-        {
-            GameObject laser = Instantiate(laserPrefab, transform.position + new Vector3(0, 7.5f, 0), Quaternion.identity);
-            float xOffset = -.04f;
-            while (xOffset < .04f)
+            else if (weapon == "minigun")
             {
-                collisions = Physics2D.RaycastAll(transform.position, transform.up, 10);
+                ammo--;
+                GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(-.2f, .1f, 0), Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
+                bullet = Instantiate(bulletPrefab, transform.position + new Vector3(.2f, .1f, 0), Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
+            }
+            else if (weapon == "shotgun")
+            {
                 int i = 0;
-                while (i < collisions.Length)
+                while (i < shellCount)
                 {
-                    if (collisions[i].transform.gameObject.name == "GreenEnemy(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<GreenEnemy>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "YellowEnemy(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<YellowEnemy>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "RedEnemy(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<RedEnemy>().health = 0;
-                    }
-                    else if (collisions[i].transform.gameObject.name == "CyanEnemy(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<CyanEnemy>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "PurpleEnemy(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<PurpleEnemy>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "OrangeEnemy(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<OrangeEnemy>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "EyeBoss(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<EyeBoss>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "YellowBoss(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<YellowBoss>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "FinalBoss(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<UFO_Boss>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "YellowBaby(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<YellowBossBaby>().Laser();
-                    }
-                    else if (collisions[i].transform.gameObject.name == "YellowBossMini(Clone)")
-                    {
-                        collisions[i].transform.GetComponent<YellowBossMini>().Laser();
-                    }
+                    GameObject shell = Instantiate(shellPrefab, transform.position + new Vector3(0f, .1f, 0), Quaternion.identity);
+                    shell.transform.Rotate(0, 0, Random.Range(-30, 31));
+                    shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * (shellSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
                     i++;
                 }
-                xOffset += .02f;
+            }
+            else if (weapon == "laser")
+            {
+                GameObject laser = Instantiate(laserPrefab, transform.position + new Vector3(0, 7.5f, 0), Quaternion.identity);
+                float xOffset = -.04f;
+                while (xOffset < .04f)
+                {
+                    collisions = Physics2D.RaycastAll(transform.position, transform.up, 10);
+                    int i = 0;
+                    while (i < collisions.Length)
+                    {
+                        if (collisions[i].transform.gameObject.name == "GreenEnemy(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<GreenEnemy>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "YellowEnemy(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<YellowEnemy>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "RedEnemy(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<RedEnemy>().health = 0;
+                        }
+                        else if (collisions[i].transform.gameObject.name == "CyanEnemy(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<CyanEnemy>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "PurpleEnemy(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<PurpleEnemy>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "OrangeEnemy(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<OrangeEnemy>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "EyeBoss(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<EyeBoss>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "YellowBoss(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<YellowBoss>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "FinalBoss(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<UFO_Boss>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "YellowBaby(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<YellowBossBaby>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "YellowBossMini(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<YellowBossMini>().Laser();
+                        }
+                        i++;
+                    }
+                    xOffset += .02f;
+                }
+            }
+            else if (weapon == "sniper")
+            {
+                GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
+                bullet.transform.localScale = new Vector3(1.5f, 1.5f, 1);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 4f);
+            }
+            else if (weapon == "rocket")
+            {
+                GameObject rocket = Instantiate(rocketPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
             }
         }
-        else if (weapon == "sniper")
+        else if (superWeapon == "super")
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
-            bullet.transform.localScale = new Vector3(1.2f, 1.2f, 1);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 4f);
+            Instantiate(superShot, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
+            superWeapon = "";
         }
-        else if (weapon == "rocket")
+        else
         {
-            GameObject rocket = Instantiate(rocketPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
+            Instantiate(ultraShot, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
+            superWeapon = "";
         }
     }
 }

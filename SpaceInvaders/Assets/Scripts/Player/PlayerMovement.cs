@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5;
-    float invincTimer;
+    public float invincTimer;
     public float invincTime;
     float flashTimer;
     public float flashTime;

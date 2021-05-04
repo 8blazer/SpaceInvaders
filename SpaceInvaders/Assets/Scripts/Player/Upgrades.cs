@@ -175,6 +175,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -188,6 +189,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -201,6 +203,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -239,6 +242,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -252,10 +256,11 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        offenseOneBought = true;
+        offenseTwoBought = true;
         exCritBought = true;
     }
 
@@ -265,10 +270,11 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        offenseOneBought = true;
+        offenseTwoBought = true;
         deathBought = true;
     }
 
@@ -278,6 +284,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -291,6 +298,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -304,6 +312,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -317,6 +326,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -330,6 +340,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -343,6 +354,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -356,6 +368,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -370,6 +383,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -383,6 +397,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -396,6 +411,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -409,6 +425,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
@@ -422,6 +439,7 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerShoot>().enabled = true;
         player.GetComponent<BoxCollider2D>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;

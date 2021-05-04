@@ -58,11 +58,11 @@ public class PlayerAbility : MonoBehaviour
                 abilityCharge.value = 0;
                 if (activeAbility == "SuperShot")
                 {
-
+                    GetComponent<PlayerShoot>().superWeapon = "super";
                 }
                 else if (activeAbility == "UltraShot")
                 {
-
+                    GetComponent<PlayerShoot>().superWeapon = "ultra";
                 }
                 else if (activeAbility == "Doppelganger")
                 {
@@ -81,7 +81,8 @@ public class PlayerAbility : MonoBehaviour
                 }
                 else
                 {
-
+                    GetComponent<PlayerMovement>().invincTimer = -2;
+                    GetComponent<BoxCollider2D>().enabled = false;
                 }
             }
         }
