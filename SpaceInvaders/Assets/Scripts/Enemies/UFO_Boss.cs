@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UFO_Boss : MonoBehaviour
 {
-    float health = 300;
+    float health = 700;
     public float moveSpeed;
     public float shootSpeed;
     public float bulletSpeed;
@@ -70,7 +70,7 @@ public class UFO_Boss : MonoBehaviour
                         moveRight = true;
                     }
                 }
-                if (health < 100)
+                if (health < 200)
                 {
                     GetComponent<Animator>().runtimeAnimatorController = null;
                     GetComponent<SpriteRenderer>().sprite = gunPhase;
@@ -83,12 +83,12 @@ public class UFO_Boss : MonoBehaviour
                 if (phaseTimer > 2)
                 {
                     canMove = true;
-                    if (health < 200)
+                    if (health < 400)
                     {
                         GetComponent<SpriteRenderer>().sprite = gunPhase;
                     }
                 }
-                if (health > 100)
+                if (health > 200)
                 {
                     enemyTimer = 0;
                 }
@@ -135,20 +135,19 @@ public class UFO_Boss : MonoBehaviour
             enemyTimer = 0;
         }
 
-        if (health < 200 && GetComponent<SpriteRenderer>().sprite == firstPhase)
+        if (health < 400 && GetComponent<SpriteRenderer>().sprite == firstPhase)
         {
             canMove = false;
             GetComponent<Animator>().runtimeAnimatorController = gun;
             enemyTime++;
             moveSpeed += 2;
         }
-        else if (health < 100 && enemyTime == 6)
+        else if (health < 200 && moveSpeed == 6)
         {
-            enemyTime++;
             moveSpeed += 2;
         }
 
-        if (health < 100)
+        if (health < 200)
         {
             laserTimer += Time.deltaTime;
             if (laserTimer > laserTime)
@@ -217,10 +216,10 @@ public class UFO_Boss : MonoBehaviour
                 }
             }
         }
-        else if (health < 200)
+        if (health < 400)
         {
             shootTimer += Time.deltaTime;
-            if (shootTimer > shootSpeed)
+            if (shootTimer > shootSpeed && !laserMovement && laserChargeTimer == 0)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(.7f, -.85f, 0), Quaternion.identity);
                 bullet.transform.up = (player.transform.position - transform.position);
@@ -229,6 +228,10 @@ public class UFO_Boss : MonoBehaviour
                 bullet.transform.up = (player.transform.position - transform.position);
                 bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
                 shootTimer = 0;
+            }
+            if (laserMovement || laserChargeTimer == 0)
+            {
+                shootTimer = 1;
             }
         }
         if (health < 1)
@@ -244,19 +247,19 @@ public class UFO_Boss : MonoBehaviour
         health--;
         if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
         {
-            health -= 2;
+            health--;
         }
         else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
         {
-            health--;
+            health -= .5f;
         }
         if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
         {
-            health -= 3;
+            health -= 5;
         }
         else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
         {
-            health -= 2;
+            health -= 3;
         }
     }
 
@@ -268,19 +271,19 @@ public class UFO_Boss : MonoBehaviour
             health--;
             if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
             {
-                health -= 2;
+                health--;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
             {
-                health--;
+                health -= .5f;
             }
             if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
-                health -= 3;
+                health -= 5;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
-                health -= 2;
+                health -= 3;
             }
             if (player.GetComponent<PlayerShoot>().weapon == "sniper")
             {
@@ -293,19 +296,19 @@ public class UFO_Boss : MonoBehaviour
             health = health - 8;
             if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
             {
-                health -= 2;
+                health--;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
             {
-                health--;
+                health -= .5f;
             }
             if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
-                health -= 3;
+                health -= 5;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
-                health -= 2;
+                health -= 3;
             }
         }
         else if (collision.gameObject.tag == "SuperShot")

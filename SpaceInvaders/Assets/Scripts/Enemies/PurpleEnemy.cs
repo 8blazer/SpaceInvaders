@@ -127,15 +127,15 @@ public class PurpleEnemy : MonoBehaviour
         health--;
         if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
         {
-            health -= 2;
+            health--;
         }
         else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
         {
-            health--;
+            health -= .5f;
         }
         if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
         {
-            health -= 3;
+            health -= 5;
         }
         else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 101) == 1)
         {
@@ -143,7 +143,7 @@ public class PurpleEnemy : MonoBehaviour
         }
         else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
         {
-            health -= 2;
+            health -= 3;
         }
     }
 
@@ -155,15 +155,15 @@ public class PurpleEnemy : MonoBehaviour
             health--;
             if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
             {
-                health -= 2;
+                health--;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
             {
-                health--;
+                health -= .5f;
             }
             if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
-                health -= 3;
+                health -= 5;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 101) == 1)
             {
@@ -171,7 +171,7 @@ public class PurpleEnemy : MonoBehaviour
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
-                health -= 2;
+                health -= 3;
             }
             if (player.GetComponent<PlayerShoot>().weapon == "sniper")
             {
@@ -191,15 +191,15 @@ public class PurpleEnemy : MonoBehaviour
             health = health - 8;
             if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
             {
-                health -= 2;
+                health--;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().dmgBought)
             {
-                health--;
+                health -= .5f;
             }
             if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
             {
-                health -= 3;
+                health -= 5;
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().deathBought && Random.Range(1, 101) == 1)
             {
@@ -207,7 +207,7 @@ public class PurpleEnemy : MonoBehaviour
             }
             else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
             {
-                health -= 2;
+                health -= 3;
             }
         }
         else if (collision.gameObject.tag == "SuperShot")

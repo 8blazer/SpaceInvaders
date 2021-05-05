@@ -20,5 +20,9 @@ public class SuperShot : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 1.4f, transform.localScale.y + Time.deltaTime * 1.4f, 1);
         }
         transform.Rotate(0, 0, -.3f);
+        if (transform.position.y > 13)
+        {
+            Destroy(gameObject);
+        }
     }
 }

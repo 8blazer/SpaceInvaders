@@ -33,11 +33,11 @@ public class EnemyDrops : MonoBehaviour
                 collision.GetComponent<PlayerShoot>().weapon = "minigun";
                 if (collision.GetComponent<PlayerShoot>().ammoUpgrade)
                 {
-                    collision.GetComponent<PlayerShoot>().ammoMax = 60;
+                    collision.GetComponent<PlayerShoot>().ammoMax = 50;
                 }
                 else
                 {
-                    collision.GetComponent<PlayerShoot>().ammoMax = 40;
+                    collision.GetComponent<PlayerShoot>().ammoMax = 30;
                 }
                 collision.GetComponent<PlayerShoot>().reloadTime = .12f;
                 collision.GetComponent<PlayerShoot>().ammoRegenTime = .015f;

@@ -9,22 +9,22 @@ public class Upgrades : MonoBehaviour
     public GameObject player;
     public Canvas UI_Canvas;
 
-    bool offenseOneBought;
-    bool offenseTwoBought;
-    bool defenseOneBought;
-    bool defenseTwoBought;
-    bool abilityOneBought;
-    bool abilityTwoBought;
-
     public bool dmgBought;
     public bool exDmgBought;
     public bool critBought;
     public bool exCritBought;
     public bool deathBought;
     public bool dodgeBought;
+    bool speedBought;
+    bool exSpeedBought;
     public bool exDodgeBought;
     public bool reflectBought;
     bool superShotBought;
+    bool ultraShotBought;
+    bool doppelgangerBought;
+    bool jamBought;
+    bool freezeBought;
+    bool invincibilityBought;
 
     public Button dmg;
     public Button exDMG;
@@ -54,118 +54,104 @@ public class Upgrades : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (offenseTwoBought)
+        if (dmgBought)
         {
-            dmg.GetComponent<Button>().interactable = false;
-            exDMG.GetComponent<Button>().interactable = false;
-            ammo.GetComponent<Button>().interactable = false;
-            crit.GetComponent<Button>().interactable = false;
-            exCrit.GetComponent<Button>().interactable = false;
-            death.GetComponent<Button>().interactable = false;
-        }
-        else if (offenseOneBought)
-        {
-            if (dmgBought)
+            if (!exDmgBought)
+            {
+                exDMG.GetComponent<Button>().interactable = true;
+            }
+            if (!player.GetComponent<PlayerShoot>().ammoUpgrade)
             {
                 ammo.GetComponent<Button>().interactable = true;
-                exDMG.GetComponent<Button>().interactable = true;
-                exCrit.GetComponent<Button>().interactable = false;
-                death.GetComponent<Button>().interactable = false;
             }
-            else
-            {
-                ammo.GetComponent<Button>().interactable = false;
-                exDMG.GetComponent<Button>().interactable = false;
-                exCrit.GetComponent<Button>().interactable = true;
-                death.GetComponent<Button>().interactable = true;
-            }
-            dmg.GetComponent<Button>().interactable = false;
-            crit.GetComponent<Button>().interactable = false;
         }
         else
         {
             dmg.GetComponent<Button>().interactable = true;
-            crit.GetComponent<Button>().interactable = true;
-            ammo.GetComponent<Button>().interactable = false;
-            exDMG.GetComponent<Button>().interactable = false;
-            exCrit.GetComponent<Button>().interactable = false;
-            death.GetComponent<Button>().interactable = false;
         }
 
-        if (defenseTwoBought)
+        if (critBought)
         {
-            dodge.GetComponent<Button>().interactable = false;
-            exDodge.GetComponent<Button>().interactable = false;
-            shield.GetComponent<Button>().interactable = false;
-            speed.GetComponent<Button>().interactable = false;
-            exSpeed.GetComponent<Button>().interactable = false;
-            reflect.GetComponent<Button>().interactable = false;
+            if (!exCritBought)
+            {
+                exCrit.GetComponent<Button>().interactable = true;
+            }
+            if (!deathBought)
+            {
+                death.GetComponent<Button>().interactable = true;
+            }
         }
-        else if (defenseOneBought)
+        else
         {
-            if (dodgeBought)
+            crit.GetComponent<Button>().interactable = true;
+        }
+
+
+
+        if (dodgeBought)
+        {
+            if (!exDodgeBought)
             {
                 exDodge.GetComponent<Button>().interactable = true;
-                shield.GetComponent<Button>().interactable = true;
-                exSpeed.GetComponent<Button>().interactable = false;
-                reflect.GetComponent<Button>().interactable = false;
             }
-            else
+            if (!player.GetComponent<PlayerAbility>().shieldBought)
             {
-                exDodge.GetComponent<Button>().interactable = false;
-                shield.GetComponent<Button>().interactable = false;
-                exSpeed.GetComponent<Button>().interactable = true;
-                reflect.GetComponent<Button>().interactable = true;
+                shield.GetComponent<Button>().interactable = true;
             }
-            dodge.GetComponent<Button>().interactable = false;
-            speed.GetComponent<Button>().interactable = false;
         }
         else
         {
             dodge.GetComponent<Button>().interactable = true;
-            speed.GetComponent<Button>().interactable = true;
-            exSpeed.GetComponent<Button>().interactable = false;
-            exDodge.GetComponent<Button>().interactable = false;
-            shield.GetComponent<Button>().interactable = false;
-            reflect.GetComponent<Button>().interactable = false;
         }
 
-        if (abilityTwoBought)
+        if (speedBought)
         {
-            superShot.GetComponent<Button>().interactable = false;
-            enemyJam.GetComponent<Button>().interactable = false;
-            ultraShot.GetComponent<Button>().interactable = false;
-            enemyFreeze.GetComponent<Button>().interactable = false;
-            doppelganger.GetComponent<Button>().interactable = false;
-            invincibility.GetComponent<Button>().interactable = false;
+            if (!exSpeedBought)
+            {
+                exSpeed.GetComponent<Button>().interactable = true;
+            }
+            if (!reflectBought)
+            {
+                reflect.GetComponent<Button>().interactable = true;
+            }
         }
-        else if (abilityOneBought)
+        else
         {
-            if (superShotBought)
+            speed.GetComponent<Button>().interactable = true;
+        }
+
+
+
+        if (superShotBought)
+        {
+            if (!ultraShotBought)
             {
                 ultraShot.GetComponent<Button>().interactable = true;
-                enemyFreeze.GetComponent<Button>().interactable = false;
-                doppelganger.GetComponent<Button>().interactable = true;
-                invincibility.GetComponent<Button>().interactable = false;
             }
-            else
+            if (!doppelgangerBought)
             {
-                ultraShot.GetComponent<Button>().interactable = false;
-                enemyFreeze.GetComponent<Button>().interactable = true;
-                doppelganger.GetComponent<Button>().interactable = false;
-                invincibility.GetComponent<Button>().interactable = true;
+                doppelganger.GetComponent<Button>().interactable = true;
             }
-            superShot.GetComponent<Button>().interactable = false;
-            enemyJam.GetComponent<Button>().interactable = false;
         }
         else
         {
             superShot.GetComponent<Button>().interactable = true;
+        }
+
+        if (jamBought)
+        {
+            if (!freezeBought)
+            {
+                enemyFreeze.GetComponent<Button>().interactable = true;
+            }
+            if (!invincibilityBought)
+            {
+                invincibility.GetComponent<Button>().interactable = true;
+            }
+        }
+        else
+        {
             enemyJam.GetComponent<Button>().interactable = true;
-            ultraShot.GetComponent<Button>().interactable = false;
-            enemyFreeze.GetComponent<Button>().interactable = false;
-            doppelganger.GetComponent<Button>().interactable = false;
-            invincibility.GetComponent<Button>().interactable = false;
         }
     }
 
@@ -179,8 +165,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        offenseOneBought = true;
         dmgBought = true;
+        dmg.GetComponent<Button>().interactable = false;
     }
 
     public void ExDMG()
@@ -193,8 +179,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        offenseTwoBought = true;
         exDmgBought = true;
+        exDMG.GetComponent<Button>().interactable = false;
     }
 
     public void Ammo()
@@ -208,6 +194,7 @@ public class Upgrades : MonoBehaviour
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
         player.GetComponent<PlayerShoot>().ammoUpgrade = true;
+        ammo.GetComponent<Button>().interactable = false;
         if (player.GetComponent<PlayerShoot>().weapon == "machinegun")
         {
             player.GetComponent<PlayerShoot>().ammoMax = 75;
@@ -233,7 +220,6 @@ public class Upgrades : MonoBehaviour
             player.GetComponent<PlayerShoot>().ammoMax = 20;
         }
         player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
-        offenseTwoBought = true;
     }
 
     public void Crit()
@@ -246,8 +232,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        offenseOneBought = true;
         critBought = true;
+        crit.GetComponent<Button>().interactable = false;
     }
 
     public void ExCrit()
@@ -260,8 +246,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        offenseTwoBought = true;
         exCritBought = true;
+        exCrit.GetComponent<Button>().interactable = false;
     }
 
     public void Death()
@@ -274,8 +260,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        offenseTwoBought = true;
         deathBought = true;
+        death.GetComponent<Button>().interactable = false;
     }
 
     public void Dodge()
@@ -288,8 +274,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        defenseOneBought = true;
         dodgeBought = true;
+        dodge.GetComponent<Button>().interactable = false;
     }
 
     public void ExDodge()
@@ -302,8 +288,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        defenseTwoBought = true;
         exDodgeBought = true;
+        exDodge.GetComponent<Button>().interactable = false;
     }
 
     public void Shield()
@@ -316,8 +302,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        defenseTwoBought = true;
         player.GetComponent<PlayerAbility>().shieldBought = true;
+        shield.GetComponent<Button>().interactable = false;
     }
 
     public void Speed()
@@ -330,8 +316,9 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        defenseOneBought = true;
         player.GetComponent<PlayerMovement>().moveSpeed++;
+        speed.GetComponent<Button>().interactable = false;
+        speedBought = true;
     }
 
     public void ExSpeed()
@@ -344,8 +331,9 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        defenseTwoBought = true;
         player.GetComponent<PlayerMovement>().moveSpeed++;
+        exSpeed.GetComponent<Button>().interactable = false;
+        exSpeedBought = true;
     }
 
     public void Reflect()
@@ -358,8 +346,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        defenseTwoBought = true;
         reflectBought = true;
+        reflect.GetComponent<Button>().interactable = false;
     }
 
     public void SuperShot()
@@ -372,9 +360,9 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        abilityOneBought = true;
         superShotBought = true;
         player.GetComponent<PlayerAbility>().activeAbility = "SuperShot";
+        superShot.GetComponent<Button>().interactable = false;
     }
 
     public void UltraShot()
@@ -387,8 +375,9 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        abilityTwoBought = true;
         player.GetComponent<PlayerAbility>().activeAbility = "UltraShot";
+        ultraShot.GetComponent<Button>().interactable = false;
+        ultraShotBought = true;
     }
 
     public void Doppelganger()
@@ -401,8 +390,9 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        abilityTwoBought = true;
         player.GetComponent<PlayerAbility>().activeAbility = "Doppelganger";
+        doppelganger.GetComponent<Button>().interactable = false;
+        doppelgangerBought = true;
     }
 
     public void EnemyJam()
@@ -415,8 +405,9 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        abilityOneBought = true;
         player.GetComponent<PlayerAbility>().activeAbility = "EnemyJam";
+        enemyJam.GetComponent<Button>().interactable = false;
+        jamBought = true;
     }
 
     public void EnemyFreeze()
@@ -429,8 +420,9 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        abilityTwoBought = true;
         player.GetComponent<PlayerAbility>().activeAbility = "EnemyFreeze";
+        enemyFreeze.GetComponent<Button>().interactable = false;
+        freezeBought = true;
     }
 
     public void Invincibility()
@@ -443,7 +435,8 @@ public class Upgrades : MonoBehaviour
         player.transform.position = new Vector3(0, -4, 0);
         UI_Canvas.GetComponent<Canvas>().enabled = true;
         GetComponent<Canvas>().enabled = false;
-        abilityTwoBought = true;
         player.GetComponent<PlayerAbility>().activeAbility = "Invincibility";
+        invincibility.GetComponent<Button>().interactable = false;
+        invincibilityBought = true;
     }
 }

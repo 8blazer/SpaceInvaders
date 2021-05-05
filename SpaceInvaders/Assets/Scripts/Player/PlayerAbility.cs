@@ -69,6 +69,8 @@ public class PlayerAbility : MonoBehaviour
                     doppelganger.transform.position = transform.position;
                     doppelganger.GetComponent<BoxCollider2D>().enabled = true;
                     doppelganger.GetComponent<Doppelganger>().enabled = true;
+                    doppelganger.GetComponent<Doppelganger>().canMove = true;
+                    doppelganger.GetComponent<Doppelganger>().lifeTimer = 0;
                     doppelganger.GetComponent<SpriteRenderer>().enabled = true;
                 }
                 else if (activeAbility == "EnemyJam")

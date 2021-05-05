@@ -13,6 +13,8 @@ public class Doppelganger : MonoBehaviour
     public float reloadTime = .12f;
     float reloadTimer;
 
+    public float lifeTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class Doppelganger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lifeTimer += Time.deltaTime;
         if (canMove)
         {
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && transform.position.x < 8)
@@ -62,17 +65,20 @@ public class Doppelganger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "E_Bullet")
+        if (lifeTimer > 2)
         {
-            Death();
-            if (collision.gameObject.name != "UFO_Laser")
+            if (collision.gameObject.tag == "E_Bullet")
             {
-                Destroy(collision.gameObject);
+                Death();
+                if (collision.gameObject.name != "UFO_Laser")
+                {
+                    Destroy(collision.gameObject);
+                }
             }
-        }
-        else if (collision.gameObject.tag == "Enemy")
-        {
-            Death();
+            else if (collision.gameObject.tag == "Enemy")
+            {
+                Death();
+            }
         }
     }
 

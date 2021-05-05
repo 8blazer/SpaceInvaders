@@ -20,6 +20,10 @@ public class UltraShot : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 3f, transform.localScale.y + Time.deltaTime * 3f, 1);
         }
         transform.Rotate(0, 0, -.3f);
+        if (transform.position.y > 13)
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
