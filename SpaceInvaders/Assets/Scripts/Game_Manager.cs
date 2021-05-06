@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -27,20 +28,31 @@ public class Game_Manager : MonoBehaviour
     public int wavePart = 1;
     bool bossSpawned = false;
     public bool upgrading = false;
-    public Canvas upgradeCanvas;
-    public Canvas UI_Canvas;
-    public GameObject player;
-
-    // Start is called before the first frame update
-    void Start()
+    GameObject upgradeCanvas;
+    GameObject UI_Canvas;
+    GameObject player;
+    bool created = false;
+    
+    void Awake()
     {
-
+        if (!created)
+        {
+            created = true;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (initialSpawned)
+        if (player == null && SceneManager.GetActiveScene().name == "GameScene")
+        {
+            player = GameObject.Find("Player");
+            UI_Canvas = GameObject.Find("UI_Canvas");
+            upgradeCanvas = GameObject.Find("UpgradeCanvas");
+        }
+
+        if (initialSpawned && SceneManager.GetActiveScene().name == "GameScene")
         {
             enemyTimer += Time.deltaTime;
             if (enemyCount < enemyPerWave && enemyTimer > enemyTime && !bossSpawned && !upgrading)
@@ -251,7 +263,7 @@ public class Game_Manager : MonoBehaviour
                 }
             }
         }
-        else if (!upgrading)
+        else if (!upgrading && SceneManager.GetActiveScene().name == "GameScene")
         {
             int i = 0;
             while (i < initialEnemyCount && !bossSpawned)
@@ -434,7 +446,7 @@ public class Game_Manager : MonoBehaviour
             }
             initialSpawned = true;
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "GameScene")
         {
             initialSpawned = true;
         }
@@ -442,21 +454,24 @@ public class Game_Manager : MonoBehaviour
 
     public void BossDeath()
     {
-        bossSpawned = false;
-        upgrading = true;
-        UI_Canvas.GetComponent<Canvas>().enabled = false;
-        upgradeCanvas.GetComponent<Canvas>().enabled = true;
-        player.GetComponent<PlayerMovement>().enabled = false;
-        player.GetComponent<PlayerShoot>().enabled = false;
-        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
-        wave++;
+        if (wave != 12)
+        {
+            bossSpawned = false;
+            upgrading = true;
+            UI_Canvas.GetComponent<Canvas>().enabled = false;
+            upgradeCanvas.GetComponent<Canvas>().enabled = true;
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<PlayerShoot>().enabled = false;
+            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
+            wave++;
 
-        wavePart = 1;
-        initialSpawned = false;
-        initialEnemyCount++;
-        enemyCount = 0;
-        enemyPerWave++;
-        enemyTime -= .1f;
+            wavePart = 1;
+            initialSpawned = false;
+            initialEnemyCount++;
+            enemyCount = 0;
+            enemyPerWave++;
+            enemyTime -= .1f;
+        }
     }
 
     public void AddEnemy()
