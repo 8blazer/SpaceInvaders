@@ -85,7 +85,7 @@ public class EnemyDrops : MonoBehaviour
                     collision.GetComponent<PlayerShoot>().ammoMax = 15;
                 }
                 collision.GetComponent<PlayerShoot>().reloadTime = .3f;
-                collision.GetComponent<PlayerShoot>().ammoRegenTime = .75f;
+                collision.GetComponent<PlayerShoot>().ammoRegenTime = .5f;
                 Destroy(gameObject);
             }
             else if (gameObject.name == "SniperDrop(Clone)")

@@ -65,7 +65,7 @@ public class OrangeEnemy : MonoBehaviour
                     moveRight = true;
                 }
             }
-            if (health < 1)
+            if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13)
             {
                 gameManager.GetComponent<Game_Manager>().KillEnemy();
                 int i = Random.Range(1, 401);

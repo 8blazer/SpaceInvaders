@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UFO_Boss : MonoBehaviour
 {
-    float health = 700;
+    public float health; //700
     public float moveSpeed;
     public float shootSpeed;
     public float bulletSpeed;
@@ -27,9 +27,10 @@ public class UFO_Boss : MonoBehaviour
     public float laserTime;
     float laserChargeTimer;
     public float laserChargeTime;
-    bool laserMovement;
+    bool laserMovement = false;
     bool spawned = false;
     GameObject upgradeCanvas;
+    public GameObject explosion;
 
     public GameObject greenPrefab;
     public GameObject yellowPrefab;
@@ -229,7 +230,7 @@ public class UFO_Boss : MonoBehaviour
                 bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
                 shootTimer = 0;
             }
-            if (laserMovement || laserChargeTimer == 0)
+            if (laserMovement || laserChargeTimer > 0)
             {
                 shootTimer = 1;
             }
@@ -237,7 +238,7 @@ public class UFO_Boss : MonoBehaviour
         if (health < 1)
         {
             gameManager.GetComponent<Game_Manager>().BossDeath();
-            Destroy(gameManager);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

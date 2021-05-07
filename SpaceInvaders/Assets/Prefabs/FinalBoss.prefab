@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1f19a6b5308d54a803394755e23fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 4
   moveSpeed: 4
   shootSpeed: 3
   bulletSpeed: 14
@@ -112,6 +113,7 @@ MonoBehaviour:
   enemyTime: 4
   laserTime: 11
   laserChargeTime: 1.75
+  explosion: {fileID: 5443598714015184442, guid: 053b9eac0b5700148b4c693062a18acd, type: 3}
   greenPrefab: {fileID: 686695695955476333, guid: 8da220aeffd41a5429ea15ba14e12e58, type: 3}
   yellowPrefab: {fileID: 5624299260351591926, guid: 7f7469f09a37818449c999b0e1580a3a, type: 3}
   orangePrefab: {fileID: 4955842485854006469, guid: e27649e9414d00b4fbeb7f7181d36505, type: 3}

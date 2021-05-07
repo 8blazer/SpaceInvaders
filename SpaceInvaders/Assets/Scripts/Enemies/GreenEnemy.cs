@@ -27,7 +27,7 @@ public class GreenEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shootSpeed = Random.Range(1.5f, 3.1f);
+        shootSpeed = Random.Range(3.5f, 5.6f);
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
         player = GameObject.Find("Player");
@@ -50,7 +50,7 @@ public class GreenEnemy : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
                 timer = 0;
-                shootSpeed = Random.Range(3.0f, 4.6f);
+                shootSpeed = Random.Range(3.5f, 5.6f);
             }
             if (moveRight)
             {
@@ -79,7 +79,7 @@ public class GreenEnemy : MonoBehaviour
                 spawned = true;
             }
         }
-        if (health < 1 || transform.position.y < -4.5f)
+        if (health < 1 || transform.position.y < -4.5f || gameManager.GetComponent<Game_Manager>().wave == 13)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
             int i = Random.Range(1, 401);

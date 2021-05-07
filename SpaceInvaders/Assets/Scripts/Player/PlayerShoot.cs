@@ -12,7 +12,7 @@ public class PlayerShoot : MonoBehaviour
     float reloadTimer;
     public float ammoRegenTime = .015f;
     float ammoRegenTimer;
-    public string weapon = "minigun";
+    public string weapon = "machinegun";
     public string superWeapon = "";
     public GameObject bulletPrefab;
     public float bulletSpeed;

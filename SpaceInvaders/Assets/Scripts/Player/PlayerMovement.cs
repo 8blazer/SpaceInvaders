@@ -15,15 +15,20 @@ public class PlayerMovement : MonoBehaviour
     public int lives = 3;
     public ParticleSystem deathParticles;
     public bool canMove = true;
+    GameObject gameManager;
     public Canvas upgradeCanvas;
     public Text livesText;
     public GameObject bulletPrefab;
     public GameObject doppelganger;
+    string direction = "";
+    float flightTimer;
+    public Canvas pauseMenu;
+    public Canvas winMenu;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -46,12 +51,12 @@ public class PlayerMovement : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
         }
-        else
+        else if (direction == "")
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
 
-        if (!canMove)
+        if (!canMove && gameManager.GetComponent<Game_Manager>().wave < 13)
         {
             doppelganger.GetComponent<Doppelganger>().canMove = false;
             respawnTimer += Time.deltaTime;
@@ -87,6 +92,39 @@ public class PlayerMovement : MonoBehaviour
                 invincTimer = 0;
             }
         }
+
+        if (direction != "" && transform.position.x == 0)
+        {
+            flightTimer += Time.deltaTime;
+            if (flightTimer > 4)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 7);
+            }
+        }
+        else if (direction == "left" && transform.position.x < 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            transform.position = new Vector3(0, transform.position.y, 0);
+        }
+        else if (direction == "right" && transform.position.x > 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            transform.position = new Vector3(0, transform.position.y, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu.enabled)
+            {
+                pauseMenu.enabled = false;
+                Time.timeScale = 1;
+            }
+            else
+            {
+                pauseMenu.enabled = true;
+                Time.timeScale = 0;
+            }
+        }
     }
 
     public void Death()
@@ -98,6 +136,23 @@ public class PlayerMovement : MonoBehaviour
             lives--;
             canMove = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        }
+    }
+
+    public void GameEnd()
+    {
+        canMove = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = true;
+        if (transform.position.x > 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+            direction = "left";
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+            direction = "right";
         }
     }
 

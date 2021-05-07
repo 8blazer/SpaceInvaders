@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Upgrades : MonoBehaviour
 {
-    public GameObject gameManager;
+    GameObject gameManager;
     public GameObject player;
     public Canvas UI_Canvas;
 
@@ -48,7 +48,7 @@ public class Upgrades : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame

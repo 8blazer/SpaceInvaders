@@ -23,7 +23,7 @@ public class Game_Manager : MonoBehaviour
     float enemyTimer;
     public float enemyTime;
     public int initialEnemyCount;
-    bool initialSpawned = false;
+    public bool initialSpawned = false;
     public int enemiesLeft;
     public int wavePart = 1;
     bool bossSpawned = false;
@@ -238,7 +238,6 @@ public class Game_Manager : MonoBehaviour
 
                         wavePart = 1;
                         initialSpawned = false;
-                        initialEnemyCount++;
                         enemyCount = 0;
                         enemyPerWave++;
                         enemyTime -= .1f;
@@ -255,7 +254,6 @@ public class Game_Manager : MonoBehaviour
                 else if (enemiesLeft < 6 && wavePart < 3)
                 {
                     initialSpawned = false;
-                    initialEnemyCount++;
                     enemyCount = 0;
                     enemyPerWave++;
                     enemyTime -= .1f;
@@ -446,10 +444,12 @@ public class Game_Manager : MonoBehaviour
             }
             initialSpawned = true;
         }
-        else if (SceneManager.GetActiveScene().name == "GameScene")
+        /*
+        else if (SceneManager.GetActiveScene().name == "GameScene")      Add a note about this.  Not sure why it exists
         {
             initialSpawned = true;
         }
+        */
     }
 
     public void BossDeath()
@@ -467,10 +467,14 @@ public class Game_Manager : MonoBehaviour
 
             wavePart = 1;
             initialSpawned = false;
-            initialEnemyCount++;
             enemyCount = 0;
             enemyPerWave++;
             enemyTime -= .1f;
+        }
+        else
+        {
+            wave = 13;
+            player.GetComponent<PlayerMovement>().GameEnd();
         }
     }
 

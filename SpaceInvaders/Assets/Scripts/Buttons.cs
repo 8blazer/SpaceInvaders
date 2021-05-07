@@ -16,9 +16,17 @@ public class Buttons : MonoBehaviour
     public Button enemyButton;
     public Button otherButton;
 
+    public Canvas pauseMenu;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager");
+        saveManager = GameObject.Find("SaveManager");
+    }
+
     private void Update()
     {
-        if (saveManager.GetComponent<SaveManager>().normalMode == "unbeaten")
+        if (saveManager.GetComponent<SaveManager>().normalMode == "unbeaten" && hardButton != null)
         {
             hardButton.interactable = false;
             endlessButton.interactable = false;
@@ -26,7 +34,7 @@ public class Buttons : MonoBehaviour
             enemyButton.interactable = false;
             otherButton.interactable = false;
         }
-        else
+        else if (hardButton != null)
         {
             hardButton.interactable = true;
             endlessButton.interactable = true;
@@ -95,7 +103,32 @@ public class Buttons : MonoBehaviour
 
     public void Back()
     {
-        mainMenu.enabled = true;
-        playMenu.enabled = false;
+        Time.timeScale = 1;
+        if (SceneManager.GetActiveScene().name == "MenuScene")
+        {
+            mainMenu.enabled = true;
+            playMenu.enabled = false;
+        }
+        else
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
+    }
+
+    public void Continue()
+    {
+        pauseMenu.enabled = false;
+        Time.timeScale = 1;
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1;
+        gameManager.GetComponent<Game_Manager>().wave = 1;
+        gameManager.GetComponent<Game_Manager>().enemyTime = 1.5f;
+        gameManager.GetComponent<Game_Manager>().initialSpawned = false;
+        gameManager.GetComponent<Game_Manager>().wavePart = 1;
+        gameManager.GetComponent<Game_Manager>().enemyPerWave = 10;
+        SceneManager.LoadScene("GameScene");
     }
 }

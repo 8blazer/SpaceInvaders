@@ -9,7 +9,8 @@ public class BossExplosion : MonoBehaviour
     public float moveSpeed;
     float xStart;
     public GameObject explosion;
-    float explosionTimer;
+    float explosionTimer = 1;
+    public RuntimeAnimatorController explosionAnim;
 
     float testTimer;
     // Start is called before the first frame update
@@ -22,9 +23,10 @@ public class BossExplosion : MonoBehaviour
     void Update()
     {
         testTimer += Time.deltaTime;
-        if (testTimer > 2)
+        if (testTimer > 1)
         {
-            color += new Color(-.5f * Time.deltaTime, -.5f * Time.deltaTime, -.5f * Time.deltaTime, .5f * Time.deltaTime);
+            GetComponent<Animator>().runtimeAnimatorController = explosionAnim;
+            color += new Color(-.5f * Time.deltaTime, -.5f * Time.deltaTime, -.5f * Time.deltaTime, -.5f * Time.deltaTime);
             GetComponent<SpriteRenderer>().color = color;
 
             if (moveRight)
@@ -45,10 +47,10 @@ public class BossExplosion : MonoBehaviour
             }
 
             explosionTimer += Time.deltaTime;
-            if (explosionTimer > .3f)
+            if (explosionTimer > .1f && color.b > 0)
             {
                 explosionTimer = 0;
-                Instantiate(explosion, transform.position += new Vector3(Random.Range(-1f, 1.1f), Random.Range(-.6f, .7f), 0), Quaternion.identity);
+                Instantiate(explosion, transform.position + new Vector3(Random.Range(-1.5f, 1.6f), Random.Range(-.7f, .8f), 0), Quaternion.identity);
             }
         }
     }
