@@ -443,7 +443,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &115922264
 MonoBehaviour:
@@ -6585,7 +6585,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 759337569}
         m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
-        m_MethodName: Back
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6662,8 +6662,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5940baa6b5e8b1f42af3cee30db82e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 1210871797}
+  gameManager: {fileID: 0}
   saveManager: {fileID: 115922262}
+  player: {fileID: 0}
   mainMenu: {fileID: 1580236296}
   playMenu: {fileID: 923701068}
   hardButton: {fileID: 1637314778}
@@ -6672,6 +6673,7 @@ MonoBehaviour:
   enemyButton: {fileID: 461702538}
   otherButton: {fileID: 186044276}
   pauseMenu: {fileID: 0}
+  loseMenu: {fileID: 0}
 --- !u!4 &759337570
 Transform:
   m_ObjectHideFlags: 0
@@ -6684,7 +6686,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &770583221
 GameObject:
@@ -7002,65 +7004,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188317523}
   m_CullTransparentMesh: 1
---- !u!1 &1210871797
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1210871799}
-  - component: {fileID: 1210871798}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1210871798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210871797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d450496936327c4b8be27c583695d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wave: 12
-  greenEnemy: {fileID: 686695695955476333, guid: 8da220aeffd41a5429ea15ba14e12e58, type: 3}
-  redEnemy: {fileID: 4777398271308564363, guid: 4678138c6ae0bfc4990a696dd95b81a2, type: 3}
-  yellowEnemy: {fileID: 5624299260351591926, guid: 7f7469f09a37818449c999b0e1580a3a, type: 3}
-  orangeEnemy: {fileID: 4955842485854006469, guid: e27649e9414d00b4fbeb7f7181d36505, type: 3}
-  purpleEnemy: {fileID: 1634020081066980991, guid: 3dd3ece5c25360941a20336081bb7806, type: 3}
-  cyanEnemy: {fileID: 4403048447259993617, guid: 586050f90929761449c7509caa4925d5, type: 3}
-  eyeBoss: {fileID: 1418694695003411075, guid: 9e35b704d908bcd4c8ce150ef4553f3d, type: 3}
-  splitBoss: {fileID: 7354710469473625894, guid: 4a4c7510770534d4aa033a671e7e533b, type: 3}
-  UFO_Boss: {fileID: 8291346804379426030, guid: da6b318a8b56ad948b6e2a8837a7f715, type: 3}
-  enemyPerWave: 10
-  enemyTime: 1.5
-  initialEnemyCount: 25
-  enemiesLeft: 0
-  wavePart: 1
-  upgrading: 0
---- !u!4 &1210871799
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210871797}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1448.8687, y: 572.30634, z: -184.95871}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1359797427
 GameObject:
   m_ObjectHideFlags: 0
@@ -7690,7 +7633,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 759337569}
         m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
-        m_MethodName: NormalMode
+        m_MethodName: HardMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

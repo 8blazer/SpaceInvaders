@@ -79,7 +79,7 @@ public class GreenEnemy : MonoBehaviour
                 spawned = true;
             }
         }
-        if (health < 1 || transform.position.y < -4.5f || gameManager.GetComponent<Game_Manager>().wave == 13)
+        if (health < 1 || transform.position.y < -4.5f || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
             int i = Random.Range(1, 401);

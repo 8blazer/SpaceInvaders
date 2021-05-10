@@ -74,7 +74,7 @@ public class YellowBossMini : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (mainBoss == null)
+        if (mainBoss == null || player.GetComponent<PlayerMovement>().lost)
         {
             decayTimer += Time.deltaTime;
             if (decayTimer > .1f)

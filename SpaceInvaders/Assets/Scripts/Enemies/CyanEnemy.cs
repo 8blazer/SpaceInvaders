@@ -112,7 +112,7 @@ public class CyanEnemy : MonoBehaviour
                 spawned = true;
             }
         }
-        if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13)
+        if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
             int i = Random.Range(1, 401);

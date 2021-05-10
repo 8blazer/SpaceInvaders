@@ -82,7 +82,7 @@ public class YellowBossBaby : MonoBehaviour
         }
 
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, health * .025f);
-        if (health < 20)
+        if (health < 20 || player.GetComponent<PlayerMovement>().lost)
         {
             GameObject mini = Instantiate(miniPrefab, transform.position + new Vector3(.5f, 0, 0), Quaternion.identity);
             mini.GetComponent<YellowBossMini>().moveSpeed = Random.Range(5.0f, 10.0f);

@@ -26,19 +26,28 @@ public class Game_Manager : MonoBehaviour
     public bool initialSpawned = false;
     public int enemiesLeft;
     public int wavePart = 1;
-    bool bossSpawned = false;
+    public bool bossSpawned = false;
     public bool upgrading = false;
     GameObject upgradeCanvas;
     GameObject UI_Canvas;
     GameObject player;
-    bool created = false;
-    
-    void Awake()
+
+    private void Start()
     {
-        if (!created)
+        if (PlayerPrefs.GetString("difficulty") == "Easy")
         {
-            created = true;
-            DontDestroyOnLoad(gameObject);
+            initialEnemyCount = 15;
+            enemyPerWave = 5;
+        }
+        else if (PlayerPrefs.GetString("difficulty") == "Normal")
+        {
+            initialEnemyCount = 20;
+            enemyPerWave = 7;
+        }
+        else
+        {
+            initialEnemyCount = 25;
+            enemyPerWave = 10;
         }
     }
 
@@ -220,7 +229,7 @@ public class Game_Manager : MonoBehaviour
                 enemyTimer = 0;
             }
 
-            if (!bossSpawned && !upgrading)
+            if (!bossSpawned && !upgrading && !player.GetComponent<PlayerMovement>().lost)
             {
                 if (enemiesLeft == 0 && wavePart == 3)
                 {

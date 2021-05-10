@@ -235,6 +235,12 @@ public class UFO_Boss : MonoBehaviour
                 shootTimer = 1;
             }
         }
+
+        if (player.GetComponent<PlayerMovement>().lost)
+        {
+            Destroy(gameObject);
+        }
+
         if (health < 1)
         {
             gameManager.GetComponent<Game_Manager>().BossDeath();

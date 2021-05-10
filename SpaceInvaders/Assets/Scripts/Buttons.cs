@@ -8,6 +8,7 @@ public class Buttons : MonoBehaviour
 {
     public GameObject gameManager;
     public GameObject saveManager;
+    public GameObject player;
     public Canvas mainMenu;
     public Canvas playMenu;
     public Button hardButton;
@@ -17,10 +18,10 @@ public class Buttons : MonoBehaviour
     public Button otherButton;
 
     public Canvas pauseMenu;
+    public Canvas loseMenu;
 
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager");
         saveManager = GameObject.Find("SaveManager");
     }
 
@@ -62,22 +63,19 @@ public class Buttons : MonoBehaviour
 
     public void EasyMode()
     {
-        gameManager.GetComponent<Game_Manager>().initialEnemyCount = 15;
-        gameManager.GetComponent<Game_Manager>().enemyPerWave = 5;
+        PlayerPrefs.SetString("difficulty", "Easy");
         SceneManager.LoadScene("GameScene");
     }
 
     public void NormalMode()
     {
-        gameManager.GetComponent<Game_Manager>().initialEnemyCount = 20;
-        gameManager.GetComponent<Game_Manager>().enemyPerWave = 7;
+        PlayerPrefs.SetString("difficulty", "Normal");
         SceneManager.LoadScene("GameScene");
     }
 
     public void HardMode()
     {
-        gameManager.GetComponent<Game_Manager>().initialEnemyCount = 25;
-        gameManager.GetComponent<Game_Manager>().enemyPerWave = 10;
+        PlayerPrefs.SetString("difficulty", "Hard");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -101,7 +99,7 @@ public class Buttons : MonoBehaviour
 
     }
 
-    public void Back()
+    public void MainMenu()
     {
         Time.timeScale = 1;
         if (SceneManager.GetActiveScene().name == "MenuScene")
@@ -124,11 +122,17 @@ public class Buttons : MonoBehaviour
     public void Retry()
     {
         Time.timeScale = 1;
-        gameManager.GetComponent<Game_Manager>().wave = 1;
-        gameManager.GetComponent<Game_Manager>().enemyTime = 1.5f;
-        gameManager.GetComponent<Game_Manager>().initialSpawned = false;
-        gameManager.GetComponent<Game_Manager>().wavePart = 1;
-        gameManager.GetComponent<Game_Manager>().enemyPerWave = 10;
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void UseContinue()
+    {
+        Time.timeScale = 1;
+        gameManager.GetComponent<Game_Manager>().enemiesLeft = 0;
+        gameManager.GetComponent<Game_Manager>().wavePart = 1;
+        gameManager.GetComponent<Game_Manager>().bossSpawned = false;
+        player.GetComponent<PlayerMovement>().continues--;
+        player.GetComponent<PlayerMovement>().lives = 3;
+        loseMenu.enabled = false;
     }
 }

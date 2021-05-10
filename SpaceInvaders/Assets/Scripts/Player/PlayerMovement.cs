@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     float respawnTimer;
     public float respawnTime;
     public int lives = 3;
+    public int continues = 3;
     public ParticleSystem deathParticles;
     public bool canMove = true;
     GameObject gameManager;
@@ -24,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     float flightTimer;
     public Canvas pauseMenu;
     public Canvas winMenu;
+    public Canvas loseMenu;
+    public Text continuesText;
+    public bool lost = false;
 
     // Start is called before the first frame update
     void Start()
@@ -125,6 +129,11 @@ public class PlayerMovement : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+
+        if (transform.position.y > 12)
+        {
+            winMenu.enabled = true;
+        }
     }
 
     public void Death()
@@ -136,6 +145,13 @@ public class PlayerMovement : MonoBehaviour
             lives--;
             canMove = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            if (lives == 0)
+            {
+                Time.timeScale = 0;
+                loseMenu.enabled = true;
+                continuesText.text = "Continues: " + continues;
+                lost = true;
+            }
         }
     }
 

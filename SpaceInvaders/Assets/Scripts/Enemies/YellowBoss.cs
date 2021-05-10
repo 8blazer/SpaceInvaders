@@ -136,6 +136,10 @@ public class YellowBoss : MonoBehaviour
             }
         }
 
+        if (player.GetComponent<PlayerMovement>().lost)
+        {
+            Destroy(gameObject);
+        }
 
         if (health < 1)
         {
