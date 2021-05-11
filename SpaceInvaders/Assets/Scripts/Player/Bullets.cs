@@ -65,9 +65,9 @@ public class Bullets : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D player)
     {
-        if (GetComponent<SpriteRenderer>().sprite == rocketSprite && collision.gameObject.tag == "Enemy")
+        if (GetComponent<SpriteRenderer>().sprite == rocketSprite && player.gameObject.tag == "Enemy")
         {
             GetComponent<Animator>().enabled = true;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);

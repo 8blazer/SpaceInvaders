@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public Canvas winMenu;
     public Canvas loseMenu;
     public Text continuesText;
+    public Button continueButton;
     public bool lost = false;
 
     // Start is called before the first frame update
@@ -141,16 +142,23 @@ public class PlayerMovement : MonoBehaviour
         if (GetComponent<BoxCollider2D>().enabled)
         {
             GetComponent<BoxCollider2D>().enabled = false;
-            deathParticles.Play();
             lives--;
             canMove = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
             if (lives == 0)
             {
                 Time.timeScale = 0;
+                if (continues == 0)
+                {
+                    continueButton.interactable = false;
+                }
                 loseMenu.enabled = true;
                 continuesText.text = "Continues: " + continues;
                 lost = true;
+            }
+            else
+            {
+                deathParticles.Play();
             }
         }
     }

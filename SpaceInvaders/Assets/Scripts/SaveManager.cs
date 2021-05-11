@@ -11,7 +11,7 @@ using System;
 public class SaveManager : MonoBehaviour
 {
     public int playCount = -1;
-    public string easyMode; // "unbeaten", "beaten", "noCont", "noDeath"
+    public string easyMode; // "unbeaten", "beaten", "noContinue", "noDeath"
     public string normalMode;
     public string hardMode;
     public int endlessKills;
@@ -26,10 +26,13 @@ public class SaveManager : MonoBehaviour
     public bool oEnemyChallenge;
     public bool cEnemyChallenge;
     public bool pEnemyChallenge;
+    public bool yEnemyChallenge;
     public bool slowChallenge;
     public bool fastChallenge;
     public bool noAbilityChallenge;
     public bool ammoChallenge;
+    public bool crazyEnemyChallenge;
+    public bool upsideDownChallenge;
 
     bool created = false;
     
@@ -70,10 +73,13 @@ public class SaveManager : MonoBehaviour
                     OEnemyChallenge = false,
                     CEnemyChallenge = false,
                     PEnemyChallenge = false,
+                    YEnemyChallenge = false,
                     SlowChallenge = false,
                     FastChallenge = false,
                     NoAbilityChallenge = false,
                     AmmoChallenge = false,
+                    CrazyEnemyChallenge = false,
+                    UpsideDownChallenge = false,
                 };
 
                 playCount = saveVars.PlayCount;
@@ -92,10 +98,13 @@ public class SaveManager : MonoBehaviour
                 oEnemyChallenge = saveVars.OEnemyChallenge;
                 pEnemyChallenge = saveVars.PEnemyChallenge;
                 cEnemyChallenge = saveVars.CEnemyChallenge;
+                yEnemyChallenge = saveVars.YEnemyChallenge;
                 slowChallenge = saveVars.SlowChallenge;
                 fastChallenge = saveVars.FastChallenge;
                 noAbilityChallenge = saveVars.NoAbilityChallenge;
                 ammoChallenge = saveVars.AmmoChallenge;
+                crazyEnemyChallenge = saveVars.CrazyEnemyChallenge;
+                upsideDownChallenge = saveVars.UpsideDownChallenge;
 
                 string json = JsonUtility.ToJson(saveVars);
                 File.WriteAllText(fullname, json);
@@ -120,10 +129,12 @@ public class SaveManager : MonoBehaviour
                 oEnemyChallenge = jsonJson.OEnemyChallenge;
                 pEnemyChallenge = jsonJson.PEnemyChallenge;
                 cEnemyChallenge = jsonJson.CEnemyChallenge;
+                yEnemyChallenge = jsonJson.YEnemyChallenge;
                 slowChallenge = jsonJson.SlowChallenge;
                 fastChallenge = jsonJson.FastChallenge;
                 noAbilityChallenge = jsonJson.NoAbilityChallenge;
                 ammoChallenge = jsonJson.AmmoChallenge;
+                upsideDownChallenge = jsonJson.UpsideDownChallenge;
             }
         }
     }
@@ -148,10 +159,13 @@ public class SaveManager : MonoBehaviour
             OEnemyChallenge = oEnemyChallenge,
             PEnemyChallenge = pEnemyChallenge,
             CEnemyChallenge = cEnemyChallenge,
+            YEnemyChallenge = yEnemyChallenge,
             SlowChallenge = slowChallenge,
             FastChallenge = fastChallenge,
             NoAbilityChallenge = noAbilityChallenge,
             AmmoChallenge = ammoChallenge,
+            CrazyEnemyChallenge = crazyEnemyChallenge,
+            UpsideDownChallenge = upsideDownChallenge,
         };
         string saveFile = "save.txt";
         FileInfo fileInfo = new FileInfo(saveFile);
@@ -181,8 +195,11 @@ public class SaveVars
     public bool OEnemyChallenge;
     public bool CEnemyChallenge;
     public bool PEnemyChallenge;
+    public bool YEnemyChallenge;
     public bool SlowChallenge;
     public bool FastChallenge;
     public bool NoAbilityChallenge;
     public bool AmmoChallenge;
+    public bool CrazyEnemyChallenge;
+    public bool UpsideDownChallenge;
 }

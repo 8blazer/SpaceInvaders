@@ -13831,7 +13831,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Replay
+  m_Text: Restart
 --- !u!222 &968907119
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15996,6 +15996,7 @@ MonoBehaviour:
   winMenu: {fileID: 907271449}
   loseMenu: {fileID: 1262400792}
   continuesText: {fileID: 1764295498}
+  continueButton: {fileID: 1222156193}
   lost: 0
 --- !u!212 &1523250841
 SpriteRenderer:
@@ -16103,7 +16104,7 @@ MonoBehaviour:
   ammoUpgrade: 0
   reloadTime: 0.08
   ammoRegenTime: 0.015
-  weapon: minigun
+  weapon: sniper
   superWeapon: 
   bulletPrefab: {fileID: 7747813893219318393, guid: 5ddcd77faaa05d74b86281382c81072d, type: 3}
   bulletSpeed: 10

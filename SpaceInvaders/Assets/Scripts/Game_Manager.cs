@@ -36,7 +36,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (PlayerPrefs.GetString("difficulty") == "Easy")
         {
-            initialEnemyCount = 15;
+            initialEnemyCount = 10;
             enemyPerWave = 5;
         }
         else if (PlayerPrefs.GetString("difficulty") == "Normal")
@@ -46,7 +46,7 @@ public class Game_Manager : MonoBehaviour
         }
         else
         {
-            initialEnemyCount = 25;
+            initialEnemyCount = 30;
             enemyPerWave = 10;
         }
     }

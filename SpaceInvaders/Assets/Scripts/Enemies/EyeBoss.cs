@@ -20,7 +20,7 @@ public class EyeBoss : MonoBehaviour
     GameObject eye;
     GameObject gameManager;
     public GameObject bulletPrefab;
-    RaycastHit2D[] collisions;
+    RaycastHit2D[] players;
     public RuntimeAnimatorController eyeCharge1;
     public RuntimeAnimatorController eyeCharge2;
     public RuntimeAnimatorController eyeCharge3;
@@ -81,11 +81,11 @@ public class EyeBoss : MonoBehaviour
             {
                 eye.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
                 eye.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
-                collisions = Physics2D.RaycastAll(transform.position, -eye.transform.up, 10);
+                players = Physics2D.RaycastAll(transform.position, -eye.transform.up, 10);
                 int i = 0;
-                while (i < collisions.Length)
+                while (i < players.Length)
                 {
-                    if (collisions[i].transform.gameObject == player)
+                    if (players[i].transform.gameObject == player)
                     {
                         player.GetComponent<PlayerMovement>().Death();
                     }

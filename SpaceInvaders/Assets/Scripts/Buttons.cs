@@ -11,11 +11,15 @@ public class Buttons : MonoBehaviour
     public GameObject player;
     public Canvas mainMenu;
     public Canvas playMenu;
+    public Canvas challengeMenu;
     public Button hardButton;
     public Button endlessButton;
     public Button weaponButton;
     public Button enemyButton;
     public Button otherButton;
+    public GameObject weaponChallengeButtons;
+    public GameObject enemyChallengeButtons;
+    public GameObject otherChallengeButtons;
 
     public Canvas pauseMenu;
     public Canvas loseMenu;
@@ -48,6 +52,7 @@ public class Buttons : MonoBehaviour
     public void PlayMenu()
     {
         mainMenu.enabled = false;
+        challengeMenu.enabled = false;
         playMenu.enabled = true;
     }
 
@@ -86,17 +91,29 @@ public class Buttons : MonoBehaviour
 
     public void WeaponChallenges()
     {
-
+        playMenu.enabled = false;
+        challengeMenu.enabled = true;
+        weaponChallengeButtons.SetActive(true);
+        enemyChallengeButtons.SetActive(false);
+        otherChallengeButtons.SetActive(false);
     }
 
     public void EnemyChallenges()
     {
-
+        playMenu.enabled = false;
+        challengeMenu.enabled = true;
+        weaponChallengeButtons.SetActive(false);
+        enemyChallengeButtons.SetActive(true);
+        otherChallengeButtons.SetActive(false);
     }
 
     public void OtherChallenges()
     {
-
+        playMenu.enabled = false;
+        challengeMenu.enabled = true;
+        weaponChallengeButtons.SetActive(false);
+        enemyChallengeButtons.SetActive(false);
+        otherChallengeButtons.SetActive(true);
     }
 
     public void MainMenu()
@@ -131,8 +148,10 @@ public class Buttons : MonoBehaviour
         gameManager.GetComponent<Game_Manager>().enemiesLeft = 0;
         gameManager.GetComponent<Game_Manager>().wavePart = 1;
         gameManager.GetComponent<Game_Manager>().bossSpawned = false;
+        gameManager.GetComponent<Game_Manager>().initialSpawned = false;
         player.GetComponent<PlayerMovement>().continues--;
         player.GetComponent<PlayerMovement>().lives = 3;
+        player.GetComponent<PlayerMovement>().lost = false;
         loseMenu.enabled = false;
     }
 }

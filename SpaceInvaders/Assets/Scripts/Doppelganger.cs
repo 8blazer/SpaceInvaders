@@ -63,19 +63,19 @@ public class Doppelganger : MonoBehaviour
         GetComponent<Doppelganger>().enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D player)
     {
         if (lifeTimer > 2)
         {
-            if (collision.gameObject.tag == "E_Bullet")
+            if (player.gameObject.tag == "E_Bullet")
             {
                 Death();
-                if (collision.gameObject.name != "UFO_Laser")
+                if (player.gameObject.name != "UFO_Laser")
                 {
-                    Destroy(collision.gameObject);
+                    Destroy(player.gameObject);
                 }
             }
-            else if (collision.gameObject.tag == "Enemy")
+            else if (player.gameObject.tag == "Enemy")
             {
                 Death();
             }
