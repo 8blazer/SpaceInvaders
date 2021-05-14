@@ -33,6 +33,9 @@ public class SaveManager : MonoBehaviour
     public bool ammoChallenge;
     public bool crazyEnemyChallenge;
     public bool upsideDownChallenge;
+    public int weaponChallenges;
+    public int enemyChallenges;
+    public int otherChallenges;
 
     bool created = false;
     
@@ -80,6 +83,9 @@ public class SaveManager : MonoBehaviour
                     AmmoChallenge = false,
                     CrazyEnemyChallenge = false,
                     UpsideDownChallenge = false,
+                    WeaponChallenges = 0,
+                    EnemyChallenges = 0,
+                    OtherChallenges = 0,
                 };
 
                 playCount = saveVars.PlayCount;
@@ -105,6 +111,9 @@ public class SaveManager : MonoBehaviour
                 ammoChallenge = saveVars.AmmoChallenge;
                 crazyEnemyChallenge = saveVars.CrazyEnemyChallenge;
                 upsideDownChallenge = saveVars.UpsideDownChallenge;
+                weaponChallenges = saveVars.WeaponChallenges;
+                enemyChallenges = saveVars.EnemyChallenges;
+                otherChallenges = saveVars.OtherChallenges;
 
                 string json = JsonUtility.ToJson(saveVars);
                 File.WriteAllText(fullname, json);
@@ -135,6 +144,10 @@ public class SaveManager : MonoBehaviour
                 noAbilityChallenge = jsonJson.NoAbilityChallenge;
                 ammoChallenge = jsonJson.AmmoChallenge;
                 upsideDownChallenge = jsonJson.UpsideDownChallenge;
+                crazyEnemyChallenge = jsonJson.CrazyEnemyChallenge;
+                weaponChallenges = jsonJson.WeaponChallenges;
+                enemyChallenges = jsonJson.EnemyChallenges;
+                otherChallenges = jsonJson.OtherChallenges;
             }
         }
     }
@@ -166,6 +179,9 @@ public class SaveManager : MonoBehaviour
             AmmoChallenge = ammoChallenge,
             CrazyEnemyChallenge = crazyEnemyChallenge,
             UpsideDownChallenge = upsideDownChallenge,
+            WeaponChallenges = weaponChallenges,
+            EnemyChallenges = enemyChallenges,
+            OtherChallenges = otherChallenges,
         };
         string saveFile = "save.txt";
         FileInfo fileInfo = new FileInfo(saveFile);
@@ -202,4 +218,7 @@ public class SaveVars
     public bool AmmoChallenge;
     public bool CrazyEnemyChallenge;
     public bool UpsideDownChallenge;
+    public int WeaponChallenges;
+    public int EnemyChallenges;
+    public int OtherChallenges;
 }

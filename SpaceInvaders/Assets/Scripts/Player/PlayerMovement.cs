@@ -29,11 +29,74 @@ public class PlayerMovement : MonoBehaviour
     public Text continuesText;
     public Button continueButton;
     public bool lost = false;
+    public bool usedLives = false;
+
+    public Sprite defaultShip;
+    public Sprite pinkShip;
+    public Sprite greenShip;
+    public Sprite blueShip;
+    public Sprite monochromeShip;
+    public Sprite redShip;
+    public Sprite doppelgangerShip;
+    public Sprite flameShip;
+    public Sprite rainbowShip;
+    public Sprite glitchShip;
+    public Sprite weaponShip;
+    public Sprite enemyShip;
+    public Sprite goldShip;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+
+        switch (PlayerPrefs.GetString("ship"))
+        {
+            case "default":
+                GetComponent<SpriteRenderer>().sprite = defaultShip;
+                break;
+            case "pink":
+                GetComponent<SpriteRenderer>().sprite = pinkShip;
+                break;
+            case "green":
+                GetComponent<SpriteRenderer>().sprite = greenShip;
+                break;
+            case "blue":
+                GetComponent<SpriteRenderer>().sprite = blueShip;
+                break;
+            case "monochrome":
+                GetComponent<SpriteRenderer>().sprite = monochromeShip;
+                break;
+            case "red":
+                GetComponent<SpriteRenderer>().sprite = redShip;
+                break;
+            case "doppelganger":
+                GetComponent<SpriteRenderer>().sprite = doppelgangerShip;
+                transform.localScale = new Vector3(2f, 2f, 1);
+                GetComponent<BoxCollider2D>().size = new Vector2(.533f, .4667f);
+                break;
+            case "flame":
+                GetComponent<SpriteRenderer>().sprite = flameShip;
+                break;
+            case "rainbow":
+                GetComponent<SpriteRenderer>().sprite = rainbowShip;
+                break;
+            case "glitch":
+                GetComponent<SpriteRenderer>().sprite = glitchShip;
+                break;
+            case "weapon":
+                GetComponent<SpriteRenderer>().sprite = weaponShip;
+                break;
+            case "enemy":
+                GetComponent<SpriteRenderer>().sprite = enemyShip;
+                break;
+            case "upsideDown":
+                transform.eulerAngles = new Vector3(0, 0, 180);
+                break;
+            case "gold":
+                GetComponent<SpriteRenderer>().sprite = goldShip;
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -142,6 +205,7 @@ public class PlayerMovement : MonoBehaviour
         if (GetComponent<BoxCollider2D>().enabled)
         {
             GetComponent<BoxCollider2D>().enabled = false;
+            usedLives = true;
             lives--;
             canMove = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);

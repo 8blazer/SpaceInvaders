@@ -15,10 +15,12 @@ public class Doppelganger : MonoBehaviour
 
     public float lifeTimer;
 
+    GameObject gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -50,6 +52,11 @@ public class Doppelganger : MonoBehaviour
         {
             reloadTimer = 0;
             Shoot();
+        }
+
+        if (gameManager.GetComponent<Game_Manager>().upgrading)
+        {
+            Death();
         }
     }
 

@@ -740,11 +740,19 @@ MonoBehaviour:
   player: {fileID: 1523250838}
   mainMenu: {fileID: 0}
   playMenu: {fileID: 0}
+  challengeMenu: {fileID: 0}
+  unlocksMenu: {fileID: 0}
   hardButton: {fileID: 0}
   endlessButton: {fileID: 0}
   weaponButton: {fileID: 0}
   enemyButton: {fileID: 0}
   otherButton: {fileID: 0}
+  weaponChallengeButtons: {fileID: 0}
+  enemyChallengeButtons: {fileID: 0}
+  otherChallengeButtons: {fileID: 0}
+  Ship_1: {fileID: 0}
+  Ship_2: {fileID: 0}
+  shipPreview: default
   pauseMenu: {fileID: 1984368067}
   loseMenu: {fileID: 1262400792}
 --- !u!4 &108504613
@@ -1275,6 +1283,7 @@ RectTransform:
   - {fileID: 770172302}
   - {fileID: 1377180802}
   - {fileID: 1521641698}
+  - {fileID: 713597732}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2240,7 +2249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d450496936327c4b8be27c583695d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: 1
+  wave: 12
   greenEnemy: {fileID: 686695695955476333, guid: 8da220aeffd41a5429ea15ba14e12e58, type: 3}
   redEnemy: {fileID: 4777398271308564363, guid: 4678138c6ae0bfc4990a696dd95b81a2, type: 3}
   yellowEnemy: {fileID: 5624299260351591926, guid: 7f7469f09a37818449c999b0e1580a3a, type: 3}
@@ -2258,6 +2267,7 @@ MonoBehaviour:
   wavePart: 1
   bossSpawned: 0
   upgrading: 0
+  winMode: {fileID: 420915205}
 --- !u!4 &529163946
 Transform:
   m_ObjectHideFlags: 0
@@ -2907,6 +2917,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685010804}
+  m_CullTransparentMesh: 1
+--- !u!1 &713597731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713597732}
+  - component: {fileID: 713597734}
+  - component: {fileID: 713597733}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &713597732
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713597731}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 252086778}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &713597733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713597731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 72
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 7
+    m_MaxSize: 72
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: give boss hitbox after death
+--- !u!222 &713597734
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713597731}
   m_CullTransparentMesh: 1
 --- !u!1 &725117230
 GameObject:
@@ -15741,7 +15830,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.48, y: 0.48}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15959,7 +16048,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -15998,6 +16087,20 @@ MonoBehaviour:
   continuesText: {fileID: 1764295498}
   continueButton: {fileID: 1222156193}
   lost: 0
+  usedLives: 0
+  defaultShip: {fileID: 21300000, guid: f4230c4550c48de4b9d74e1147710d47, type: 3}
+  pinkShip: {fileID: -3955315786042260600, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  greenShip: {fileID: 499465489112947978, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  blueShip: {fileID: 8829943371061541346, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  monochromeShip: {fileID: 1582096262700788101, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  redShip: {fileID: -2042357130742720995, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  doppelgangerShip: {fileID: -3594672465257244376, guid: 1ceb80b4b4d698f419734e49a411ed92, type: 3}
+  flameShip: {fileID: 5494400214622144353, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  rainbowShip: {fileID: 8405065620779318965, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  glitchShip: {fileID: 8973860487683246668, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  weaponShip: {fileID: 7399214519220680081, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  enemyShip: {fileID: 5054299475547793296, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
+  goldShip: {fileID: 5235517661275787934, guid: c9e051bb2bb93ef469153b85386748fa, type: 3}
 --- !u!212 &1523250841
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16039,12 +16142,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7ba19c39a7e63704fb13566ba6d81a5a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4230c4550c48de4b9d74e1147710d47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -16059,7 +16162,7 @@ Transform:
   m_GameObject: {fileID: 1523250838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 2050021375}
   - {fileID: 2004169565}
@@ -16104,7 +16207,7 @@ MonoBehaviour:
   ammoUpgrade: 0
   reloadTime: 0.08
   ammoRegenTime: 0.015
-  weapon: sniper
+  weapon: minigun
   superWeapon: 
   bulletPrefab: {fileID: 7747813893219318393, guid: 5ddcd77faaa05d74b86281382c81072d, type: 3}
   bulletSpeed: 10
@@ -17990,7 +18093,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.48, y: 0.48}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.48, y: 0.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

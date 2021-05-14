@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -29,8 +30,10 @@ public class Game_Manager : MonoBehaviour
     public bool bossSpawned = false;
     public bool upgrading = false;
     GameObject upgradeCanvas;
+    GameObject saveManager;
     GameObject UI_Canvas;
     GameObject player;
+    public Text winMode;
 
     private void Start()
     {
@@ -38,16 +41,19 @@ public class Game_Manager : MonoBehaviour
         {
             initialEnemyCount = 10;
             enemyPerWave = 5;
+            winMode.text = "Easy Mode";
         }
         else if (PlayerPrefs.GetString("difficulty") == "Normal")
         {
             initialEnemyCount = 20;
             enemyPerWave = 7;
+            winMode.text = "Normal Mode";
         }
         else
         {
             initialEnemyCount = 30;
             enemyPerWave = 10;
+            winMode.text = "Hard Mode";
         }
     }
 
@@ -59,6 +65,7 @@ public class Game_Manager : MonoBehaviour
             player = GameObject.Find("Player");
             UI_Canvas = GameObject.Find("UI_Canvas");
             upgradeCanvas = GameObject.Find("UpgradeCanvas");
+            saveManager = GameObject.Find("SaveManager");
         }
 
         if (initialSpawned && SceneManager.GetActiveScene().name == "GameScene")
@@ -453,12 +460,56 @@ public class Game_Manager : MonoBehaviour
             }
             initialSpawned = true;
         }
-        /*
-        else if (SceneManager.GetActiveScene().name == "GameScene")      Add a note about this.  Not sure why it exists
+
+        if (player.transform.position.y > 12)
         {
-            initialSpawned = true;
+            if (PlayerPrefs.GetString("difficulty") == "Easy")
+            {
+                if (!player.GetComponent<PlayerMovement>().usedLives)
+                {
+                    saveManager.GetComponent<SaveManager>().easyMode = "noLives";
+                }
+                else if (player.GetComponent<PlayerMovement>().continues == 3 && saveManager.GetComponent<SaveManager>().easyMode != "noLives")
+                {
+                    saveManager.GetComponent<SaveManager>().easyMode = "noContinues";
+                }
+                else if (saveManager.GetComponent<SaveManager>().easyMode == "unbeaten")
+                {
+                    saveManager.GetComponent<SaveManager>().easyMode = "beaten";
+                }
+            }
+            else if (PlayerPrefs.GetString("difficulty") == "Normal")
+            {
+                if (!player.GetComponent<PlayerMovement>().usedLives)
+                {
+                    saveManager.GetComponent<SaveManager>().normalMode = "noLives";
+                }
+                else if (player.GetComponent<PlayerMovement>().continues == 3 && saveManager.GetComponent<SaveManager>().normalMode != "noLives")
+                {
+                    saveManager.GetComponent<SaveManager>().normalMode = "noContinues";
+                }
+                else if (saveManager.GetComponent<SaveManager>().normalMode == "unbeaten")
+                {
+                    saveManager.GetComponent<SaveManager>().normalMode = "beaten";
+                }
+            }
+            else
+            {
+                if (!player.GetComponent<PlayerMovement>().usedLives)
+                {
+                    saveManager.GetComponent<SaveManager>().hardMode = "noLives";
+                }
+                else if (player.GetComponent<PlayerMovement>().continues == 3 && saveManager.GetComponent<SaveManager>().hardMode != "noLives")
+                {
+                    saveManager.GetComponent<SaveManager>().hardMode = "noContinues";
+                }
+                else if (saveManager.GetComponent<SaveManager>().hardMode == "unbeaten")
+                {
+                    saveManager.GetComponent<SaveManager>().hardMode = "beaten";
+                }
+            }
+            saveManager.GetComponent<SaveManager>().ToJson();
         }
-        */
     }
 
     public void BossDeath()

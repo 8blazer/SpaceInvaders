@@ -183,9 +183,9 @@ public class CyanEnemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D player)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (player.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet")
         {
             health--;
             health--;
@@ -209,20 +209,20 @@ public class CyanEnemy : MonoBehaviour
             {
                 health -= 3;
             }
-            if (player.GetComponent<PlayerShoot>().weapon == "sniper")
+            if (collision.GetComponent<PlayerShoot>().weapon == "sniper")
             {
                 health -= 13;
                 if (Random.Range(1, 3) == 1)
                 {
-                    Destroy(player.gameObject);
+                    Destroy(collision.gameObject);
                 }
             }
             else
             {
-                Destroy(player.gameObject);
+                Destroy(collision.gameObject);
             }
         }
-        if (player.gameObject.tag == "Rocket")
+        if (collision.gameObject.tag == "Rocket")
         {
             health = health - 8;
             if (upgradeCanvas.GetComponent<Upgrades>().exDmgBought)
@@ -246,7 +246,7 @@ public class CyanEnemy : MonoBehaviour
                 health -= 3;
             }
         }
-        else if (player.gameObject.tag == "SuperShot")
+        else if (collision.gameObject.tag == "SuperShot")
         {
             health -= player.transform.localScale.x;
         }
