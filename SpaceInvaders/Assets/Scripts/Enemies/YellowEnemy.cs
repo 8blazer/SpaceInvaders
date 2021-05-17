@@ -9,6 +9,8 @@ public class YellowEnemy : MonoBehaviour
     GameObject gameManager;
     GameObject upgradeCanvas;
     float health = 50;
+    float dropTimer = 0;
+    public float dropTime;
 
     public GameObject lifeDrop;
     public GameObject minigunDrop;
@@ -32,19 +34,27 @@ public class YellowEnemy : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
         }
-        else if (player.transform.position.x - transform.position.x > .3f)
+        else if (dropTimer < dropTime)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
-        }
-        else if (player.transform.position.x - transform.position.x < -.3f)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+            dropTimer += Time.deltaTime;
+            if (player.transform.position.x - transform.position.x > .3f)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+            }
+            else if (player.transform.position.x - transform.position.x < -.3f)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            }
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
         }
-        if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
+        if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost || transform.position.y < -4.5f)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
             int i = Random.Range(1, 401);
@@ -52,23 +62,23 @@ public class YellowEnemy : MonoBehaviour
             {
                 Instantiate(lifeDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 2)
+            else if (i == 2 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(minigunDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 3)
+            else if (i == 3 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(laserDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 4)
+            else if (i == 4 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(rocketDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 5)
+            else if (i == 5 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(shotgunDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 6)
+            else if (i == 6 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(sniperDrop, transform.position, Quaternion.identity);
             }

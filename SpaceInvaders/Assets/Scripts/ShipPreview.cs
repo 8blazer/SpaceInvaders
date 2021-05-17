@@ -9,6 +9,7 @@ public class ShipPreview : MonoBehaviour
     public GameObject saveManager;
     public GameObject UI_Manager;
     public Text unlockText;
+    public Image checkmark;
 
     public Sprite defaultPreview;
     public Sprite pinkPreview;
@@ -26,6 +27,15 @@ public class ShipPreview : MonoBehaviour
     public Sprite goldPreview;
     public Sprite hiddenPreview;
 
+    private void Start()
+    {
+        if (PlayerPrefs.GetString("ship") == "default")
+        {
+            checkmark.enabled = true;
+            GetComponent<Button>().interactable = false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,12 +44,14 @@ public class ShipPreview : MonoBehaviour
             GetComponent<Image>().color += new Color(0, 0, 0, -.005f);
             unlockText.GetComponent<Text>().color += new Color(0, 0, 0, -.007f);
             GetComponent<RectTransform>().position += new Vector3(-3, 0, 0);
+            checkmark.color += new Color(0, 0, 0, -.007f);
             if (GetComponent<RectTransform>().localPosition.x < -700)
             {
                 direction = "";
                 GetComponent<Image>().sprite = hiddenPreview;
                 GetComponent<Button>().interactable = false;
                 unlockText.text = "";
+                checkmark.enabled = false;
             }
         }
         else if (direction == "fadeRight")
@@ -47,12 +59,14 @@ public class ShipPreview : MonoBehaviour
             GetComponent<Image>().color += new Color(0, 0, 0, -.005f);
             unlockText.GetComponent<Text>().color += new Color(0, 0, 0, -.007f);
             GetComponent<RectTransform>().position += new Vector3(3, 0, 0);
+            checkmark.color += new Color(0, 0, 0, -.007f);
             if (GetComponent<RectTransform>().localPosition.x > 700)
             {
                 direction = "";
                 GetComponent<Image>().sprite = hiddenPreview;
                 GetComponent<Button>().interactable = false;
                 unlockText.text = "";
+                checkmark.enabled = false;
             }
         }
         else if (direction == "appearRight")
@@ -60,10 +74,12 @@ public class ShipPreview : MonoBehaviour
             GetComponent<Image>().color += new Color(0, 0, 0, .005f);
             unlockText.GetComponent<Text>().color += new Color(0, 0, 0, .006f);
             GetComponent<RectTransform>().position += new Vector3(-3, 0, 0);
+            checkmark.color += new Color(0, 0, 0, .006f);
             if (GetComponent<RectTransform>().localPosition.x < 0)
             {
                 direction = "";
                 unlockText.GetComponent<Text>().color = new Color(0, 0, 0, 1);
+                checkmark.color = new Color(1, 1, 1, 1);
             }
         }
         else if (direction == "appearLeft")
@@ -71,10 +87,12 @@ public class ShipPreview : MonoBehaviour
             GetComponent<Image>().color += new Color(0, 0, 0, .005f);
             unlockText.GetComponent<Text>().color += new Color(0, 0, 0, .006f);
             GetComponent<RectTransform>().position += new Vector3(3, 0, 0);
+            checkmark.color += new Color(0, 0, 0, .006f);
             if (GetComponent<RectTransform>().localPosition.x > 0)
             {
                 direction = "";
                 unlockText.GetComponent<Text>().color = new Color(0, 0, 0, 1);
+                checkmark.color = new Color(1, 1, 1, 1);
             }
         }
     }
@@ -94,6 +112,15 @@ public class ShipPreview : MonoBehaviour
         direction = "appearLeft";
         GetComponent<RectTransform>().localPosition = new Vector3(-700, 65, 0);
         GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        if (UI_Manager.GetComponent<Buttons>().shipPreview == PlayerPrefs.GetString("ship"))
+        {
+            checkmark.enabled = true;
+            GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            checkmark.enabled = false;
+        }
         ShipPreviewSprite();
     }
 
@@ -102,6 +129,15 @@ public class ShipPreview : MonoBehaviour
         direction = "appearRight";
         GetComponent<RectTransform>().localPosition = new Vector3(700, 65, 0);
         GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        if (UI_Manager.GetComponent<Buttons>().shipPreview == PlayerPrefs.GetString("ship"))
+        {
+            checkmark.enabled = true;
+            GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            checkmark.enabled = false;
+        }
         ShipPreviewSprite();
     }
 
@@ -111,14 +147,20 @@ public class ShipPreview : MonoBehaviour
         {
             case "default":
                 GetComponent<Image>().sprite = defaultPreview;
-                GetComponent<Button>().interactable = true;
+                if (!checkmark.enabled)
+                {
+                    GetComponent<Button>().interactable = true;
+                }
                 unlockText.text = "";
                 break;
             case "pink":
                 if (saveManager.GetComponent<SaveManager>().easyMode != "unbeaten")
                 {
                     GetComponent<Image>().sprite = pinkPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -130,7 +172,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().easyMode != "unbeaten" && saveManager.GetComponent<SaveManager>().easyMode != "beaten")
                 {
                     GetComponent<Image>().sprite = greenPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -142,7 +187,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().easyMode == "noLives")
                 {
                     GetComponent<Image>().sprite = bluePreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -154,7 +202,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().normalMode != "unbeaten")
                 {
                     GetComponent<Image>().sprite = monochromePreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -166,7 +217,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().normalMode != "unbeaten" && saveManager.GetComponent<SaveManager>().normalMode != "beaten")
                 {
                     GetComponent<Image>().sprite = redPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -178,7 +232,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().normalMode == "noLives")
                 {
                     GetComponent<Image>().sprite = doppelgangerPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -190,7 +247,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().hardMode != "unbeaten")
                 {
                     GetComponent<Image>().sprite = flamePreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -202,7 +262,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().hardMode != "unbeaten" && saveManager.GetComponent<SaveManager>().hardMode != "beaten")
                 {
                     GetComponent<Image>().sprite = rainbowPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -214,7 +277,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().hardMode == "noLives")
                 {
                     GetComponent<Image>().sprite = glitchPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -226,7 +292,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().weaponChallenges == 6)
                 {
                     GetComponent<Image>().sprite = weaponPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -238,7 +307,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().enemyChallenges == 6)
                 {
                     GetComponent<Image>().sprite = enemyPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -250,7 +322,10 @@ public class ShipPreview : MonoBehaviour
                 if (saveManager.GetComponent<SaveManager>().otherChallenges == 6)
                 {
                     GetComponent<Image>().sprite = upsideDownPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -267,7 +342,10 @@ public class ShipPreview : MonoBehaviour
                     saveManager.GetComponent<SaveManager>().otherChallenges == 6)
                 {
                     GetComponent<Image>().sprite = goldPreview;
-                    GetComponent<Button>().interactable = true;
+                    if (!checkmark.enabled)
+                    {
+                        GetComponent<Button>().interactable = true;
+                    }
                     unlockText.text = "";
                 }
                 else
@@ -276,5 +354,12 @@ public class ShipPreview : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void ShipSelect()
+    {
+        PlayerPrefs.SetString("ship", UI_Manager.GetComponent<Buttons>().shipPreview);
+        checkmark.enabled = true;
+        GetComponent<Button>().interactable = false;
     }
 }

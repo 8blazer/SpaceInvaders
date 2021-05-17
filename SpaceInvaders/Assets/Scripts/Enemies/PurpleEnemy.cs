@@ -93,23 +93,23 @@ public class PurpleEnemy : MonoBehaviour
             {
                 Instantiate(lifeDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 2)
+            else if (i == 2 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(minigunDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 3)
+            else if (i == 3 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(laserDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 4)
+            else if (i == 4 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(rocketDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 5)
+            else if (i == 5 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(shotgunDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 6)
+            else if (i == 6 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(sniperDrop, transform.position, Quaternion.identity);
             }

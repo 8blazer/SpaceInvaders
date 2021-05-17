@@ -54,4 +54,12 @@ public class BossExplosion : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }

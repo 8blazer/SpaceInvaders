@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem deathParticles;
     public bool canMove = true;
     GameObject gameManager;
+    GameObject saveManager;
     public Canvas upgradeCanvas;
     public Text livesText;
     public GameObject bulletPrefab;
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        saveManager = GameObject.Find("SaveManager");
 
         switch (PlayerPrefs.GetString("ship"))
         {
@@ -72,8 +74,6 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case "doppelganger":
                 GetComponent<SpriteRenderer>().sprite = doppelgangerShip;
-                transform.localScale = new Vector3(2f, 2f, 1);
-                GetComponent<BoxCollider2D>().size = new Vector2(.533f, .4667f);
                 break;
             case "flame":
                 GetComponent<SpriteRenderer>().sprite = flameShip;
@@ -197,6 +197,88 @@ public class PlayerMovement : MonoBehaviour
         if (transform.position.y > 12)
         {
             winMenu.enabled = true;
+            if (PlayerPrefs.GetString("challenge") == "")
+            {
+                if (PlayerPrefs.GetString("difficulty") == "Easy")
+                {
+                    if (usedLives)
+                    {
+                        saveManager.GetComponent<SaveManager>().easyMode = "noLives";
+                    }
+                    else if (continues == 3 && saveManager.GetComponent<SaveManager>().easyMode != "noLives")
+                    {
+                        saveManager.GetComponent<SaveManager>().easyMode = "noContinues";
+                    }
+                    else if (saveManager.GetComponent<SaveManager>().easyMode == "unbeaten")
+                    {
+                        saveManager.GetComponent<SaveManager>().easyMode = "beaten";
+                    }
+                }
+                else if (PlayerPrefs.GetString("difficulty") == "Normal")
+                {
+                    if (usedLives)
+                    {
+                        saveManager.GetComponent<SaveManager>().normalMode = "noLives";
+                    }
+                    else if (continues == 3 && saveManager.GetComponent<SaveManager>().normalMode != "noLives")
+                    {
+                        saveManager.GetComponent<SaveManager>().normalMode = "noContinues";
+                    }
+                    else if (saveManager.GetComponent<SaveManager>().normalMode == "unbeaten")
+                    {
+                        saveManager.GetComponent<SaveManager>().normalMode = "beaten";
+                    }
+                }
+                else
+                {
+                    if (usedLives)
+                    {
+                        saveManager.GetComponent<SaveManager>().hardMode = "noLives";
+                    }
+                    else if (continues == 3 && saveManager.GetComponent<SaveManager>().hardMode != "noLives")
+                    {
+                        saveManager.GetComponent<SaveManager>().hardMode = "noContinues";
+                    }
+                    else if (saveManager.GetComponent<SaveManager>().hardMode == "unbeaten")
+                    {
+                        saveManager.GetComponent<SaveManager>().hardMode = "beaten";
+                    }
+                }
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Weapon")
+            {
+                if (GetComponent<PlayerShoot>().weapon == "machinegun" && !saveManager.GetComponent<SaveManager>().machinegunChallenge)
+                {
+                    saveManager.GetComponent<SaveManager>().machinegunChallenge = true;
+                    saveManager.GetComponent<SaveManager>().weaponChallenges++;
+                }
+                else if (GetComponent<PlayerShoot>().weapon == "minigun" && !saveManager.GetComponent<SaveManager>().minigunChallenge)
+                {
+                    saveManager.GetComponent<SaveManager>().minigunChallenge = true;
+                    saveManager.GetComponent<SaveManager>().weaponChallenges++;
+                }
+                else if (GetComponent<PlayerShoot>().weapon == "shotgun" && !saveManager.GetComponent<SaveManager>().shotgunChallenge)
+                {
+                    saveManager.GetComponent<SaveManager>().shotgunChallenge = true;
+                    saveManager.GetComponent<SaveManager>().weaponChallenges++;
+                }
+                else if (GetComponent<PlayerShoot>().weapon == "laser" && !saveManager.GetComponent<SaveManager>().laserChallenge)
+                {
+                    saveManager.GetComponent<SaveManager>().laserChallenge = true;
+                    saveManager.GetComponent<SaveManager>().weaponChallenges++;
+                }
+                else if (GetComponent<PlayerShoot>().weapon == "sniper" && !saveManager.GetComponent<SaveManager>().sniperChallenge)
+                {
+                    saveManager.GetComponent<SaveManager>().sniperChallenge = true;
+                    saveManager.GetComponent<SaveManager>().weaponChallenges++;
+                }
+                else if (GetComponent<PlayerShoot>().weapon == "rocket" && !saveManager.GetComponent<SaveManager>().rocketChallenge)
+                {
+                    saveManager.GetComponent<SaveManager>().rocketChallenge = true;
+                    saveManager.GetComponent<SaveManager>().weaponChallenges++;
+                }
+            }
+            saveManager.GetComponent<SaveManager>().ToJson();
         }
     }
 

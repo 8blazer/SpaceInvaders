@@ -97,24 +97,32 @@ public class Buttons : MonoBehaviour
     public void EasyMode()
     {
         PlayerPrefs.SetString("difficulty", "Easy");
+        PlayerPrefs.SetString("challenge", "");
+        PlayerPrefs.SetString("weapon", "machinegun");
         SceneManager.LoadScene("GameScene");
     }
 
     public void NormalMode()
     {
         PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "");
+        PlayerPrefs.SetString("weapon", "machinegun");
         SceneManager.LoadScene("GameScene");
     }
 
     public void HardMode()
     {
         PlayerPrefs.SetString("difficulty", "Hard");
+        PlayerPrefs.SetString("challenge", "");
+        PlayerPrefs.SetString("weapon", "machinegun");
         SceneManager.LoadScene("GameScene");
     }
 
     public void Endless()
     {
-
+        PlayerPrefs.SetString("challenge", "");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        SceneManager.LoadScene("EndlessScene");
     }
 
     public void WeaponChallenges()
@@ -126,6 +134,53 @@ public class Buttons : MonoBehaviour
         otherChallengeButtons.SetActive(false);
     }
 
+    public void MachinegunChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Weapon");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void MinigunChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Weapon");
+        PlayerPrefs.SetString("weapon", "minigun");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void ShotgunChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Weapon");
+        PlayerPrefs.SetString("weapon", "shotgun");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void LaserChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Weapon");
+        PlayerPrefs.SetString("weapon", "laser");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void SniperChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Weapon");
+        PlayerPrefs.SetString("weapon", "sniper");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void RocketChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Weapon");
+        PlayerPrefs.SetString("weapon", "rocket");
+        SceneManager.LoadScene("GameScene");
+    }
     public void EnemyChallenges()
     {
         playMenu.enabled = false;
@@ -238,10 +293,5 @@ public class Buttons : MonoBehaviour
                 mainShip = "Ship_1";
             }
         }
-    }
-
-    public void ShipSelect()
-    {
-        PlayerPrefs.SetString("ship", shipPreview);
     }
 }

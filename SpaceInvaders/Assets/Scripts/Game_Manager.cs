@@ -55,6 +55,10 @@ public class Game_Manager : MonoBehaviour
             enemyPerWave = 10;
             winMode.text = "Hard Mode";
         }
+        if (PlayerPrefs.GetString("challenge") != "")
+        {
+            winMode.text = "Challenge";
+        }
     }
 
     // Update is called once per frame
@@ -459,56 +463,6 @@ public class Game_Manager : MonoBehaviour
                 i++;
             }
             initialSpawned = true;
-        }
-
-        if (player.transform.position.y > 12)
-        {
-            if (PlayerPrefs.GetString("difficulty") == "Easy")
-            {
-                if (!player.GetComponent<PlayerMovement>().usedLives)
-                {
-                    saveManager.GetComponent<SaveManager>().easyMode = "noLives";
-                }
-                else if (player.GetComponent<PlayerMovement>().continues == 3 && saveManager.GetComponent<SaveManager>().easyMode != "noLives")
-                {
-                    saveManager.GetComponent<SaveManager>().easyMode = "noContinues";
-                }
-                else if (saveManager.GetComponent<SaveManager>().easyMode == "unbeaten")
-                {
-                    saveManager.GetComponent<SaveManager>().easyMode = "beaten";
-                }
-            }
-            else if (PlayerPrefs.GetString("difficulty") == "Normal")
-            {
-                if (!player.GetComponent<PlayerMovement>().usedLives)
-                {
-                    saveManager.GetComponent<SaveManager>().normalMode = "noLives";
-                }
-                else if (player.GetComponent<PlayerMovement>().continues == 3 && saveManager.GetComponent<SaveManager>().normalMode != "noLives")
-                {
-                    saveManager.GetComponent<SaveManager>().normalMode = "noContinues";
-                }
-                else if (saveManager.GetComponent<SaveManager>().normalMode == "unbeaten")
-                {
-                    saveManager.GetComponent<SaveManager>().normalMode = "beaten";
-                }
-            }
-            else
-            {
-                if (!player.GetComponent<PlayerMovement>().usedLives)
-                {
-                    saveManager.GetComponent<SaveManager>().hardMode = "noLives";
-                }
-                else if (player.GetComponent<PlayerMovement>().continues == 3 && saveManager.GetComponent<SaveManager>().hardMode != "noLives")
-                {
-                    saveManager.GetComponent<SaveManager>().hardMode = "noContinues";
-                }
-                else if (saveManager.GetComponent<SaveManager>().hardMode == "unbeaten")
-                {
-                    saveManager.GetComponent<SaveManager>().hardMode = "beaten";
-                }
-            }
-            saveManager.GetComponent<SaveManager>().ToJson();
         }
     }
 

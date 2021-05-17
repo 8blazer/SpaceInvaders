@@ -120,23 +120,23 @@ public class CyanEnemy : MonoBehaviour
             {
                 Instantiate(lifeDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 2)
+            else if (i == 2 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(minigunDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 3)
+            else if (i == 3 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(laserDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 4)
+            else if (i == 4 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(rocketDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 5)
+            else if (i == 5 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(shotgunDrop, transform.position, Quaternion.identity);
             }
-            else if (i == 6)
+            else if (i == 6 && PlayerPrefs.GetString("challenge") != "Weapon")
             {
                 Instantiate(sniperDrop, transform.position, Quaternion.identity);
             }
@@ -209,7 +209,7 @@ public class CyanEnemy : MonoBehaviour
             {
                 health -= 3;
             }
-            if (collision.GetComponent<PlayerShoot>().weapon == "sniper")
+            if (player.GetComponent<PlayerShoot>().weapon == "sniper")
             {
                 health -= 13;
                 if (Random.Range(1, 3) == 1)

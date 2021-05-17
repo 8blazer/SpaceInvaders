@@ -28,6 +28,46 @@ public class PlayerShoot : MonoBehaviour
     public Text ammoText;
     RaycastHit2D[] collisions;
 
+    private void Start()
+    {
+        weapon = PlayerPrefs.GetString("weapon");
+        if (weapon == "minigun")
+        {
+            ammo = 30;
+            ammoMax = 30;
+            reloadTime = .12f;
+            ammoRegenTime = .015f;
+        }
+        else if (weapon == "shotgun")
+        {
+            ammo = 10;
+            ammoMax = 10;
+            reloadTime = .6f;
+            ammoRegenTime = .8f;
+        }
+        else if (weapon == "laser")
+        {
+            ammo = 15;
+            ammoMax = 15;
+            reloadTime = .075f;
+            ammoRegenTime = .3f;
+        }
+        else if (weapon == "sniper")
+        {
+            ammo = 20;
+            ammoMax = 20;
+            reloadTime = .3f;
+            ammoRegenTime = .4f;
+        }
+        else if (weapon == "rocket")
+        {
+            ammo = 15;
+            ammoMax = 15;
+            reloadTime = .3f;
+            ammoRegenTime = .5f;
+        }
+    }
+
     void Update()
     {
         ammoText.text = "Ammo: " + ammo.ToString();
