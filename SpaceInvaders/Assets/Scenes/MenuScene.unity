@@ -9358,6 +9358,7 @@ MonoBehaviour:
   unlocksMenu: {fileID: 828506428}
   hardButton: {fileID: 1637314778}
   endlessButton: {fileID: 103063118}
+  endlessKills: {fileID: 131139827}
   weaponButton: {fileID: 544964816}
   enemyButton: {fileID: 461702538}
   otherButton: {fileID: 186044276}

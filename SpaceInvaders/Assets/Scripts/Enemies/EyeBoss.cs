@@ -242,7 +242,7 @@ public class EyeBoss : MonoBehaviour
         }
         else if (collision.gameObject.tag == "SuperShot")
         {
-            health -= collision.transform.localScale.x;
+            health -= collision.transform.localScale.x * 2;
         }
 
         if (health < 100)

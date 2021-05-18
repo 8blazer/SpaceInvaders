@@ -167,6 +167,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         dmgBought = true;
         dmg.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void ExDMG()
@@ -181,6 +185,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         exDmgBought = true;
         exDMG.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Ammo()
@@ -220,6 +228,10 @@ public class Upgrades : MonoBehaviour
             player.GetComponent<PlayerShoot>().ammoMax = 20;
         }
         player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Crit()
@@ -234,6 +246,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         critBought = true;
         crit.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void ExCrit()
@@ -248,6 +264,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         exCritBought = true;
         exCrit.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Death()
@@ -262,6 +282,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         deathBought = true;
         death.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Dodge()
@@ -276,6 +300,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         dodgeBought = true;
         dodge.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void ExDodge()
@@ -290,6 +318,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         exDodgeBought = true;
         exDodge.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Shield()
@@ -304,6 +336,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         player.GetComponent<PlayerAbility>().shieldBought = true;
         shield.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Speed()
@@ -319,6 +355,10 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().moveSpeed++;
         speed.GetComponent<Button>().interactable = false;
         speedBought = true;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void ExSpeed()
@@ -334,6 +374,10 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerMovement>().moveSpeed++;
         exSpeed.GetComponent<Button>().interactable = false;
         exSpeedBought = true;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Reflect()
@@ -348,6 +392,10 @@ public class Upgrades : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         reflectBought = true;
         reflect.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void SuperShot()
@@ -363,6 +411,10 @@ public class Upgrades : MonoBehaviour
         superShotBought = true;
         player.GetComponent<PlayerAbility>().activeAbility = "SuperShot";
         superShot.GetComponent<Button>().interactable = false;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void UltraShot()
@@ -378,6 +430,10 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerAbility>().activeAbility = "UltraShot";
         ultraShot.GetComponent<Button>().interactable = false;
         ultraShotBought = true;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Doppelganger()
@@ -393,6 +449,10 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerAbility>().activeAbility = "Doppelganger";
         doppelganger.GetComponent<Button>().interactable = false;
         doppelgangerBought = true;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void EnemyJam()
@@ -408,6 +468,10 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerAbility>().activeAbility = "EnemyJam";
         enemyJam.GetComponent<Button>().interactable = false;
         jamBought = true;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void EnemyFreeze()
@@ -423,6 +487,10 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerAbility>().activeAbility = "EnemyFreeze";
         enemyFreeze.GetComponent<Button>().interactable = false;
         freezeBought = true;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 
     public void Invincibility()
@@ -438,5 +506,9 @@ public class Upgrades : MonoBehaviour
         player.GetComponent<PlayerAbility>().activeAbility = "Invincibility";
         invincibility.GetComponent<Button>().interactable = false;
         invincibilityBought = true;
+        if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            gameManager.GetComponent<Game_Manager>().upgradeNumber--;
+        }
     }
 }

@@ -35,418 +35,492 @@ public class Game_Manager : MonoBehaviour
     GameObject player;
     public Text winMode;
 
+    int yellowProbability = 15;
+    int redProbability = 30;
+    int orangeProbability = 60;
+    int cyanProbability = 120;
+    int purpleProbability = 240;
+    int waveSize = 10;
+    public int upgradeNumber = 5;
+
     private void Start()
     {
-        if (PlayerPrefs.GetString("difficulty") == "Easy")
+        player = GameObject.Find("Player");
+        UI_Canvas = GameObject.Find("UI_Canvas");
+        upgradeCanvas = GameObject.Find("UpgradeCanvas");
+        saveManager = GameObject.Find("SaveManager");
+
+        if (PlayerPrefs.GetString("managerType") == "normal")
         {
-            initialEnemyCount = 10;
-            enemyPerWave = 5;
-            winMode.text = "Easy Mode";
-        }
-        else if (PlayerPrefs.GetString("difficulty") == "Normal")
-        {
-            initialEnemyCount = 20;
-            enemyPerWave = 7;
-            winMode.text = "Normal Mode";
-        }
-        else
-        {
-            initialEnemyCount = 30;
-            enemyPerWave = 10;
-            winMode.text = "Hard Mode";
-        }
-        if (PlayerPrefs.GetString("challenge") != "")
-        {
-            winMode.text = "Challenge";
+            if (PlayerPrefs.GetString("difficulty") == "Easy")
+            {
+                initialEnemyCount = 10;
+                enemyPerWave = 5;
+                winMode.text = "Easy Mode";
+            }
+            else if (PlayerPrefs.GetString("difficulty") == "Normal")
+            {
+                initialEnemyCount = 20;
+                enemyPerWave = 7;
+                winMode.text = "Normal Mode";
+            }
+            else
+            {
+                initialEnemyCount = 30;
+                enemyPerWave = 10;
+                winMode.text = "Hard Mode";
+            }
+            if (PlayerPrefs.GetString("challenge") != "")
+            {
+                winMode.text = "Challenge";
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player == null && SceneManager.GetActiveScene().name == "GameScene")
+        if (PlayerPrefs.GetString("managerType") == "normal")
         {
-            player = GameObject.Find("Player");
-            UI_Canvas = GameObject.Find("UI_Canvas");
-            upgradeCanvas = GameObject.Find("UpgradeCanvas");
-            saveManager = GameObject.Find("SaveManager");
-        }
-
-        if (initialSpawned && SceneManager.GetActiveScene().name == "GameScene")
-        {
-            enemyTimer += Time.deltaTime;
-            if (enemyCount < enemyPerWave && enemyTimer > enemyTime && !bossSpawned && !upgrading)
+            if (initialSpawned && SceneManager.GetActiveScene().name == "GameScene")
             {
-                if (wave == 1)
+                enemyTimer += Time.deltaTime;
+                if (enemyCount < enemyPerWave && enemyTimer > enemyTime && !bossSpawned && !upgrading)
                 {
-                    if (Random.Range(1, 19) == 1)
+                    if (wave == 1)
                     {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        if (Random.Range(1, 19) == 1)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
                     }
-                    else
+                    else if (wave == 2)
                     {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy == 17)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 17)
+                        {
+                            Instantiate(redEnemy, new Vector3(Random.Range(-7, 8), 6.5f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
                     }
+                    else if (wave == 3)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 17)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 14)
+                        {
+                            Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), Random.Range(5.5f, 6.5f), 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 5)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 18)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy == 18)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 6)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 18)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy == 18)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 7)
+                    {
+                        randomEnemy = Random.Range(1, 101);
+                        if (randomEnemy > 94)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 89)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 86)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 9)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 18)
+                        {
+                            Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy == 18)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 10)
+                    {
+                        randomEnemy = Random.Range(1, 101);
+                        if (randomEnemy > 94)
+                        {
+                            Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 89)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 84)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 11)
+                    {
+                        randomEnemy = Random.Range(1, 101);
+                        if (randomEnemy > 96)
+                        {
+                            Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 92)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 88)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 84)
+                        {
+                            Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 80)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    enemyCount++;
+                    enemyTimer = 0;
                 }
-                else if (wave == 2)
-                {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy == 17)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 17)
-                    {
-                        Instantiate(redEnemy, new Vector3(Random.Range(-7, 8), 6.5f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 3)
-                {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 17)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 14)
-                    {
-                        Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), Random.Range(5.5f, 6.5f), 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 5)
-                {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 18)
-                    {
-                        Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy == 18)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 6)
-                {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 18)
-                    {
-                        Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy == 18)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 7)
-                {
-                    randomEnemy = Random.Range(1, 101);
-                    if (randomEnemy > 94)
-                    {
-                        Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 89)
-                    {
-                        Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 86)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 9)
-                {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 18)
-                    {
-                        Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy == 18)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 10)
-                {
-                    randomEnemy = Random.Range(1, 101);
-                    if (randomEnemy > 94)
-                    {
-                        Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 89)
-                    {
-                        Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 84)
-                    {
-                        Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 11)
-                {
-                    randomEnemy = Random.Range(1, 101);
-                    if (randomEnemy > 96)
-                    {
-                        Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 92)
-                    {
-                        Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 88)
-                    {
-                        Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 84)
-                    {
-                        Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 80)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                enemyCount++;
-                enemyTimer = 0;
-            }
 
-            if (!bossSpawned && !upgrading && !player.GetComponent<PlayerMovement>().lost)
-            {
-                if (enemiesLeft == 0 && wavePart == 3)
+                if (!bossSpawned && !upgrading && !player.GetComponent<PlayerMovement>().lost)
                 {
-                    if (wave == 2 || wave == 6 || wave == 10)
+                    if (enemiesLeft == 0 && wavePart == 3)
                     {
-                        upgrading = true;
-                        UI_Canvas.GetComponent<Canvas>().enabled = false;
-                        upgradeCanvas.GetComponent<Canvas>().enabled = true;
-                        player.GetComponent<PlayerMovement>().enabled = false;
-                        player.GetComponent<PlayerShoot>().enabled = false;
-                        player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
-                        player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
-                        player.GetComponent<BoxCollider2D>().enabled = false;
-                        wave++;
+                        if (wave == 2 || wave == 6 || wave == 10)
+                        {
+                            upgrading = true;
+                            UI_Canvas.GetComponent<Canvas>().enabled = false;
+                            upgradeCanvas.GetComponent<Canvas>().enabled = true;
+                            player.GetComponent<PlayerMovement>().enabled = false;
+                            player.GetComponent<PlayerShoot>().enabled = false;
+                            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
+                            player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
+                            player.GetComponent<BoxCollider2D>().enabled = false;
+                            wave++;
 
-                        wavePart = 1;
+                            wavePart = 1;
+                            initialSpawned = false;
+                            enemyCount = 0;
+                            enemyPerWave++;
+                            enemyTime -= .1f;
+                        }
+                        else
+                        {
+                            wavePart = 1;
+                            initialSpawned = false;
+                            enemyCount = 0;
+                            enemyPerWave++;
+                            wave++;
+                        }
+                    }
+                    else if (enemiesLeft < 6 && wavePart < 3)
+                    {
                         initialSpawned = false;
                         enemyCount = 0;
                         enemyPerWave++;
                         enemyTime -= .1f;
+                        wavePart++;
                     }
-                    else
-                    {
-                        wavePart = 1;
-                        initialSpawned = false;
-                        enemyCount = 0;
-                        enemyPerWave++;
-                        wave++;
-                    }
-                }
-                else if (enemiesLeft < 6 && wavePart < 3)
-                {
-                    initialSpawned = false;
-                    enemyCount = 0;
-                    enemyPerWave++;
-                    enemyTime -= .1f;
-                    wavePart++;
                 }
             }
-        }
-        else if (!upgrading && SceneManager.GetActiveScene().name == "GameScene")
-        {
-            int i = 0;
-            while (i < initialEnemyCount && !bossSpawned)
+            else if (!upgrading && SceneManager.GetActiveScene().name == "GameScene")
             {
-                if (wave == 1)
+                int i = 0;
+                while (i < initialEnemyCount && !bossSpawned)
                 {
-                    if (Random.Range(1, 19) == 1)
+                    if (wave == 1)
                     {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        if (Random.Range(1, 19) == 1)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 2)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy == 17)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 17)
+                        {
+                            Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), Random.Range(5.5f, 6.5f), 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 3)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 17)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 14)
+                        {
+                            Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), Random.Range(5.5f, 6.5f), 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 4)
+                    {
+                        Instantiate(eyeBoss, new Vector3(0, 6, 0), Quaternion.identity);
+                        bossSpawned = true;
+                    }
+                    else if (wave == 5)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 18)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy == 18)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 6)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 18)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy == 18)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 7)
+                    {
+                        randomEnemy = Random.Range(1, 101);
+                        if (randomEnemy > 94)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 89)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 86)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 8)
+                    {
+                        Instantiate(splitBoss, new Vector3(0, 6, 0), Quaternion.identity);
+                        bossSpawned = true;
+                    }
+                    else if (wave == 9)
+                    {
+                        randomEnemy = Random.Range(1, 20);
+                        if (randomEnemy > 18)
+                        {
+                            Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy == 18)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 10)
+                    {
+                        randomEnemy = Random.Range(1, 101);
+                        if (randomEnemy > 97)
+                        {
+                            Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 94)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 91)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
+                    }
+                    else if (wave == 11)
+                    {
+                        randomEnemy = Random.Range(1, 101);
+                        if (randomEnemy > 97)
+                        {
+                            Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 94)
+                        {
+                            Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 91)
+                        {
+                            Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 87)
+                        {
+                            Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else if (randomEnemy > 83)
+                        {
+                            Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        }
                     }
                     else
                     {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                        Instantiate(UFO_Boss, new Vector3(0, 6, 0), Quaternion.identity);
+                        bossSpawned = true;
                     }
+                    i++;
                 }
-                else if (wave == 2)
+                initialSpawned = true;
+            }
+        }
+        else if (PlayerPrefs.GetString("managerType") == "endless" && upgradeNumber == 0)
+        {
+            if (enemiesLeft == 0)
+            {
+                if (yellowProbability > 5)
                 {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy == 17)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 17)
-                    {
-                        Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), Random.Range(5.5f, 6.5f), 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
+                    yellowProbability--;
                 }
-                else if (wave == 3)
+                if (redProbability > 6)
                 {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 17)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 14)
-                    {
-                        Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), Random.Range(5.5f, 6.5f), 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
+                    redProbability -= 2;
                 }
-                else if (wave == 4)
+                if (orangeProbability > 8)
                 {
-                    Instantiate(eyeBoss, new Vector3(0, 6, 0), Quaternion.identity);
-                    bossSpawned = true;
+                    orangeProbability -= 4;
                 }
-                else if (wave == 5)
+                if (cyanProbability > 10)
                 {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 18)
-                    {
-                        Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy == 18)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
+                    cyanProbability -= 8;
                 }
-                else if (wave == 6)
+                if (purpleProbability > 13)
                 {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 18)
-                    {
-                        Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy == 18)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
+                    purpleProbability -= 10;
                 }
-                else if (wave == 7)
+                waveSize++;
+
+                int i = 0;
+                while (i < waveSize)
                 {
-                    randomEnemy = Random.Range(1, 101);
-                    if (randomEnemy > 94)
-                    {
-                        Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 89)
-                    {
-                        Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 86)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 8)
-                {
-                    Instantiate(splitBoss, new Vector3(0, 6, 0), Quaternion.identity);
-                    bossSpawned = true;
-                }
-                else if (wave == 9)
-                {
-                    randomEnemy = Random.Range(1, 20);
-                    if (randomEnemy > 18)
+                    if (Random.Range(1, purpleProbability) == 1)
                     {
                         Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
                     }
-                    else if (randomEnemy == 18)
-                    {
-                        Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 10)
-                {
-                    randomEnemy = Random.Range(1, 101);
-                    if (randomEnemy > 97)
-                    {
-                        Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 94)
+                    else if (Random.Range(1, cyanProbability) == 1)
                     {
                         Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
                     }
-                    else if (randomEnemy > 91)
+                    else if (Random.Range(1, orangeProbability) == 1)
                     {
                         Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
                     }
-                    else
-                    {
-                        Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
-                    }
-                }
-                else if (wave == 11)
-                {
-                    randomEnemy = Random.Range(1, 101);
-                    if (randomEnemy > 97)
-                    {
-                        Instantiate(purpleEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 5.5f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 94)
-                    {
-                        Instantiate(cyanEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 91)
-                    {
-                        Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
-                    }
-                    else if (randomEnemy > 87)
+                    else if (Random.Range(1, redProbability) == 1)
                     {
                         Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
                     }
-                    else if (randomEnemy > 83)
+                    else if (Random.Range(1, yellowProbability) == 1)
                     {
                         Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
                     }
@@ -454,15 +528,17 @@ public class Game_Manager : MonoBehaviour
                     {
                         Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
                     }
+                    i++;
                 }
-                else
-                {
-                    Instantiate(UFO_Boss, new Vector3(0, 6, 0), Quaternion.identity);
-                    bossSpawned = true;
-                }
-                i++;
             }
-            initialSpawned = true;
+        }
+        else if (PlayerPrefs.GetString("managerType") == "endless")
+        {
+            UI_Canvas.GetComponent<Canvas>().enabled = false;
+            upgradeCanvas.GetComponent<Canvas>().enabled = true;
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<PlayerShoot>().enabled = false;
+            player.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 

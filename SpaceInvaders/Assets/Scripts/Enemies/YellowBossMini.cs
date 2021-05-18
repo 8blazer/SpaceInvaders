@@ -179,7 +179,7 @@ public class YellowBossMini : MonoBehaviour
         }
         else if (collision.gameObject.tag == "SuperShot")
         {
-            health -= collision.transform.localScale.x;
+            health -= collision.transform.localScale.x * 2;
         }
     }
 }

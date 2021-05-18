@@ -115,6 +115,7 @@ public class CyanEnemy : MonoBehaviour
         if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
+            player.GetComponent<PlayerMovement>().kills++;
             int i = Random.Range(1, 401);
             if (i == 1)
             {

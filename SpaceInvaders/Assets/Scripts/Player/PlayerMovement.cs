@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float respawnTime;
     public int lives = 3;
     public int continues = 3;
+    public int kills = 0;
     public ParticleSystem deathParticles;
     public bool canMove = true;
     GameObject gameManager;
@@ -299,8 +301,20 @@ public class PlayerMovement : MonoBehaviour
                     continueButton.interactable = false;
                 }
                 loseMenu.enabled = true;
-                continuesText.text = "Continues: " + continues;
                 lost = true;
+                if (SceneManager.GetActiveScene().name == "GameScene")
+                {
+                    continuesText.text = "Continues: " + continues;
+                }
+                else
+                {
+                    continuesText.text = "Kills: " + kills;
+                    if (kills > saveManager.GetComponent<SaveManager>().endlessKills)
+                    {
+                        saveManager.GetComponent<SaveManager>().endlessKills = kills;
+                        saveManager.GetComponent<SaveManager>().ToJson();
+                    }
+                }
             }
             else
             {

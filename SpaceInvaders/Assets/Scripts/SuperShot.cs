@@ -15,9 +15,9 @@ public class SuperShot : MonoBehaviour
         {
             speed += Time.deltaTime * 1.5f;
         }
-        if (transform.localScale.x < 6)
+        if (transform.localScale.x < 9)
         {
-            transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 1.4f, transform.localScale.y + Time.deltaTime * 1.4f, 1);
+            transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 2f, transform.localScale.y + Time.deltaTime * 2f, 1);
         }
         transform.Rotate(0, 0, -.3f);
         if (transform.position.y > 13)

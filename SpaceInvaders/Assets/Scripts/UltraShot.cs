@@ -15,9 +15,9 @@ public class UltraShot : MonoBehaviour
         {
             speed += Time.deltaTime / 1.4f;
         }
-        if (transform.localScale.x < 14)
+        if (transform.localScale.x < 20)
         {
-            transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 3f, transform.localScale.y + Time.deltaTime * 3f, 1);
+            transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * 4f, transform.localScale.y + Time.deltaTime * 4f, 1);
         }
         transform.Rotate(0, 0, -.3f);
         if (transform.position.y > 13)

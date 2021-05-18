@@ -15,6 +15,7 @@ public class Buttons : MonoBehaviour
     public Canvas unlocksMenu;
     public Button hardButton;
     public Button endlessButton;
+    public Text endlessKills;
     public Button weaponButton;
     public Button enemyButton;
     public Button otherButton;
@@ -76,6 +77,7 @@ public class Buttons : MonoBehaviour
         mainMenu.enabled = false;
         challengeMenu.enabled = false;
         playMenu.enabled = true;
+        endlessKills.text = "Best: " + saveManager.GetComponent<SaveManager>().endlessKills;
     }
 
     public void UnlocksMenu()
@@ -99,6 +101,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Easy");
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -107,6 +110,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -115,13 +119,16 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Hard");
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
     public void Endless()
     {
+        PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "endless");
         SceneManager.LoadScene("EndlessScene");
     }
 
@@ -139,6 +146,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -147,6 +155,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "minigun");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -155,6 +164,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "shotgun");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -163,6 +173,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "laser");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -171,6 +182,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "sniper");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
 
@@ -179,6 +191,7 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("difficulty", "Normal");
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "rocket");
+        PlayerPrefs.SetString("managerType", "normal");
         SceneManager.LoadScene("GameScene");
     }
     public void EnemyChallenges()
@@ -223,7 +236,7 @@ public class Buttons : MonoBehaviour
     public void Retry()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void UseContinue()

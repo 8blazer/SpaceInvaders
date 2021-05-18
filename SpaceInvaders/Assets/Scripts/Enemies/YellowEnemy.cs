@@ -57,6 +57,7 @@ public class YellowEnemy : MonoBehaviour
         if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost || transform.position.y < -4.5f)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
+            player.GetComponent<PlayerMovement>().kills++;
             int i = Random.Range(1, 401);
             if (i == 1)
             {
@@ -181,7 +182,7 @@ public class YellowEnemy : MonoBehaviour
         }
         else if (collision.gameObject.tag == "SuperShot")
         {
-            health -= collision.transform.localScale.x;
+            health -= collision.transform.localScale.x * 2;
         }
     }
 }
