@@ -54,6 +54,15 @@ public class PlayerMovement : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
         saveManager = GameObject.Find("SaveManager");
 
+        if (PlayerPrefs.GetString("challenge") == "Fast")
+        {
+            moveSpeed *= 5;
+        }
+        else if (PlayerPrefs.GetString("challenge") == "Slow")
+        {
+            moveSpeed /= 1.5f;
+        }
+
         switch (PlayerPrefs.GetString("ship"))
         {
             case "default":
@@ -166,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
         if (direction != "" && transform.position.x == 0)
         {
             flightTimer += Time.deltaTime;
+            GetComponent<SpriteRenderer>().enabled = true;
             if (flightTimer > 4)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 7);
@@ -175,11 +185,13 @@ public class PlayerMovement : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             transform.position = new Vector3(0, transform.position.y, 0);
+            GetComponent<SpriteRenderer>().enabled = true;
         }
         else if (direction == "right" && transform.position.x > 0)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             transform.position = new Vector3(0, transform.position.y, 0);
+            GetComponent<SpriteRenderer>().enabled = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -279,6 +291,21 @@ public class PlayerMovement : MonoBehaviour
                     saveManager.GetComponent<SaveManager>().rocketChallenge = true;
                     saveManager.GetComponent<SaveManager>().weaponChallenges++;
                 }
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Fast" && !saveManager.GetComponent<SaveManager>().fastChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().fastChallenge = true;
+                saveManager.GetComponent<SaveManager>().otherChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Slow" && !saveManager.GetComponent<SaveManager>().slowChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().slowChallenge = true;
+                saveManager.GetComponent<SaveManager>().otherChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "UpsideDown" && !saveManager.GetComponent<SaveManager>().upsideDownChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().upsideDownChallenge = true;
+                saveManager.GetComponent<SaveManager>().otherChallenges++;
             }
             saveManager.GetComponent<SaveManager>().ToJson();
         }

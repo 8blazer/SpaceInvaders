@@ -148,8 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 15
   rocketSprite: {fileID: 7431529995326980795, guid: 36e57921d5a0a0246a45961dbe182929, type: 3}
+  enemyBullet: {fileID: 1705687525535762421, guid: eb5591a6e9b862b44b13c07956e77212, type: 3}
   rocketDetectionRange: 2
   rocketSpeed: 5
+  jitterTimer: 0
 --- !u!95 &-6457096738228477885
 Animator:
   serializedVersion: 3

@@ -24,6 +24,11 @@ public class GreenEnemy : MonoBehaviour
     public GameObject sniperDrop;
     public GameObject rocketDrop;
 
+    public float jitterTimer;
+    float jitterTime;
+    public Sprite crazy;
+    Vector2 jitterVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +38,21 @@ public class GreenEnemy : MonoBehaviour
         player = GameObject.Find("Player");
         gameManager.GetComponent<Game_Manager>().AddEnemy();
         spawnY = Random.Range(3.0f, 4.6f);
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy")
+        {
+            GetComponent<SpriteRenderer>().sprite = crazy;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        jitterTimer += Time.deltaTime;
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy" && jitterTimer > jitterTime)
+        {
+            jitterVelocity = new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f));
+            jitterTimer = 0;
+        }
         if (spawned)
         {
             timer += Time.deltaTime;
@@ -54,7 +69,7 @@ public class GreenEnemy : MonoBehaviour
             }
             if (moveRight)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0) + jitterVelocity;
                 if (transform.position.x > 8.5f)
                 {
                     moveRight = false;
@@ -63,7 +78,7 @@ public class GreenEnemy : MonoBehaviour
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0) + jitterVelocity;
                 if (transform.position.x < -8.5f)
                 {
                     moveRight = true;
@@ -73,7 +88,7 @@ public class GreenEnemy : MonoBehaviour
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed) + jitterVelocity;
             if (transform.position.y < spawnY)
             {
                 spawned = true;

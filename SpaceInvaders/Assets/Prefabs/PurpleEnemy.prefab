@@ -157,3 +157,4 @@ MonoBehaviour:
   shotgunDrop: {fileID: 9211844773864518727, guid: 63ba7db98bc24674f878b2bd843c4b60, type: 3}
   sniperDrop: {fileID: 1706859342547301220, guid: 0532b5c6bc7b3ad49bc84adfad22ce3b, type: 3}
   rocketDrop: {fileID: 2134132142184691096, guid: 9e6a9d5a6b927ff4aaa94e38f4e75469, type: 3}
+  crazy: {fileID: 2684576536808156462, guid: 8d2148f4e5fa2894388cac33d4ea67d6, type: 3}

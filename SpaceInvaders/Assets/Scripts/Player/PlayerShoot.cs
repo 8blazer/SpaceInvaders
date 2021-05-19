@@ -79,7 +79,7 @@ public class PlayerShoot : MonoBehaviour
         if (!canShoot)  //Burnout recharge timer
         {
             burnoutTimer += Time.deltaTime;
-            if (burnoutTimer > 3)
+            if (burnoutTimer > 2)
             {
                 canShoot = true;
                 burnoutTimer = 0;
@@ -121,6 +121,11 @@ public class PlayerShoot : MonoBehaviour
     void Fire()
     {
         ammo--;
+        if (PlayerPrefs.GetString("challenge") == "Ammo")
+        {
+            ammo--;
+            ammo--;
+        }
         if (superWeapon == "")
         {
             if (weapon == "machinegun")

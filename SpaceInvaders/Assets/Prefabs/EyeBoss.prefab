@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1418694693342010459}
   - component: {fileID: 1418694693342010458}
   - component: {fileID: 1418694693342010457}
+  - component: {fileID: 7985775883248903940}
   m_Layer: 0
   m_Name: Eyeball
   m_TagString: Untagged
@@ -104,6 +105,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7985775883248903940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418694693342010456}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb148f713252f04ba8ebef748add6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1418694693894737334
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +128,7 @@ GameObject:
   - component: {fileID: 1418694693894737335}
   - component: {fileID: 1418694693894737329}
   - component: {fileID: 1418694693894737328}
+  - component: {fileID: 4379308700588583159}
   m_Layer: 0
   m_Name: EyeLaser
   m_TagString: Enemy
@@ -214,6 +228,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4379308700588583159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418694693894737334}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb148f713252f04ba8ebef748add6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1418694695003411075
 GameObject:
   m_ObjectHideFlags: 0

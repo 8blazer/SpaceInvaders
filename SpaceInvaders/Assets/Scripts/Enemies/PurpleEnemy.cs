@@ -25,12 +25,20 @@ public class PurpleEnemy : MonoBehaviour
     public GameObject sniperDrop;
     public GameObject rocketDrop;
 
+    public Sprite crazy;
+
     void Start()
     {
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("GameManager");
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager.GetComponent<Game_Manager>().AddEnemy();
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy")
+        {
+            GetComponent<SpriteRenderer>().sprite = crazy;
+            poofPower *= 2.5f;
+            bulletSpeed++;
+        }
     }
 
     // Update is called once per frame

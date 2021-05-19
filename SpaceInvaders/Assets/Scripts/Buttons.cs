@@ -212,6 +212,60 @@ public class Buttons : MonoBehaviour
         otherChallengeButtons.SetActive(true);
     }
 
+    public void FastChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Fast");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void SlowChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Slow");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void AmmoChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Ammo");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void UpsideDownChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "UpsideDown");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void NoAbilityChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "NoAbility");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void CrazyEnemyChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "CrazyEnemy");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "normal");
+        SceneManager.LoadScene("GameScene");
+    }
+
     public void MainMenu()
     {
         Time.timeScale = 1;

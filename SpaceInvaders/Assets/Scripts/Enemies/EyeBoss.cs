@@ -36,6 +36,11 @@ public class EyeBoss : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         eye = transform.GetChild(0).gameObject;
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy")
+        {
+            eye.transform.GetChild(0).GetComponent<Rainbow>().enabled = true;
+            eye.transform.GetChild(0).transform.GetChild(0).GetComponent<Rainbow>().enabled = true;
+        }
     }
 
     // Update is called once per frame

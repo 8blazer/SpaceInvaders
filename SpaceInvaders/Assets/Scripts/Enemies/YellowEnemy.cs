@@ -19,40 +19,55 @@ public class YellowEnemy : MonoBehaviour
     public GameObject sniperDrop;
     public GameObject rocketDrop;
 
+    public float jitterTimer;
+    float jitterTime;
+    public Sprite crazy;
+    Vector2 jitterVelocity;
+
     void Start()
     {
         player = GameObject.Find("Player");
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
         gameManager.GetComponent<Game_Manager>().AddEnemy();
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy")
+        {
+            GetComponent<SpriteRenderer>().sprite = crazy;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        jitterTimer += Time.deltaTime;
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy" && jitterTimer > jitterTime)
+        {
+            jitterVelocity = new Vector2(Random.Range(-7.0f, 7.0f), 0);
+            jitterTimer = 0;
+        }
         if (transform.position.y > -2.5f)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed) + jitterVelocity;
         }
         else if (dropTimer < dropTime)
         {
             dropTimer += Time.deltaTime;
             if (player.transform.position.x - transform.position.x > .3f)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0) + jitterVelocity;
             }
             else if (player.transform.position.x - transform.position.x < -.3f)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0) + jitterVelocity;
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0) + jitterVelocity;
             }
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed) + jitterVelocity;
         }
         if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost || transform.position.y < -4.5f)
         {

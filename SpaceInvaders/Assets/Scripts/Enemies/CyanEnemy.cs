@@ -26,6 +26,11 @@ public class CyanEnemy : MonoBehaviour
     public GameObject sniperDrop;
     public GameObject rocketDrop;
 
+    public float jitterTimer;
+    float jitterTime;
+    public Sprite crazy;
+    Vector2 jitterVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +38,21 @@ public class CyanEnemy : MonoBehaviour
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
         gameManager.GetComponent<Game_Manager>().AddEnemy();
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy")
+        {
+            GetComponent<SpriteRenderer>().sprite = crazy;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        jitterTimer += Time.deltaTime;
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy" && jitterTimer > jitterTime)
+        {
+            jitterVelocity = new Vector2(Random.Range(-7.0f, 7.1f), 0);
+            jitterTimer = 0;
+        }
         if (spawned)
         {
             if (!player.GetComponent<PlayerAbility>().frozen)

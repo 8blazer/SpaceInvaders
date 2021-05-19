@@ -256,16 +256,19 @@ public class Game_Manager : MonoBehaviour
                     {
                         if (wave == 2 || wave == 6 || wave == 10)
                         {
-                            upgrading = true;
-                            UI_Canvas.GetComponent<Canvas>().enabled = false;
-                            upgradeCanvas.GetComponent<Canvas>().enabled = true;
-                            player.GetComponent<PlayerMovement>().enabled = false;
-                            player.GetComponent<PlayerShoot>().enabled = false;
-                            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
-                            player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
-                            player.GetComponent<BoxCollider2D>().enabled = false;
-                            wave++;
+                            if (PlayerPrefs.GetString("challenge") != "NoAbility")
+                            {
+                                upgrading = true;
+                                UI_Canvas.GetComponent<Canvas>().enabled = false;
+                                upgradeCanvas.GetComponent<Canvas>().enabled = true;
+                                player.GetComponent<PlayerMovement>().enabled = false;
+                                player.GetComponent<PlayerShoot>().enabled = false;
+                                player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
+                                player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
+                                player.GetComponent<BoxCollider2D>().enabled = false;
+                            }
 
+                            wave++;
                             wavePart = 1;
                             initialSpawned = false;
                             enemyCount = 0;
@@ -546,17 +549,20 @@ public class Game_Manager : MonoBehaviour
     {
         if (wave != 12)
         {
-            bossSpawned = false;
-            upgrading = true;
-            UI_Canvas.GetComponent<Canvas>().enabled = false;
-            upgradeCanvas.GetComponent<Canvas>().enabled = true;
-            player.GetComponent<PlayerMovement>().enabled = false;
-            player.GetComponent<PlayerShoot>().enabled = false;
-            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
-            wave++;
+            if (PlayerPrefs.GetString("challenge") != "NoAbility")
+            {
+                upgrading = true;
+                UI_Canvas.GetComponent<Canvas>().enabled = false;
+                upgradeCanvas.GetComponent<Canvas>().enabled = true;
+                player.GetComponent<PlayerMovement>().enabled = false;
+                player.GetComponent<PlayerShoot>().enabled = false;
+                player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -5);
+            }
 
+            wave++;
             wavePart = 1;
             initialSpawned = false;
+            bossSpawned = false;
             enemyCount = 0;
             enemyPerWave++;
             enemyTime -= .1f;

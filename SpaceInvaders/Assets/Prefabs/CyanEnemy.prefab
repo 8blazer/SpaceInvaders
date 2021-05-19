@@ -149,9 +149,12 @@ MonoBehaviour:
   vertSpeed: -10
   vertSpeedChange: 6
   swoopTime: 3
+  savedVelocity: {x: 0, y: 0}
   lifeDrop: {fileID: 5518201233025428409, guid: 12a0a5c314a8ba04597f6ae9b321bf48, type: 3}
   minigunDrop: {fileID: 6755424283559179131, guid: 3607d818628f62f4c9e64a1af4aa26cc, type: 3}
   laserDrop: {fileID: 738882051191185003, guid: 4bf16c0435908c74585a538a4e385ff5, type: 3}
   shotgunDrop: {fileID: 9211844773864518727, guid: 63ba7db98bc24674f878b2bd843c4b60, type: 3}
   sniperDrop: {fileID: 1706859342547301220, guid: 0532b5c6bc7b3ad49bc84adfad22ce3b, type: 3}
   rocketDrop: {fileID: 2134132142184691096, guid: 9e6a9d5a6b927ff4aaa94e38f4e75469, type: 3}
+  jitterTimer: 0.5
+  crazy: {fileID: -5564559366325301369, guid: 8d2148f4e5fa2894388cac33d4ea67d6, type: 3}
