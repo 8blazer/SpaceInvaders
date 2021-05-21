@@ -1,13 +1,25 @@
 fileFormatVersion: 2
-guid: eb5591a6e9b862b44b13c07956e77212
+guid: 04d7d5854c2cf484f8f9a82b13b580fa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1705687525535762421
-    second: E_Bullets_0
+      213: -1971373481572994416
+    second: SuperEnemies_0
   - first:
-      213: 4723680694378192875
-    second: E_Bullets_1
+      213: 5676109349899771506
+    second: SuperEnemies_1
+  - first:
+      213: -8424618507778097872
+    second: SuperEnemies_2
+  - first:
+      213: 4083167823784826625
+    second: SuperEnemies_3
+  - first:
+      213: 4806132570619686144
+    second: SuperEnemies_4
+  - first:
+      213: 5841880670477633281
+    second: SuperEnemies_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -52,7 +64,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,43 +109,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: E_Bullets_0
+      name: SuperEnemies_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 24
-        width: 24
-        height: 24
+        y: 96
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f7cf5174c1dba710800000000000000
-      internalID: 1705687525535762421
+      spriteID: 0927737634644a4e0800000000000000
+      internalID: -1971373481572994416
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: E_Bullets_1
+      name: SuperEnemies_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 24
-        height: 24
+        x: 48
+        y: 96
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bef58cc7092ed8140800000000000000
-      internalID: 4723680694378192875
+      spriteID: 27e9c03616795ce40800000000000000
+      internalID: 5676109349899771506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperEnemies_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03d74bb4a1eb51b80800000000000000
+      internalID: -8424618507778097872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperEnemies_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 107dffe80835aa830800000000000000
+      internalID: 4083167823784826625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperEnemies_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00da837eb10d2b240800000000000000
+      internalID: 4806132570619686144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperEnemies_5
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1074a08a487821150800000000000000
+      internalID: 5841880670477633281
       vertices: []
       indices: 
       edges: []

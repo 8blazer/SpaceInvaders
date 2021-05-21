@@ -39,7 +39,7 @@ public class EyeBoss : MonoBehaviour
         if (PlayerPrefs.GetString("challenge") == "CrazyEnemy")
         {
             eye.transform.GetChild(0).GetComponent<Rainbow>().enabled = true;
-            eye.transform.GetChild(0).transform.GetChild(0).GetComponent<Rainbow>().enabled = true;
+            eye.GetComponent<Rainbow>().enabled = true;
         }
     }
 

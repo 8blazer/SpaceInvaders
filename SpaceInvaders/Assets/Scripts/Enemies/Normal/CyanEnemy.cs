@@ -89,11 +89,11 @@ public class CyanEnemy : MonoBehaviour
             {
                 if (moveRight)
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, tempVertSpeed);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, tempVertSpeed) + jitterVelocity;
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, tempVertSpeed);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, tempVertSpeed) + jitterVelocity;
                 }
                 if (-vertSpeed < tempVertSpeed)
                 {
@@ -104,7 +104,7 @@ public class CyanEnemy : MonoBehaviour
             }
             if (moveRight && !swooping)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(horizSpeed, 0) + jitterVelocity;
                 if (transform.position.x > 8.5f)
                 {
                     moveRight = false;
@@ -112,7 +112,7 @@ public class CyanEnemy : MonoBehaviour
             }
             else if (!swooping)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-horizSpeed, 0) + jitterVelocity;
                 if (transform.position.x < -8.5f)
                 {
                     moveRight = true;
@@ -121,7 +121,7 @@ public class CyanEnemy : MonoBehaviour
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -horizSpeed);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -horizSpeed) + jitterVelocity;
             if (transform.position.y < 3.3f)
             {
                 spawned = true;

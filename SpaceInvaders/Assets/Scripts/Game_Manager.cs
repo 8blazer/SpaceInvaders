@@ -54,25 +54,34 @@ public class Game_Manager : MonoBehaviour
         {
             if (PlayerPrefs.GetString("difficulty") == "Easy")
             {
-                initialEnemyCount = 10;
+                initialEnemyCount = 12;
                 enemyPerWave = 5;
                 winMode.text = "Easy Mode";
             }
             else if (PlayerPrefs.GetString("difficulty") == "Normal")
             {
-                initialEnemyCount = 20;
-                enemyPerWave = 7;
+                initialEnemyCount = 15;
+                enemyPerWave = 5;
                 winMode.text = "Normal Mode";
             }
             else
             {
-                initialEnemyCount = 30;
-                enemyPerWave = 10;
+                initialEnemyCount = 22;
+                enemyPerWave = 7;
                 winMode.text = "Hard Mode";
             }
             if (PlayerPrefs.GetString("challenge") != "")
             {
                 winMode.text = "Challenge";
+                if (PlayerPrefs.GetString("managerType") == "green" ||
+                    PlayerPrefs.GetString("managerType") == "red" ||
+                    PlayerPrefs.GetString("managerType") == "yellow" ||
+                    PlayerPrefs.GetString("managerType") == "cyan" ||
+                    PlayerPrefs.GetString("managerType") == "orange" ||
+                    PlayerPrefs.GetString("managerType") == "purple")
+                {
+                    wave = 12;
+                }
             }
         }
     }
@@ -498,7 +507,7 @@ public class Game_Manager : MonoBehaviour
                 {
                     cyanProbability -= 8;
                 }
-                if (purpleProbability > 13)
+                if (purpleProbability > 11)
                 {
                     purpleProbability -= 10;
                 }
@@ -542,6 +551,10 @@ public class Game_Manager : MonoBehaviour
             player.GetComponent<PlayerMovement>().enabled = false;
             player.GetComponent<PlayerShoot>().enabled = false;
             player.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else if (PlayerPrefs.GetString("managerType") == "green")
+        {
+
         }
     }
 

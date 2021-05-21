@@ -166,6 +166,7 @@ public class ShipPreview : MonoBehaviour
                 else
                 {
                     unlockText.text = "Beat Easy Mode";
+                    GetComponent<Button>().interactable = false;
                 }
                 break;
             case "green":
@@ -351,6 +352,7 @@ public class ShipPreview : MonoBehaviour
                 else
                 {
                     unlockText.text = "100% The Game";
+                    GetComponent<Button>().interactable = false;
                 }
                 break;
         }

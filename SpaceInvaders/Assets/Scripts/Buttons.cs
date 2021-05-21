@@ -203,6 +203,15 @@ public class Buttons : MonoBehaviour
         otherChallengeButtons.SetActive(false);
     }
 
+    public void GreenChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Green");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "green");
+        SceneManager.LoadScene("GameScene");
+    }
+
     public void OtherChallenges()
     {
         playMenu.enabled = false;

@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrangeEnemy : MonoBehaviour
+public class PurpleEnemy : MonoBehaviour
 {
-    float health = 15;
+    float health = 10;
     public float moveSpeed;
     public float shootSpeed;
     public float bulletSpeed;
     public GameObject bulletPrefab;
-    float timer;
-    bool moveRight;
     GameObject player;
     GameObject gameManager;
     GameObject upgradeCanvas;
-    bool spawned = false;
+    float shootTimer;
+    public float poofPower;
+    public float poofLoss;
+    bool poof;
+    float poofTimer;
 
     public GameObject lifeDrop;
     public GameObject minigunDrop;
@@ -23,102 +25,104 @@ public class OrangeEnemy : MonoBehaviour
     public GameObject sniperDrop;
     public GameObject rocketDrop;
 
-    public float jitterTimer;
-    float jitterTime;
     public Sprite crazy;
-    Vector2 jitterVelocity;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
+        upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager.GetComponent<Game_Manager>().AddEnemy();
         if (PlayerPrefs.GetString("challenge") == "CrazyEnemy")
         {
             GetComponent<SpriteRenderer>().sprite = crazy;
+            poofPower *= 1.5f;
+            bulletSpeed++;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        jitterTimer += Time.deltaTime;
-        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy" && jitterTimer > jitterTime)
+        shootTimer += Time.deltaTime;
+        poofTimer += Time.deltaTime;
+        if (poof)
         {
-            jitterVelocity = new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-.5f, .5f));
-            jitterTimer = 0;
-        }
-        if (spawned)
-        {
-            timer += Time.deltaTime;
-            if (player.GetComponent<PlayerAbility>().jammed || player.GetComponent<PlayerAbility>().frozen)
+            if (GetComponent<Rigidbody2D>().velocity.x > 0)
             {
-                timer = 0;
-            }
-            if (timer > shootSpeed)
-            {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.transform.up = (player.transform.position - transform.position);
-                bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
-                timer = 0;
-            }
-            if (moveRight)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0) + jitterVelocity;
-                if (transform.position.x > 8.5f)
-                {
-                    moveRight = false;
-                }
+                GetComponent<Rigidbody2D>().velocity -= new Vector2(poofLoss * .7f, poofLoss) * Time.deltaTime;
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0) + jitterVelocity;
-                if (transform.position.x < -8.5f)
-                {
-                    moveRight = true;
-                }
+                GetComponent<Rigidbody2D>().velocity -= new Vector2(-poofLoss * .7f, poofLoss) * Time.deltaTime;
             }
-            if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
+            if (GetComponent<Rigidbody2D>().velocity.y < .1f)
             {
-                gameManager.GetComponent<Game_Manager>().KillEnemy();
-                player.GetComponent<PlayerMovement>().kills++;
-                int i = Random.Range(1, 401);
-                if (i == 1)
-                {
-                    Instantiate(lifeDrop, transform.position, Quaternion.identity);
-                }
-                else if (i == 2 && PlayerPrefs.GetString("challenge") != "Weapon")
-                {
-                    Instantiate(minigunDrop, transform.position, Quaternion.identity);
-                }
-                else if (i == 3 && PlayerPrefs.GetString("challenge") != "Weapon")
-                {
-                    Instantiate(laserDrop, transform.position, Quaternion.identity);
-                }
-                else if (i == 4 && PlayerPrefs.GetString("challenge") != "Weapon")
-                {
-                    Instantiate(rocketDrop, transform.position, Quaternion.identity);
-                }
-                else if (i == 5 && PlayerPrefs.GetString("challenge") != "Weapon")
-                {
-                    Instantiate(shotgunDrop, transform.position, Quaternion.identity);
-                }
-                else if (i == 6 && PlayerPrefs.GetString("challenge") != "Weapon")
-                {
-                    Instantiate(sniperDrop, transform.position, Quaternion.identity);
-                }
-                Destroy(gameObject);
+                poof = false;
             }
         }
-        else
+
+        if ((shootTimer > shootSpeed || transform.position.y < -3 || (transform.position.y < 2 && Mathf.Abs(transform.position.x - player.transform.position.x) < 1)) && !poof)
+        {
+            int i = 0;
+            if (transform.position.x > player.transform.position.x)
+            {
+                poof = true;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, poofPower);
+            }
+            else
+            {
+                poof = true;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, poofPower);
+            }
+            if (!player.GetComponent<PlayerAbility>().jammed && !player.GetComponent<PlayerAbility>().frozen)
+            {
+                while (i < 5)
+                {
+                    GameObject shell = Instantiate(bulletPrefab, transform.position + new Vector3(0f, .1f, 0), Quaternion.identity);
+                    shell.transform.Rotate(0, 0, Random.Range(-30, 31));
+                    shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * -(bulletSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
+                    i++;
+                }
+            }
+            shootTimer = 0;
+            poofTimer = 0;
+        }
+        else if (!poof)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
-            if (transform.position.y < 3.5f)
+        }
+
+        if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
+        {
+            player.GetComponent<PlayerMovement>().kills++;
+            gameManager.GetComponent<Game_Manager>().KillEnemy();
+            int i = Random.Range(1, 401);
+            if (i == 1)
             {
-                spawned = true;
+                Instantiate(lifeDrop, transform.position, Quaternion.identity);
             }
+            else if (i == 2 && PlayerPrefs.GetString("challenge") != "Weapon")
+            {
+                Instantiate(minigunDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 3 && PlayerPrefs.GetString("challenge") != "Weapon")
+            {
+                Instantiate(laserDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 4 && PlayerPrefs.GetString("challenge") != "Weapon")
+            {
+                Instantiate(rocketDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 5 && PlayerPrefs.GetString("challenge") != "Weapon")
+            {
+                Instantiate(shotgunDrop, transform.position, Quaternion.identity);
+            }
+            else if (i == 6 && PlayerPrefs.GetString("challenge") != "Weapon")
+            {
+                Instantiate(sniperDrop, transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
         }
 
         if (player.GetComponent<PlayerAbility>().frozen)

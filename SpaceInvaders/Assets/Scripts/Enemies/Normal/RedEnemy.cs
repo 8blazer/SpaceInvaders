@@ -16,6 +16,11 @@ public class RedEnemy : MonoBehaviour
     public GameObject sniperDrop;
     public GameObject rocketDrop;
 
+    public float jitterTimer;
+    float jitterTime;
+    public Sprite crazy;
+    Vector2 jitterVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +32,15 @@ public class RedEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        jitterTimer += Time.deltaTime;
+        if (PlayerPrefs.GetString("challenge") == "CrazyEnemy" && jitterTimer > jitterTime)
+        {
+            jitterVelocity = new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f));
+            jitterTimer = 0;
+        }
         transform.up = (player.transform.position - transform.position) * -1;
         GetComponent<Rigidbody2D>().velocity = transform.up * -moveSpeed;
+        GetComponent<Rigidbody2D>().velocity += jitterVelocity;
         if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
         {
             gameManager.GetComponent<Game_Manager>().KillEnemy();
