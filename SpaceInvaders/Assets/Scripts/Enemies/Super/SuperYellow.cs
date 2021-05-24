@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SuperGreen : MonoBehaviour
+public class SuperYellow : MonoBehaviour
 {
-    float health = 325;
     public float moveSpeed;
-    public float shootSpeed;
-    public float bulletSpeed;
-    public GameObject bulletPrefab;
-    GameObject gameManager;
-    GameObject upgradeCanvas;
     GameObject player;
-    float timer;
-    bool moveRight;
-    bool spawned = false;
-    float spawnY = 3.5f;
+    GameObject gameManager;
+    float health = 400;
+    float dropTimer = 0;
+    public float dropTime;
+
     Slider healthbar;
     Image background;
     Image fill;
@@ -26,8 +21,6 @@ public class SuperGreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shootSpeed = Random.Range(3.5f, 5.6f);
-        upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
         player = GameObject.Find("Player");
         healthbar = GameObject.Find("BossHealth").GetComponent<Slider>();
@@ -39,52 +32,46 @@ public class SuperGreen : MonoBehaviour
         handle.enabled = true;
         handle.sprite = handleSprite;
         gameManager.GetComponent<Game_Manager>().AddEnemy();
-        spawnY = Random.Range(3.0f, 4.6f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthbar.value = health / 325;
-        if (spawned)
+        healthbar.value = health / 400;
+        if (transform.position.y > 0f)
         {
-            timer += Time.deltaTime;
-            if (timer > shootSpeed)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed - ((400 - health) / 80));
+        }
+        else if (dropTimer < dropTime)
+        {
+            dropTimer += Time.deltaTime;
+            if (player.transform.position.x - transform.position.x > .3f)
             {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position - new Vector3(0, 1.3f, 0), Quaternion.identity);
-                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
-                bullet.transform.localScale = new Vector3(3, 3, 1);
-                timer = 0;
-                shootSpeed = Random.Range(1.5f, 2.5f);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((400 - health) / 80), 0);
             }
-            if (moveRight)
+            else if (player.transform.position.x - transform.position.x < -.3f)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((400 - health) / 50), 0);
-                if (transform.position.x > 7.5f)
-                {
-                    moveRight = false;
-                    transform.position += new Vector3(0, -.5f, 0);
-                }
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((400 - health) / 80), 0);
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((400 - health) / 50), 0);
-                if (transform.position.x < -7.5f)
-                {
-                    moveRight = true;
-                    transform.position += new Vector3(0, -.5f, 0);
-                }
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
-            if (transform.position.y < spawnY)
-            {
-                spawned = true;
-            }
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed - ((400 - health) / 80));
         }
-        if (health < 1 || transform.position.y < -4.5f || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
+        if (transform.position.y < -7)
+        {
+            transform.position = new Vector3(player.transform.position.x, 7, 0);
+            if (dropTime > .5f)
+            {
+                dropTime -= .1f;
+            }
+            dropTimer = 0;
+        }
+        if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
         {
             gameManager.GetComponent<Game_Manager>().BossDeath();
             player.GetComponent<PlayerMovement>().kills++;

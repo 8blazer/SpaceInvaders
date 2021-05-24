@@ -206,6 +206,14 @@ public class PlayerShoot : MonoBehaviour
                         {
                             collisions[i].transform.GetComponent<YellowBossMini>().Laser();
                         }
+                        else if (collisions[i].transform.gameObject.name == "SuperGreen(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<SuperGreen>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "SuperYellow(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<SuperGreen>().Laser();
+                        }
                         i++;
                     }
                     xOffset += .02f;

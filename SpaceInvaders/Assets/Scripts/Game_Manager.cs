@@ -18,6 +18,13 @@ public class Game_Manager : MonoBehaviour
     public GameObject splitBoss;
     public GameObject UFO_Boss;
 
+    public GameObject greenBoss;
+    public GameObject yellowBoss;
+    public GameObject redBoss;
+    public GameObject cyanBoss;
+    public GameObject orangeBoss;
+    public GameObject purpleBoss;
+
     int randomEnemy;
     int enemyCount;
     public int enemyPerWave;
@@ -50,38 +57,35 @@ public class Game_Manager : MonoBehaviour
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         saveManager = GameObject.Find("SaveManager");
 
-        if (PlayerPrefs.GetString("managerType") == "normal")
+        if (PlayerPrefs.GetString("difficulty") == "Easy")
         {
-            if (PlayerPrefs.GetString("difficulty") == "Easy")
+            initialEnemyCount = 12;
+            enemyPerWave = 5;
+            winMode.text = "Easy Mode";
+        }
+        else if (PlayerPrefs.GetString("difficulty") == "Normal")
+        {
+            initialEnemyCount = 15;
+            enemyPerWave = 5;
+            winMode.text = "Normal Mode";
+        }
+        else
+        {
+            initialEnemyCount = 22;
+            enemyPerWave = 7;
+            winMode.text = "Hard Mode";
+        }
+        if (PlayerPrefs.GetString("challenge") != "")
+        {
+            winMode.text = "Challenge";
+            if (PlayerPrefs.GetString("managerType") == "green" ||
+                PlayerPrefs.GetString("managerType") == "red" ||
+                PlayerPrefs.GetString("managerType") == "yellow" ||
+                PlayerPrefs.GetString("managerType") == "cyan" ||
+                PlayerPrefs.GetString("managerType") == "orange" ||
+                PlayerPrefs.GetString("managerType") == "purple")
             {
-                initialEnemyCount = 12;
-                enemyPerWave = 5;
-                winMode.text = "Easy Mode";
-            }
-            else if (PlayerPrefs.GetString("difficulty") == "Normal")
-            {
-                initialEnemyCount = 15;
-                enemyPerWave = 5;
-                winMode.text = "Normal Mode";
-            }
-            else
-            {
-                initialEnemyCount = 22;
-                enemyPerWave = 7;
-                winMode.text = "Hard Mode";
-            }
-            if (PlayerPrefs.GetString("challenge") != "")
-            {
-                winMode.text = "Challenge";
-                if (PlayerPrefs.GetString("managerType") == "green" ||
-                    PlayerPrefs.GetString("managerType") == "red" ||
-                    PlayerPrefs.GetString("managerType") == "yellow" ||
-                    PlayerPrefs.GetString("managerType") == "cyan" ||
-                    PlayerPrefs.GetString("managerType") == "orange" ||
-                    PlayerPrefs.GetString("managerType") == "purple")
-                {
-                    wave = 12;
-                }
+                wave = 12;
             }
         }
     }
@@ -552,9 +556,47 @@ public class Game_Manager : MonoBehaviour
             player.GetComponent<PlayerShoot>().enabled = false;
             player.GetComponent<SpriteRenderer>().enabled = false;
         }
+        else if (PlayerPrefs.GetString("managerType") == "green" && !initialSpawned)
+        {
+            int i = 0;
+            while (i < 30)
+            {
+                Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                i++;
+            }
+            Instantiate(greenBoss, new Vector3(0, 6, 0), Quaternion.identity);
+            initialSpawned = true;
+            enemyTime = 1;
+        }
         else if (PlayerPrefs.GetString("managerType") == "green")
         {
-
+            enemyTimer += Time.deltaTime;
+            if (enemyTimer > enemyTime)
+            {
+                Instantiate(greenEnemy, new Vector3(Random.Range(-7.0f, 8.1f), Random.Range(5.0f, 7.1f), 0), Quaternion.identity);
+                enemyTimer = 0;
+            }
+        }
+        else if (PlayerPrefs.GetString("managerType") == "yellow" && !initialSpawned)
+        {
+            int i = 0;
+            while (i < 3)
+            {
+                Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                i++;
+            }
+            Instantiate(yellowBoss, new Vector3(0, 6, 0), Quaternion.identity);
+            initialSpawned = true;
+            enemyTime = 3f;
+        }
+        else if (PlayerPrefs.GetString("managerType") == "yellow")
+        {
+            enemyTimer += Time.deltaTime;
+            if (enemyTimer > enemyTime)
+            {
+                Instantiate(yellowEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                enemyTimer = 0;
+            }
         }
     }
 

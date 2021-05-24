@@ -63,6 +63,20 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed /= 1.5f;
         }
 
+        if (PlayerPrefs.GetString("challenge") != "")
+        {
+            if (PlayerPrefs.GetString("managerType") == "green" ||
+                PlayerPrefs.GetString("managerType") == "red" ||
+                PlayerPrefs.GetString("managerType") == "yellow" ||
+                PlayerPrefs.GetString("managerType") == "cyan" ||
+                PlayerPrefs.GetString("managerType") == "orange" ||
+                PlayerPrefs.GetString("managerType") == "purple")
+            {
+                lives = 1;
+                continues = 0;
+            }
+        }
+
         switch (PlayerPrefs.GetString("ship"))
         {
             case "default":
@@ -176,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
         {
             flightTimer += Time.deltaTime;
             GetComponent<SpriteRenderer>().enabled = true;
-            if (flightTimer > 4)
+            if (flightTimer > 3)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 7);
             }
@@ -306,6 +320,51 @@ public class PlayerMovement : MonoBehaviour
             {
                 saveManager.GetComponent<SaveManager>().upsideDownChallenge = true;
                 saveManager.GetComponent<SaveManager>().otherChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Ammo" && !saveManager.GetComponent<SaveManager>().ammoChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().ammoChallenge = true;
+                saveManager.GetComponent<SaveManager>().otherChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "NoAbility" && !saveManager.GetComponent<SaveManager>().noAbilityChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().noAbilityChallenge = true;
+                saveManager.GetComponent<SaveManager>().otherChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "CrazyEnemy" && !saveManager.GetComponent<SaveManager>().crazyEnemyChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().crazyEnemyChallenge = true;
+                saveManager.GetComponent<SaveManager>().otherChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Green" && !saveManager.GetComponent<SaveManager>().gEnemyChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().gEnemyChallenge = true;
+                saveManager.GetComponent<SaveManager>().enemyChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Yellow" && !saveManager.GetComponent<SaveManager>().yEnemyChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().yEnemyChallenge = true;
+                saveManager.GetComponent<SaveManager>().enemyChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Red" && !saveManager.GetComponent<SaveManager>().rEnemyChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().rEnemyChallenge = true;
+                saveManager.GetComponent<SaveManager>().enemyChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Orange" && !saveManager.GetComponent<SaveManager>().oEnemyChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().oEnemyChallenge = true;
+                saveManager.GetComponent<SaveManager>().enemyChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Cyan" && !saveManager.GetComponent<SaveManager>().cEnemyChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().cEnemyChallenge = true;
+                saveManager.GetComponent<SaveManager>().enemyChallenges++;
+            }
+            else if (PlayerPrefs.GetString("challenge") == "Purple" && !saveManager.GetComponent<SaveManager>().pEnemyChallenge)
+            {
+                saveManager.GetComponent<SaveManager>().pEnemyChallenge = true;
+                saveManager.GetComponent<SaveManager>().enemyChallenges++;
             }
             saveManager.GetComponent<SaveManager>().ToJson();
         }

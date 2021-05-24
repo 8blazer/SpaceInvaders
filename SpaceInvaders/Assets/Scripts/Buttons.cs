@@ -212,6 +212,15 @@ public class Buttons : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void YellowChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Yellow");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "yellow");
+        SceneManager.LoadScene("GameScene");
+    }
+
     public void OtherChallenges()
     {
         playMenu.enabled = false;
