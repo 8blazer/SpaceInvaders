@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SuperYellow : MonoBehaviour
+public class SuperRed : MonoBehaviour
 {
     public float moveSpeed;
     GameObject player;
     GameObject gameManager;
-    float health = 400;
-    float dropTimer = 0;
-    public float dropTime;
+    float health = 300;
+    float lockOnTimer;
+    public float lockOnTime;
 
     Slider healthbar;
     Image background;
@@ -21,8 +21,9 @@ public class SuperYellow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager");
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
+
         healthbar = GameObject.Find("BossHealth").GetComponent<Slider>();
         background = GameObject.Find("BossHealth").transform.GetChild(0).GetComponent<Image>();
         fill = GameObject.Find("BossHealth").transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
@@ -31,45 +32,30 @@ public class SuperYellow : MonoBehaviour
         fill.enabled = true;
         handle.enabled = true;
         handle.sprite = handleSprite;
-        gameManager.GetComponent<Game_Manager>().AddEnemy();
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthbar.value = health / 400;
-        if (transform.position.y > 0f)
+        healthbar.value = health / 300;
+        if (transform.position.y > 6)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed - ((400 - health) / 80));
-        }
-        else if (dropTimer < dropTime)
-        {
-            dropTimer += Time.deltaTime;
-            if (player.transform.position.x - transform.position.x > .3f)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((400 - health) / 80), 0);
-            }
-            else if (player.transform.position.x - transform.position.x < -.3f)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((400 - health) / 80), 0);
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            }
+            transform.up = (player.transform.position - transform.position) * -1;
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed - ((400 - health) / 80));
+            if (lockOnTimer < lockOnTime)
+            {
+                transform.up = (player.transform.position - transform.position) * -1;
+                lockOnTimer += Time.deltaTime;
+            }
         }
+        GetComponent<Rigidbody2D>().velocity = transform.up * -moveSpeed;
         if (transform.position.y < -7)
         {
-            transform.position = new Vector3(player.transform.position.x, 7, 0);
-            if (dropTime > .5f)
-            {
-                dropTime -= .1f;
-            }
-            dropTimer = 0;
+            transform.position += new Vector3(0, 14, 0);
+            lockOnTime += .2f;
+            lockOnTimer = 0;
         }
         if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
         {

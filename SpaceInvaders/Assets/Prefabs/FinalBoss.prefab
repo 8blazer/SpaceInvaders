@@ -120,6 +120,7 @@ MonoBehaviour:
   redPrefab: {fileID: 4777398271308564363, guid: 4678138c6ae0bfc4990a696dd95b81a2, type: 3}
   purplePrefab: {fileID: 1634020081066980991, guid: 3dd3ece5c25360941a20336081bb7806, type: 3}
   cyanPrefab: {fileID: 4403048447259993617, guid: 586050f90929761449c7509caa4925d5, type: 3}
+  handleSprite: {fileID: 7441195367221170796, guid: 29980edf9da68404384b9a7f7f995c5d, type: 3}
 --- !u!61 &8291346804379426027
 BoxCollider2D:
   m_ObjectHideFlags: 0

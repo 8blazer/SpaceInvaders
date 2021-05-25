@@ -2350,9 +2350,9 @@ MonoBehaviour:
   UFO_Boss: {fileID: 8291346804379426030, guid: da6b318a8b56ad948b6e2a8837a7f715, type: 3}
   greenBoss: {fileID: 7273640259498684821, guid: 02b45d944408b6743bd5965388d85a2b, type: 3}
   yellowBoss: {fileID: 3116798606624612381, guid: e798f8a6ddf193543a6a39ed3f95e648, type: 3}
-  redBoss: {fileID: 0}
+  redBoss: {fileID: 3549761870385303453, guid: 263e038452c175541ad731d6b4ac2bfc, type: 3}
   cyanBoss: {fileID: 0}
-  orangeBoss: {fileID: 0}
+  orangeBoss: {fileID: 5175424421332288576, guid: 6e5e7e1e50f1e6648af98847d2d02223, type: 3}
   purpleBoss: {fileID: 0}
   enemyPerWave: 10
   enemyTime: 1.5

@@ -10671,7 +10671,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 976494621}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 759337569}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: RedChallenge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &976494621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11768,7 +11780,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1186199244}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 759337569}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: OrangeChallenge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1186199244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12369,7 +12393,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1308890142}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 759337569}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: PurpleChallenge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1308890142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13585,7 +13621,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1574037562}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 759337569}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: CyanChallenge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1574037562
 MonoBehaviour:
   m_ObjectHideFlags: 0

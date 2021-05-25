@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EyeBoss : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class EyeBoss : MonoBehaviour
     GameObject upgradeCanvas;
     public GameObject lifeDrop;
 
+    Slider healthbar;
+    Image background;
+    Image fill;
+    Image handle;
+    public Sprite handleSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +48,21 @@ public class EyeBoss : MonoBehaviour
             eye.transform.GetChild(0).GetComponent<Rainbow>().enabled = true;
             eye.GetComponent<Rainbow>().enabled = true;
         }
+
+        healthbar = GameObject.Find("BossHealth").GetComponent<Slider>();
+        background = GameObject.Find("BossHealth").transform.GetChild(0).GetComponent<Image>();
+        fill = GameObject.Find("BossHealth").transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
+        handle = GameObject.Find("BossHealth").transform.GetChild(2).transform.GetChild(0).GetComponent<Image>();
+        background.enabled = true;
+        fill.enabled = true;
+        handle.enabled = true;
+        handle.sprite = handleSprite;
     }
 
     // Update is called once per frame
     void Update()
     {
+        healthbar.value = health / 300;
         shootTimer += Time.deltaTime;
         if (shootTimer > shootSpeed && Mathf.Abs(transform.position.x - player.transform.position.x) < .65f)
         {
@@ -167,12 +184,18 @@ public class EyeBoss : MonoBehaviour
 
         if (player.GetComponent<PlayerMovement>().lost)
         {
+            background.enabled = false;
+            fill.enabled = false;
+            handle.enabled = false;
             Destroy(gameObject);
         }
 
         if (health < 1)
         {
             gameManager.GetComponent<Game_Manager>().BossDeath();
+            background.enabled = false;
+            fill.enabled = false;
+            handle.enabled = false;
             Destroy(gameObject);
         }
     }

@@ -221,6 +221,42 @@ public class Buttons : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void RedChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Red");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "red");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void CyanChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Cyan");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "cyan");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void OrangeChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Orange");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "orange");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void PurpleChallenge()
+    {
+        PlayerPrefs.SetString("difficulty", "Normal");
+        PlayerPrefs.SetString("challenge", "Purple");
+        PlayerPrefs.SetString("weapon", "machinegun");
+        PlayerPrefs.SetString("managerType", "purple");
+        SceneManager.LoadScene("GameScene");
+    }
+
     public void OtherChallenges()
     {
         playMenu.enabled = false;

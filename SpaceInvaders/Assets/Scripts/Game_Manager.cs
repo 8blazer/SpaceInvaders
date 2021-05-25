@@ -598,6 +598,48 @@ public class Game_Manager : MonoBehaviour
                 enemyTimer = 0;
             }
         }
+        else if (PlayerPrefs.GetString("managerType") == "red" && !initialSpawned)
+        {
+            int i = 0;
+            while (i < 5)
+            {
+                Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                i++;
+            }
+            Instantiate(redBoss, new Vector3(0, 6, 0), Quaternion.identity);
+            initialSpawned = true;
+            enemyTime = 1f;
+        }
+        else if (PlayerPrefs.GetString("managerType") == "red")
+        {
+            enemyTimer += Time.deltaTime;
+            if (enemyTimer > enemyTime)
+            {
+                Instantiate(redEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                enemyTimer = 0;
+            }
+        }
+        else if (PlayerPrefs.GetString("managerType") == "orange" && !initialSpawned)
+        {
+            int i = 0;
+            while (i < 3)
+            {
+                Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                i++;
+            }
+            Instantiate(orangeBoss, new Vector3(0, 7, 0), Quaternion.identity);
+            initialSpawned = true;
+            enemyTime = 3f;
+        }
+        else if (PlayerPrefs.GetString("managerType") == "orange")
+        {
+            enemyTimer += Time.deltaTime;
+            if (enemyTimer > enemyTime)
+            {
+                Instantiate(orangeEnemy, new Vector3(Random.Range(-7.0f, 8.0f), 6f, 0), Quaternion.identity);
+                enemyTimer = 0;
+            }
+        }
     }
 
     public void BossDeath()

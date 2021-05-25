@@ -212,7 +212,23 @@ public class PlayerShoot : MonoBehaviour
                         }
                         else if (collisions[i].transform.gameObject.name == "SuperYellow(Clone)")
                         {
-                            collisions[i].transform.GetComponent<SuperGreen>().Laser();
+                            collisions[i].transform.GetComponent<SuperYellow>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "SuperRed(Clone)")
+                        {
+                            collisions[i].transform.GetComponent<SuperRed>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "SuperCyan(Clone)")
+                        {
+                            //collisions[i].transform.GetComponent<SuperCyan>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "SuperOrange(Clone)")
+                        {
+                            //collisions[i].transform.GetComponent<SuperOrange>().Laser();
+                        }
+                        else if (collisions[i].transform.gameObject.name == "SuperPurple(Clone)")
+                        {
+                            //collisions[i].transform.GetComponent<SuperPurple>().Laser();
                         }
                         i++;
                     }

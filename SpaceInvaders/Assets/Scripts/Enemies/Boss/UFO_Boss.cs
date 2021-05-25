@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UFO_Boss : MonoBehaviour
 {
@@ -39,6 +40,12 @@ public class UFO_Boss : MonoBehaviour
     public GameObject purplePrefab;
     public GameObject cyanPrefab;
 
+    Slider healthbar;
+    Image background;
+    Image fill;
+    Image handle;
+    public Sprite handleSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,11 +53,21 @@ public class UFO_Boss : MonoBehaviour
         upgradeCanvas = GameObject.Find("UpgradeCanvas");
         gameManager = GameObject.Find("GameManager");
         laser = transform.GetChild(0).gameObject;
+
+        healthbar = GameObject.Find("BossHealth").GetComponent<Slider>();
+        background = GameObject.Find("BossHealth").transform.GetChild(0).GetComponent<Image>();
+        fill = GameObject.Find("BossHealth").transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
+        handle = GameObject.Find("BossHealth").transform.GetChild(2).transform.GetChild(0).GetComponent<Image>();
+        background.enabled = true;
+        fill.enabled = true;
+        handle.enabled = true;
+        handle.sprite = handleSprite;
     }
 
     // Update is called once per frame
     void Update()
     {
+        healthbar.value = health / 700;
         if (spawned)
         {
             if (canMove)
@@ -238,6 +255,9 @@ public class UFO_Boss : MonoBehaviour
 
         if (player.GetComponent<PlayerMovement>().lost)
         {
+            background.enabled = false;
+            fill.enabled = false;
+            handle.enabled = false;
             Destroy(gameObject);
         }
 
@@ -245,6 +265,9 @@ public class UFO_Boss : MonoBehaviour
         {
             gameManager.GetComponent<Game_Manager>().BossDeath();
             Instantiate(explosion, transform.position, Quaternion.identity);
+            background.enabled = false;
+            fill.enabled = false;
+            handle.enabled = false;
             Destroy(gameObject);
         }
     }

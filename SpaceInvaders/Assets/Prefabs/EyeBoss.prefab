@@ -393,3 +393,4 @@ MonoBehaviour:
   eyeCharge2: {fileID: 9100000, guid: 8909bc5637729a94dba4e4e4be7b08bc, type: 2}
   eyeCharge3: {fileID: 9100000, guid: 6b34a13f98374594db0cc7f352f947ae, type: 2}
   lifeDrop: {fileID: 5518201233025428409, guid: 12a0a5c314a8ba04597f6ae9b321bf48, type: 3}
+  handleSprite: {fileID: -2792402802363126846, guid: 905d4cf3c1a86be45b1e5ebf36b9afe7, type: 3}
