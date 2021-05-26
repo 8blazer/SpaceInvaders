@@ -119,6 +119,10 @@ public class OrangeEnemy : MonoBehaviour
             {
                 spawned = true;
             }
+            if (gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (player.GetComponent<PlayerAbility>().frozen)

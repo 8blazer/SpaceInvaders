@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SuperYellow : MonoBehaviour
+public class SuperPurple : MonoBehaviour
 {
+    float health = 250;
     public float moveSpeed;
+    public float shootSpeed;
+    public float bulletSpeed;
+    public GameObject bulletPrefab;
     GameObject player;
     GameObject gameManager;
-    float health = 400;
-    float dropTimer = 0;
-    public float dropTime;
+    float shootTimer;
+    public float poofPower;
+    public float poofLoss;
+    bool poof;
+    float poofTimer;
 
     Slider healthbar;
     Image background;
@@ -21,8 +27,8 @@ public class SuperYellow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager");
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager");
         healthbar = GameObject.Find("BossHealth").GetComponent<Slider>();
         background = GameObject.Find("BossHealth").transform.GetChild(0).GetComponent<Image>();
         fill = GameObject.Find("BossHealth").transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
@@ -36,46 +42,61 @@ public class SuperYellow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthbar.value = health / 400;
-        if (transform.position.y > 0f)
+        healthbar.value = health / 250;
+        shootTimer += Time.deltaTime;
+        poofTimer += Time.deltaTime;
+        if (poof)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed - ((400 - health) / 80));
-        }
-        else if (dropTimer < dropTime)
-        {
-            dropTimer += Time.deltaTime;
-            if (player.transform.position.x - transform.position.x > .3f)
+            if (GetComponent<Rigidbody2D>().velocity.x > 0)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((400 - health) / 80), 0);
-            }
-            else if (player.transform.position.x - transform.position.x < -.3f)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((400 - health) / 80), 0);
+                GetComponent<Rigidbody2D>().velocity -= new Vector2(poofLoss * .7f, poofLoss) * Time.deltaTime;
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                GetComponent<Rigidbody2D>().velocity -= new Vector2(-poofLoss * .7f, poofLoss) * Time.deltaTime;
             }
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed - ((400 - health) / 80));
-        }
-        if (transform.position.y < -7)
-        {
-            transform.position = new Vector3(player.transform.position.x, 7, 0);
-            if (dropTime > .5f)
+            if (GetComponent<Rigidbody2D>().velocity.y < .1f)
             {
-                dropTime -= .1f;
+                poof = false;
             }
-            dropTimer = 0;
         }
+
+        if ((shootTimer > shootSpeed || transform.position.y < 2 || (transform.position.y < 2 && Mathf.Abs(transform.position.x - player.transform.position.x) < 1)) && !poof)
+        {
+            int i = 0;
+            if (transform.position.x > player.transform.position.x)
+            {
+                poof = true;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, poofPower);
+            }
+            else
+            {
+                poof = true;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, poofPower);
+            }
+            if (!player.GetComponent<PlayerAbility>().jammed && !player.GetComponent<PlayerAbility>().frozen)
+            {
+                while (i < 5)
+                {
+                    GameObject shell = Instantiate(bulletPrefab, transform.position + new Vector3(0f, .1f, 0), Quaternion.identity);
+                    shell.transform.Rotate(0, 0, Random.Range(-30, 31));
+                    shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * -(bulletSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
+                    i++;
+                }
+            }
+            shootTimer = 0;
+            poofTimer = 0;
+        }
+        else if (!poof)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+        }
+
         if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)
         {
             if (!player.GetComponent<PlayerMovement>().lost)
             {
                 gameManager.GetComponent<Game_Manager>().BossDeath();
-                player.GetComponent<PlayerMovement>().kills++;
             }
             background.enabled = false;
             fill.enabled = false;

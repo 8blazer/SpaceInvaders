@@ -13,6 +13,8 @@ public class SuperOrange : MonoBehaviour
     float timer;
     bool moveRight;
     int direction = 1; //1 = moving to top-right, 2 is bottom-right, so on
+    float swapTimer;
+    public float swapTime;
     GameObject player;
     GameObject gameManager;
     bool spawned = false;
@@ -46,28 +48,102 @@ public class SuperOrange : MonoBehaviour
         if (spawned)
         {
             timer += Time.deltaTime;
+            swapTimer += Time.deltaTime;
             if (timer > shootSpeed)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
                 bullet.transform.up = (player.transform.position - transform.position);
                 bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bulletSpeed;
                 timer = 0;
-                shootSpeed = Random.Range(2, 5);
+                shootSpeed = Random.Range(1.0f, 4.0f);
             }
-            if (moveRight)
+            if (swapTimer > swapTime)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
-                if (transform.position.x > 8.5f)
+                swapTimer = 0;
+                swapTime = Random.Range(.1f, 8.0f);
+                if (moveRight)
                 {
                     moveRight = false;
+                }
+                else
+                {
+                    moveRight = true;
+                }
+                if (direction == 1)
+                {
+                    direction = 3;
+                }
+                else if (direction == 2)
+                {
+                    direction = 4;
+                }
+                else if (direction == 3)
+                {
+                    direction = 1;
+                }
+                else
+                {
+                    direction = 2;
+                }
+            }
+            if (direction == 1)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+                if (transform.position.x > 7f)
+                {
+                    if (moveRight)
+                    {
+                        direction = 2;
+                    }
+                    else
+                    {
+                        direction = 4;
+                    }
+                }
+            }
+            else if (direction == 2)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed);
+                if (transform.position.y < 0f)
+                {
+                    if (moveRight)
+                    {
+                        direction = 3;
+                    }
+                    else
+                    {
+                        direction = 1;
+                    }
+                }
+            }
+            else if (direction == 3)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+                if (transform.position.x < -7f)
+                {
+                    if (moveRight)
+                    {
+                        direction = 4;
+                    }
+                    else
+                    {
+                        direction = 2;
+                    }
                 }
             }
             else
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
-                if (transform.position.x < -8.5f)
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, moveSpeed);
+                if (transform.position.y > 3f)
                 {
-                    moveRight = true;
+                    if (moveRight)
+                    {
+                        direction = 1;
+                    }
+                    else
+                    {
+                        direction = 3;
+                    }
                 }
             }
             if (health < 1 || gameManager.GetComponent<Game_Manager>().wave == 13 || player.GetComponent<PlayerMovement>().lost)

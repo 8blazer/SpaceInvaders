@@ -2351,9 +2351,9 @@ MonoBehaviour:
   greenBoss: {fileID: 7273640259498684821, guid: 02b45d944408b6743bd5965388d85a2b, type: 3}
   yellowBoss: {fileID: 3116798606624612381, guid: e798f8a6ddf193543a6a39ed3f95e648, type: 3}
   redBoss: {fileID: 3549761870385303453, guid: 263e038452c175541ad731d6b4ac2bfc, type: 3}
-  cyanBoss: {fileID: 0}
+  cyanBoss: {fileID: 1541622954186584187, guid: 6b82a2b412b35f145b698b1f52a9cccb, type: 3}
   orangeBoss: {fileID: 5175424421332288576, guid: 6e5e7e1e50f1e6648af98847d2d02223, type: 3}
-  purpleBoss: {fileID: 0}
+  purpleBoss: {fileID: 2755040265812447074, guid: 6f54316e34d023e4a988ca55630d7c75, type: 3}
   enemyPerWave: 10
   enemyTime: 1.5
   initialEnemyCount: 25

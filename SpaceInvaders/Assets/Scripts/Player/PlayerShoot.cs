@@ -220,15 +220,15 @@ public class PlayerShoot : MonoBehaviour
                         }
                         else if (collisions[i].transform.gameObject.name == "SuperCyan(Clone)")
                         {
-                            //collisions[i].transform.GetComponent<SuperCyan>().Laser();
+                            collisions[i].transform.GetComponent<SuperCyan>().Laser();
                         }
                         else if (collisions[i].transform.gameObject.name == "SuperOrange(Clone)")
                         {
-                            //collisions[i].transform.GetComponent<SuperOrange>().Laser();
+                            collisions[i].transform.GetComponent<SuperOrange>().Laser();
                         }
                         else if (collisions[i].transform.gameObject.name == "SuperPurple(Clone)")
                         {
-                            //collisions[i].transform.GetComponent<SuperPurple>().Laser();
+                            collisions[i].transform.GetComponent<SuperPurple>().Laser();
                         }
                         i++;
                     }
