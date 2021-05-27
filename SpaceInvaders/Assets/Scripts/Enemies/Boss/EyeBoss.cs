@@ -68,6 +68,7 @@ public class EyeBoss : MonoBehaviour
         {
             moving = false;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            /*
             if (health < 100)
             {
                 eye.GetComponent<Animator>().runtimeAnimatorController = eyeCharge3;
@@ -80,6 +81,8 @@ public class EyeBoss : MonoBehaviour
             {
                 eye.GetComponent<Animator>().runtimeAnimatorController = eyeCharge1;
             }
+            */
+            eye.GetComponent<Animator>().runtimeAnimatorController = eyeCharge1;
         }
 
         bulletTimer += Time.deltaTime;

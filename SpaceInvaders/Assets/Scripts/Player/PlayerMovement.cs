@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        livesText.text = lives.ToString();
+        livesText.text = "x" + lives;
 
         if (canMove)
         {

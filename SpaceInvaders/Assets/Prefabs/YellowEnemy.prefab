@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  dropTime: 7
+  dropTime: 9
   lifeDrop: {fileID: 5518201233025428409, guid: 12a0a5c314a8ba04597f6ae9b321bf48, type: 3}
   minigunDrop: {fileID: 6755424283559179131, guid: 3607d818628f62f4c9e64a1af4aa26cc, type: 3}
   laserDrop: {fileID: 738882051191185003, guid: 4bf16c0435908c74585a538a4e385ff5, type: 3}

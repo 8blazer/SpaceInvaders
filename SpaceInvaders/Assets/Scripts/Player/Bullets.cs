@@ -12,10 +12,15 @@ public class Bullets : MonoBehaviour
     GameObject enemyDetected;
     public float rocketDetectionRange;
     public float rocketSpeed;
-    bool rocketExplode = false;
+    GameObject gameManager;
 
     public float jitterTimer;
     float jitterTime;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager");
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,15 +32,9 @@ public class Bullets : MonoBehaviour
             jitterTimer = 0;
         }
         timer += Time.deltaTime;
-        if (timer > lifeTime)
+        if (timer > lifeTime || gameManager.GetComponent<Game_Manager>().upgrading || transform.position.y > 10)
         {
             Destroy(gameObject);
-        }
-
-        if (rocketExplode && timer < lifeTime - .5f)
-        {
-            timer = lifeTime - .45f;
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
 
         if (GetComponent<SpriteRenderer>().sprite == rocketSprite)
@@ -76,7 +75,6 @@ public class Bullets : MonoBehaviour
         {
             GetComponent<Animator>().enabled = true;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            rocketExplode = true;
         }
     }
 }
