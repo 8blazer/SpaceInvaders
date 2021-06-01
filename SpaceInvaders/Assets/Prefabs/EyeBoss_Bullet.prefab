@@ -135,7 +135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363210be9d329c34584c211274416c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 2
+  lifeTime: 2.5
   rocketSprite: {fileID: 7431529995326980795, guid: 36e57921d5a0a0246a45961dbe182929, type: 3}
+  enemyBullet: {fileID: 0}
   rocketDetectionRange: 0
   rocketSpeed: 0
+  jitterTimer: 0

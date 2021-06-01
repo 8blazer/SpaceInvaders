@@ -88,7 +88,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 48
@@ -208,7 +208,7 @@ TextureImporter:
         height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 15, z: 0, w: 15}
+      border: {x: 6, y: 23, z: 7, w: 22}
       outline: []
       physicsShape: []
       tessellationDetail: 0

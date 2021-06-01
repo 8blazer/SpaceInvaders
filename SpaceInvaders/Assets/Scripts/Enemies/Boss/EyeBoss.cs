@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EyeBoss : MonoBehaviour
 {
-    float health = 300;
+    float health = 900;
     public float moveSpeed;
     public float shootSpeed;
     float shootTimer;
@@ -14,7 +14,7 @@ public class EyeBoss : MonoBehaviour
     float chargeTimer;
     float chargeTime = 2f;
     float laserTimer;
-    float laserTime = 1;
+    public float laserTime;
     bool moving = true;
     bool moveRight;
     GameObject player;
@@ -62,7 +62,7 @@ public class EyeBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthbar.value = health / 300;
+        healthbar.value = health / 900;
         shootTimer += Time.deltaTime;
         if (shootTimer > shootSpeed && Mathf.Abs(transform.position.x - player.transform.position.x) < .65f)
         {
@@ -92,7 +92,7 @@ public class EyeBoss : MonoBehaviour
             while (i < 3)
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(Random.Range(-7.0f, 8.0f), 4, 0);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(Random.Range(-7.0f, 8.0f), 7, 0);
 
                 i++;
             }
@@ -117,7 +117,7 @@ public class EyeBoss : MonoBehaviour
                     i++;
                 }
                 laserTimer += Time.deltaTime;
-                if (health < 100)
+                if (health < 300)
                 {
                     if (transform.position.x > player.transform.position.x)
                     {
@@ -128,7 +128,7 @@ public class EyeBoss : MonoBehaviour
                         eye.transform.Rotate(0, 0, 75 * Time.deltaTime);
                     }
                 }
-                else if (health < 200)
+                else if (health < 600)
                 {
                     if (transform.position.x > player.transform.position.x)
                     {
@@ -159,7 +159,7 @@ public class EyeBoss : MonoBehaviour
             {
                 if (moveRight)
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((300 - health) / 10), 0);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed + ((900 - health) / 70), 0);
                     if (transform.position.x > 7.5f)
                     {
                         moveRight = false;
@@ -167,7 +167,7 @@ public class EyeBoss : MonoBehaviour
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((300 - health) / 10), 0);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed - ((900 - health) / 70), 0);
                     if (transform.position.x < -7.5f)
                     {
                         moveRight = true;
@@ -276,13 +276,13 @@ public class EyeBoss : MonoBehaviour
             health -= collision.transform.localScale.x * 2;
         }
 
-        if (health < 100)
+        if (health < 300)
         {
-            laserTime = .33f;
+            laserTime = .3f;
             chargeTime = .66f;
-            bulletTime = 2;
+            bulletTime = 3;
         }
-        else if (health < 200)
+        else if (health < 600)
         {
             laserTime = .66f;
             chargeTime = 1.33f;
