@@ -59,19 +59,19 @@ public class Game_Manager : MonoBehaviour
 
         if (PlayerPrefs.GetString("difficulty") == "Easy")
         {
-            initialEnemyCount = 12;
+            initialEnemyCount = 8;
             enemyPerWave = 5;
             winMode.text = "Easy Mode";
         }
         else if (PlayerPrefs.GetString("difficulty") == "Normal")
         {
-            initialEnemyCount = 15;
+            initialEnemyCount = 12;
             enemyPerWave = 5;
             winMode.text = "Normal Mode";
         }
         else
         {
-            initialEnemyCount = 22;
+            initialEnemyCount = 17;
             enemyPerWave = 7;
             winMode.text = "Hard Mode";
         }
