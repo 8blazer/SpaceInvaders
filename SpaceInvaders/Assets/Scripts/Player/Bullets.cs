@@ -8,6 +8,8 @@ public class Bullets : MonoBehaviour
     public float lifeTime = 5;
     public Sprite rocketSprite;
     public Sprite enemyBullet;
+    public GameObject bulletPrefab;
+    public float bulletSpeed;
     Collider2D[] colliders;
     GameObject enemyDetected;
     public float rocketDetectionRange;
@@ -35,6 +37,21 @@ public class Bullets : MonoBehaviour
         if (timer > lifeTime || gameManager.GetComponent<Game_Manager>().upgrading || transform.position.y > 10)
         {
             Destroy(gameObject);
+        }
+        if (timer > .78f && GetComponent<Animator>() != null)
+        {
+            if (GetComponent<Animator>().enabled)
+            {
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -bulletSpeed);
+                bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
+                bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletSpeed, 0);
+                bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-bulletSpeed, 0);
+                Destroy(gameObject);
+            }
         }
 
         if (GetComponent<SpriteRenderer>().sprite == rocketSprite)
@@ -73,6 +90,11 @@ public class Bullets : MonoBehaviour
     {
         if (GetComponent<SpriteRenderer>().sprite == rocketSprite && collision.gameObject.tag == "Enemy")
         {
+            if (!GetComponent<Animator>().enabled)
+            {
+                timer = 0;
+                lifeTime = .8f;
+            }
             GetComponent<Animator>().enabled = true;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }

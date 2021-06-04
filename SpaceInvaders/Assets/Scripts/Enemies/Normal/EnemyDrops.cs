@@ -72,7 +72,7 @@ public class EnemyDrops : MonoBehaviour
                     }
                     player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
                     player.GetComponent<PlayerShoot>().reloadTime = .075f;
-                    player.GetComponent<PlayerShoot>().ammoRegenTime = .3f;
+                    player.GetComponent<PlayerShoot>().ammoRegenTime = .2f;
                     Destroy(gameObject);
                 }
                 else if (gameObject.name == "RocketDrop(Clone)")
@@ -87,8 +87,8 @@ public class EnemyDrops : MonoBehaviour
                         player.GetComponent<PlayerShoot>().ammoMax = 15;
                     }
                     player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
-                    player.GetComponent<PlayerShoot>().reloadTime = .3f;
-                    player.GetComponent<PlayerShoot>().ammoRegenTime = .5f;
+                    player.GetComponent<PlayerShoot>().reloadTime = .2f;
+                    player.GetComponent<PlayerShoot>().ammoRegenTime = .3f;
                     Destroy(gameObject);
                 }
                 else if (gameObject.name == "SniperDrop(Clone)")
@@ -103,8 +103,8 @@ public class EnemyDrops : MonoBehaviour
                         player.GetComponent<PlayerShoot>().ammoMax = 20;
                     }
                     player.GetComponent<PlayerShoot>().ammo = player.GetComponent<PlayerShoot>().ammoMax;
-                    player.GetComponent<PlayerShoot>().reloadTime = .3f;
-                    player.GetComponent<PlayerShoot>().ammoRegenTime = .4f;
+                    player.GetComponent<PlayerShoot>().reloadTime = .15f;
+                    player.GetComponent<PlayerShoot>().ammoRegenTime = .25f;
                     Destroy(gameObject);
                 }
             }

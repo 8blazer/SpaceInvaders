@@ -27,6 +27,7 @@ public class PlayerShoot : MonoBehaviour
     float burnoutTimer;
     public Text ammoText;
     RaycastHit2D[] collisions;
+    public ParticleSystem smoke;
 
     private void Start()
     {
@@ -79,10 +80,15 @@ public class PlayerShoot : MonoBehaviour
         if (!canShoot)  //Burnout recharge timer
         {
             burnoutTimer += Time.deltaTime;
+            if (smoke.isStopped)
+            {
+                smoke.Play();
+            }
             if (burnoutTimer > 2)
             {
                 canShoot = true;
                 burnoutTimer = 0;
+                smoke.Stop();
             }
         }
         if (ammo > 0 && Input.GetKey(KeyCode.Space) && reloadTimer > reloadTime && canShoot && (weapon == "machinegun" || weapon == "minigun") && GetComponent<PlayerMovement>().canMove && Time.timeScale == 1)
@@ -107,7 +113,7 @@ public class PlayerShoot : MonoBehaviour
                 canShoot = false;
             }
         }
-        else if (!Input.GetKey(KeyCode.Space) && ammo < ammoMax)
+        else if ((!Input.GetKey(KeyCode.Space) || !canShoot) && ammo < ammoMax)
         {
             ammoRegenTimer += Time.deltaTime;
             if (ammoRegenTimer > ammoRegenTime)
@@ -155,8 +161,8 @@ public class PlayerShoot : MonoBehaviour
             else if (weapon == "laser")
             {
                 GameObject laser = Instantiate(laserPrefab, transform.position + new Vector3(0, 7.5f, 0), Quaternion.identity);
-                float xOffset = -.04f;
-                while (xOffset < .04f)
+                float xOffset = -.06f;
+                while (xOffset < .06f)
                 {
                     collisions = Physics2D.RaycastAll(transform.position, transform.up, 10);
                     int i = 0;
