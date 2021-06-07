@@ -25,6 +25,10 @@ public class Game_Manager : MonoBehaviour
     public GameObject orangeBoss;
     public GameObject purpleBoss;
 
+    public AudioClip normalSong;
+    public AudioClip bossSong;
+    public AudioClip upgradingSong;
+
     int randomEnemy;
     int enemyCount;
     public int enemyPerWave;
@@ -93,6 +97,26 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!upgrading && !bossSpawned && GetComponent<AudioSource>().clip != normalSong && saveManager.GetComponent<SaveManager>().music)
+        {
+            GetComponent<AudioSource>().clip = normalSong;
+            GetComponent<AudioSource>().Play();
+        }
+        else if (upgrading && GetComponent<AudioSource>().clip != upgradingSong && saveManager.GetComponent<SaveManager>().music)
+        {
+            GetComponent<AudioSource>().clip = upgradingSong;
+            GetComponent<AudioSource>().Play();
+        }
+        else if (bossSpawned && GetComponent<AudioSource>().clip != bossSong && saveManager.GetComponent<SaveManager>().music)
+        {
+            GetComponent<AudioSource>().clip = bossSong;
+            GetComponent<AudioSource>().Play();
+        }
+        else
+        {
+            GetComponent<AudioSource>().clip = null;
+        }
+
         if (PlayerPrefs.GetString("managerType") == "normal")
         {
             if (initialSpawned && SceneManager.GetActiveScene().name == "GameScene")

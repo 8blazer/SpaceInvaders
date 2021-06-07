@@ -36,6 +36,8 @@ public class SaveManager : MonoBehaviour
     public int weaponChallenges;
     public int enemyChallenges;
     public int otherChallenges;
+    public bool music;
+    public bool sound;
 
     bool created = false;
     
@@ -86,6 +88,8 @@ public class SaveManager : MonoBehaviour
                     WeaponChallenges = 0,
                     EnemyChallenges = 0,
                     OtherChallenges = 0,
+                    Music = true,
+                    Sound = true,
                 };
 
                 playCount = saveVars.PlayCount;
@@ -114,6 +118,8 @@ public class SaveManager : MonoBehaviour
                 weaponChallenges = saveVars.WeaponChallenges;
                 enemyChallenges = saveVars.EnemyChallenges;
                 otherChallenges = saveVars.OtherChallenges;
+                music = saveVars.Music;
+                sound = saveVars.Sound;
 
                 string json = JsonUtility.ToJson(saveVars);
                 File.WriteAllText(fullname, json);
@@ -148,6 +154,8 @@ public class SaveManager : MonoBehaviour
                 weaponChallenges = jsonJson.WeaponChallenges;
                 enemyChallenges = jsonJson.EnemyChallenges;
                 otherChallenges = jsonJson.OtherChallenges;
+                music = jsonJson.Music;
+                sound = jsonJson.Sound;
             }
         }
     }
@@ -182,6 +190,8 @@ public class SaveManager : MonoBehaviour
             WeaponChallenges = weaponChallenges,
             EnemyChallenges = enemyChallenges,
             OtherChallenges = otherChallenges,
+            Sound = sound,
+            Music = music,
         };
         string saveFile = "save.txt";
         FileInfo fileInfo = new FileInfo(saveFile);
@@ -221,4 +231,6 @@ public class SaveVars
     public int WeaponChallenges;
     public int EnemyChallenges;
     public int OtherChallenges;
+    public bool Music;
+    public bool Sound;
 }

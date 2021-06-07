@@ -32,6 +32,13 @@ public class Buttons : MonoBehaviour
     public Canvas pauseMenu;
     public Canvas loseMenu;
 
+    public Button musicButton;
+    public Button soundButton;
+    public Sprite musicOn;
+    public Sprite musicOff;
+    public Sprite soundOn;
+    public Sprite soundOff;
+
     private void Start()
     {
         saveManager = GameObject.Find("SaveManager");
@@ -86,9 +93,34 @@ public class Buttons : MonoBehaviour
         unlocksMenu.enabled = true;
     }
 
-    public void Settings()
+    public void Music()
     {
+        if (saveManager.GetComponent<SaveManager>().music)
+        {
+            saveManager.GetComponent<SaveManager>().music = false;
+            musicButton.GetComponent<Image>().sprite = musicOff;
+            saveManager.GetComponent<SaveManager>().ToJson();
+        }
+        else
+        {
+            saveManager.GetComponent<SaveManager>().music = true;
+            musicButton.GetComponent<Image>().sprite = musicOn;
+            saveManager.GetComponent<SaveManager>().ToJson();
+        }
+    }
 
+    public void Sound()
+    {
+        if (saveManager.GetComponent<SaveManager>().sound)
+        {
+            saveManager.GetComponent<SaveManager>().sound = false;
+            soundButton.GetComponent<Image>().sprite = soundOff;
+        }
+        else
+        {
+            saveManager.GetComponent<SaveManager>().sound = true;
+            soundButton.GetComponent<Image>().sprite = soundOn;
+        }
     }
 
     public void Quit()
