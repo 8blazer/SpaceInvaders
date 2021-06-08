@@ -8809,6 +8809,7 @@ GameObject:
   - component: {fileID: 596567534}
   - component: {fileID: 596567533}
   - component: {fileID: 596567536}
+  - component: {fileID: 596567537}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -8939,7 +8940,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 52b38b4595a16e94cb7fe5e21148af19, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -9025,6 +9026,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &596567537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596567531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a33b2cee4be1bd4dade390a495611c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveManager: {fileID: 115922262}
+  menuSong: {fileID: 8300000, guid: 52b38b4595a16e94cb7fe5e21148af19, type: 3}
+  musicOn: {fileID: 4084006452782340508, guid: d8f692ab2dc9fc14a9f7252c1e29564c, type: 3}
+  musicOff: {fileID: -2617711873977790733, guid: d8f692ab2dc9fc14a9f7252c1e29564c, type: 3}
 --- !u!1 &615102966
 GameObject:
   m_ObjectHideFlags: 0
@@ -9942,7 +9959,7 @@ MonoBehaviour:
   playMenu: {fileID: 923701068}
   challengeMenu: {fileID: 1156227721}
   unlocksMenu: {fileID: 828506428}
-  hardButton: {fileID: 0}
+  hardButton: {fileID: 108172323}
   endlessButton: {fileID: 103063118}
   endlessKills: {fileID: 131139827}
   weaponButton: {fileID: 544964816}

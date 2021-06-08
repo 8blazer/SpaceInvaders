@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UFO_Boss : MonoBehaviour
 {
-    public float health; //700
+    public float health; //900
     public float moveSpeed;
     public float shootSpeed;
     public float bulletSpeed;
@@ -67,7 +67,7 @@ public class UFO_Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthbar.value = health / 700;
+        healthbar.value = health / 900;
         if (spawned)
         {
             if (canMove)
@@ -88,7 +88,7 @@ public class UFO_Boss : MonoBehaviour
                         moveRight = true;
                     }
                 }
-                if (health < 200)
+                if (health < 300)
                 {
                     GetComponent<Animator>().runtimeAnimatorController = null;
                     GetComponent<SpriteRenderer>().sprite = gunPhase;
@@ -101,12 +101,12 @@ public class UFO_Boss : MonoBehaviour
                 if (phaseTimer > 2)
                 {
                     canMove = true;
-                    if (health < 400)
+                    if (health < 600)
                     {
                         GetComponent<SpriteRenderer>().sprite = gunPhase;
                     }
                 }
-                if (health > 200)
+                if (health > 300)
                 {
                     enemyTimer = 0;
                 }
@@ -153,19 +153,19 @@ public class UFO_Boss : MonoBehaviour
             enemyTimer = 0;
         }
 
-        if (health < 400 && GetComponent<SpriteRenderer>().sprite == firstPhase)
+        if (health < 600 && GetComponent<SpriteRenderer>().sprite == firstPhase)
         {
             canMove = false;
             GetComponent<Animator>().runtimeAnimatorController = gun;
             enemyTime++;
             moveSpeed += 2;
         }
-        else if (health < 200 && moveSpeed == 6)
+        else if (health < 300 && moveSpeed == 6)
         {
             moveSpeed += 2;
         }
 
-        if (health < 200)
+        if (health < 300)
         {
             laserTimer += Time.deltaTime;
             if (laserTimer > laserTime)
@@ -234,7 +234,7 @@ public class UFO_Boss : MonoBehaviour
                 }
             }
         }
-        if (health < 400)
+        if (health < 600)
         {
             shootTimer += Time.deltaTime;
             if (shootTimer > shootSpeed && !laserMovement && laserChargeTimer == 0)
@@ -283,11 +283,11 @@ public class UFO_Boss : MonoBehaviour
         {
             health -= .5f;
         }
-        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
         {
             health -= 5;
         }
-        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
         {
             health -= 3;
         }
@@ -307,11 +307,11 @@ public class UFO_Boss : MonoBehaviour
             {
                 health -= .5f;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
             {
                 health -= 5;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
@@ -332,11 +332,11 @@ public class UFO_Boss : MonoBehaviour
             {
                 health -= .5f;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
             {
                 health -= 5;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }

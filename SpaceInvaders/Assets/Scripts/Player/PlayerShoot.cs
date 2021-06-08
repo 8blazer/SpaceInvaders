@@ -84,7 +84,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 smoke.Play();
             }
-            if (burnoutTimer > 2)
+            if (burnoutTimer > 3.5f)
             {
                 canShoot = true;
                 burnoutTimer = 0;

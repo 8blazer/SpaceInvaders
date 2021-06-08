@@ -45,6 +45,7 @@ public class Game_Manager : MonoBehaviour
     GameObject UI_Canvas;
     GameObject player;
     public Text winMode;
+	public Text upgradesLeftText;
 
     int yellowProbability = 15;
     int redProbability = 30;
@@ -112,7 +113,7 @@ public class Game_Manager : MonoBehaviour
             GetComponent<AudioSource>().clip = bossSong;
             GetComponent<AudioSource>().Play();
         }
-        else
+        else if (!saveManager.GetComponent<SaveManager>().music)
         {
             GetComponent<AudioSource>().clip = null;
         }
@@ -574,6 +575,7 @@ public class Game_Manager : MonoBehaviour
         }
         else if (PlayerPrefs.GetString("managerType") == "endless")
         {
+			upgradesLeftText.text = "Upgrades Left: " + upgradeNumber;
             UI_Canvas.GetComponent<Canvas>().enabled = false;
             upgradeCanvas.GetComponent<Canvas>().enabled = true;
             player.GetComponent<PlayerMovement>().enabled = false;

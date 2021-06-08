@@ -151,8 +151,8 @@ MonoBehaviour:
   enemyBullet: {fileID: 1705687525535762421, guid: eb5591a6e9b862b44b13c07956e77212, type: 3}
   bulletPrefab: {fileID: 7747813893219318393, guid: 5ddcd77faaa05d74b86281382c81072d, type: 3}
   bulletSpeed: 6
-  rocketDetectionRange: 2
-  rocketSpeed: 5
+  rocketDetectionRange: 3
+  rocketSpeed: 5.5
   jitterTimer: 0
 --- !u!95 &-6457096738228477885
 Animator:

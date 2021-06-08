@@ -448,7 +448,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Death();
             }
-            if (collision.gameObject.name != "UFO_Laser")
+            if (collision.gameObject.name != "UFO_Laser" && collision.gameObject.name != "EyeLaser")
             {
                 Destroy(collision.gameObject);
             }

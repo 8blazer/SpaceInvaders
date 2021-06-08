@@ -109,7 +109,7 @@ public class YellowBossBaby : MonoBehaviour
         {
             health -= .5f;
         }
-        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
         {
             health -= 5;
         }
@@ -117,7 +117,7 @@ public class YellowBossBaby : MonoBehaviour
         {
             health = 0;
         }
-        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
         {
             health -= 3;
         }
@@ -137,7 +137,7 @@ public class YellowBossBaby : MonoBehaviour
             {
                 health -= .5f;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
             {
                 health -= 5;
             }
@@ -145,7 +145,7 @@ public class YellowBossBaby : MonoBehaviour
             {
                 health = 0;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
@@ -173,7 +173,7 @@ public class YellowBossBaby : MonoBehaviour
             {
                 health -= .5f;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
             {
                 health -= 5;
             }
@@ -181,7 +181,7 @@ public class YellowBossBaby : MonoBehaviour
             {
                 health = 0;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }

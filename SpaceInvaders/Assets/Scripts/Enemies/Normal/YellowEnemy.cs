@@ -11,6 +11,7 @@ public class YellowEnemy : MonoBehaviour
     float health = 50;
     float dropTimer = 0;
     public float dropTime;
+	public Sprite spike;
 
     public GameObject lifeDrop;
     public GameObject minigunDrop;
@@ -45,7 +46,11 @@ public class YellowEnemy : MonoBehaviour
             jitterVelocity = new Vector2(Random.Range(-7.0f, 7.0f), 0);
             jitterTimer = 0;
         }
-        if (transform.position.y > -2.5f)
+		if (dropTimer > dropTime * .85f)
+		{
+			GetComponent<SpriteRenderer>().sprite = spike;
+		}
+        if (transform.position.y > -2.0f)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -moveSpeed) + jitterVelocity;
         }
@@ -118,7 +123,7 @@ public class YellowEnemy : MonoBehaviour
         {
             health -= .5f;
         }
-        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+        if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
         {
             health -= 5;
         }
@@ -126,7 +131,7 @@ public class YellowEnemy : MonoBehaviour
         {
             health = 0;
         }
-        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+        else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
         {
             health -= 3;
         }
@@ -146,7 +151,7 @@ public class YellowEnemy : MonoBehaviour
             {
                 health -= .5f;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
             {
                 health -= 5;
             }
@@ -154,7 +159,7 @@ public class YellowEnemy : MonoBehaviour
             {
                 health = 0;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
@@ -182,7 +187,7 @@ public class YellowEnemy : MonoBehaviour
             {
                 health -= .5f;
             }
-            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 90)
+            if (upgradeCanvas.GetComponent<Upgrades>().exCritBought && Random.Range(1, 101) > 80)
             {
                 health -= 5;
             }
@@ -190,7 +195,7 @@ public class YellowEnemy : MonoBehaviour
             {
                 health = 0;
             }
-            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 95)
+            else if (upgradeCanvas.GetComponent<Upgrades>().critBought && Random.Range(1, 101) > 90)
             {
                 health -= 3;
             }
