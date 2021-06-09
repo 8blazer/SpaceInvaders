@@ -22,6 +22,7 @@ public class EnemyDrops : MonoBehaviour
         {
             if (Mathf.Abs(transform.position.x - player.transform.position.x) < .8f)
             {
+				GetComponent<AudioSource>().Play();
                 if (gameObject.name == "LifeDrop(Clone)")
                 {
                     player.GetComponent<PlayerMovement>().lives++;

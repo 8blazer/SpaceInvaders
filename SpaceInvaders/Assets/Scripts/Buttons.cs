@@ -85,27 +85,34 @@ public class Buttons : MonoBehaviour
         challengeMenu.enabled = false;
         playMenu.enabled = true;
         endlessKills.text = "Best: " + saveManager.GetComponent<SaveManager>().endlessKills;
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
     }
 
     public void UnlocksMenu()
     {
         mainMenu.enabled = false;
         unlocksMenu.enabled = true;
-    }
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+	}
 
     public void Music()
     {
+		Debug.Log("asf");
         if (saveManager.GetComponent<SaveManager>().music)
         {
             saveManager.GetComponent<SaveManager>().music = false;
             musicButton.GetComponent<Image>().sprite = musicOff;
-            saveManager.GetComponent<SaveManager>().ToJson();
         }
         else
         {
             saveManager.GetComponent<SaveManager>().music = true;
             musicButton.GetComponent<Image>().sprite = musicOn;
-            saveManager.GetComponent<SaveManager>().ToJson();
         }
     }
 
@@ -125,7 +132,11 @@ public class Buttons : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		Application.Quit();
     }
 
     public void EasyMode()
@@ -134,7 +145,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void NormalMode()
@@ -143,7 +158,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void HardMode()
@@ -152,7 +171,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void Endless()
@@ -161,7 +184,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "endless");
-        SceneManager.LoadScene("EndlessScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("EndlessScene");
     }
 
     public void WeaponChallenges()
@@ -171,7 +198,11 @@ public class Buttons : MonoBehaviour
         weaponChallengeButtons.SetActive(true);
         enemyChallengeButtons.SetActive(false);
         otherChallengeButtons.SetActive(false);
-    }
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+	}
 
     public void MachinegunChallenge()
     {
@@ -179,7 +210,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void MinigunChallenge()
@@ -188,7 +223,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "minigun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void ShotgunChallenge()
@@ -197,7 +236,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "shotgun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void LaserChallenge()
@@ -206,7 +249,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "laser");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void SniperChallenge()
@@ -215,7 +262,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "sniper");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void RocketChallenge()
@@ -224,7 +275,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Weapon");
         PlayerPrefs.SetString("weapon", "rocket");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
     public void EnemyChallenges()
     {
@@ -233,7 +288,11 @@ public class Buttons : MonoBehaviour
         weaponChallengeButtons.SetActive(false);
         enemyChallengeButtons.SetActive(true);
         otherChallengeButtons.SetActive(false);
-    }
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+	}
 
     public void GreenChallenge()
     {
@@ -241,7 +300,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Green");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "green");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void YellowChallenge()
@@ -250,7 +313,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Yellow");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "yellow");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void RedChallenge()
@@ -259,7 +326,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Red");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "red");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void CyanChallenge()
@@ -268,7 +339,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Cyan");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "cyan");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void OrangeChallenge()
@@ -277,7 +352,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Orange");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "orange");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void PurpleChallenge()
@@ -286,7 +365,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Purple");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "purple");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void OtherChallenges()
@@ -296,7 +379,11 @@ public class Buttons : MonoBehaviour
         weaponChallengeButtons.SetActive(false);
         enemyChallengeButtons.SetActive(false);
         otherChallengeButtons.SetActive(true);
-    }
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+	}
 
     public void FastChallenge()
     {
@@ -304,7 +391,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Fast");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void SlowChallenge()
@@ -313,7 +404,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Slow");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void AmmoChallenge()
@@ -322,7 +417,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "Ammo");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void UpsideDownChallenge()
@@ -331,7 +430,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "UpsideDown");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void NoAbilityChallenge()
@@ -340,7 +443,11 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "NoAbility");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void CrazyEnemyChallenge()
@@ -349,13 +456,21 @@ public class Buttons : MonoBehaviour
         PlayerPrefs.SetString("challenge", "CrazyEnemy");
         PlayerPrefs.SetString("weapon", "machinegun");
         PlayerPrefs.SetString("managerType", "normal");
-        SceneManager.LoadScene("GameScene");
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene("GameScene");
     }
 
     public void MainMenu()
     {
         Time.timeScale = 1;
-        if (SceneManager.GetActiveScene().name == "MenuScene")
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		if (SceneManager.GetActiveScene().name == "MenuScene")
         {
             mainMenu.enabled = true;
             playMenu.enabled = false;
@@ -363,6 +478,8 @@ public class Buttons : MonoBehaviour
         }
         else
         {
+			saveManager.GetComponent<SaveManager>().ToJson();
+			Destroy(saveManager);
             SceneManager.LoadScene("MenuScene");
         }
     }
@@ -371,12 +488,20 @@ public class Buttons : MonoBehaviour
     {
         pauseMenu.enabled = false;
         Time.timeScale = 1;
-    }
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+	}
 
     public void Retry()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void UseContinue()
@@ -390,7 +515,11 @@ public class Buttons : MonoBehaviour
         player.GetComponent<PlayerMovement>().lives = 3;
         player.GetComponent<PlayerMovement>().lost = false;
         loseMenu.enabled = false;
-    }
+		if (saveManager.GetComponent<SaveManager>().sound)
+		{
+			GetComponent<AudioSource>().Play();
+		}
+	}
 
     public void LeftArrow()
     {
@@ -417,7 +546,11 @@ public class Buttons : MonoBehaviour
                 Ship_1.GetComponent<ShipPreview>().AppearRight();
                 mainShip = "Ship_1";
             }
-        }
+			if (saveManager.GetComponent<SaveManager>().sound)
+			{
+				GetComponent<AudioSource>().Play();
+			}
+		}
     }
 
     public void RightArrow()
@@ -445,6 +578,10 @@ public class Buttons : MonoBehaviour
                 Ship_1.GetComponent<ShipPreview>().AppearLeft();
                 mainShip = "Ship_1";
             }
-        }
+			if (saveManager.GetComponent<SaveManager>().sound)
+			{
+				GetComponent<AudioSource>().Play();
+			}
+		}
     }
 }

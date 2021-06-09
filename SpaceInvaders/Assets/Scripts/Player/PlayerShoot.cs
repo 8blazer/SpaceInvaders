@@ -28,10 +28,16 @@ public class PlayerShoot : MonoBehaviour
     public Text ammoText;
     RaycastHit2D[] collisions;
     public ParticleSystem smoke;
+	public AudioClip machinegunSound;
+	public AudioClip laserSound;
+	public AudioClip rocketSound;
+	GameObject saveManager;
 
     private void Start()
     {
-        weapon = PlayerPrefs.GetString("weapon");
+		saveManager = GameObject.Find("SaveManager");
+
+		weapon = PlayerPrefs.GetString("weapon");
         if (weapon == "minigun")
         {
             ammo = 30;
@@ -138,6 +144,11 @@ public class PlayerShoot : MonoBehaviour
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
+				if (saveManager.GetComponent<SaveManager>().sound)
+				{
+					GetComponent<AudioSource>().clip = machinegunSound;
+					GetComponent<AudioSource>().Play();
+				}
             }
             else if (weapon == "minigun")
             {
@@ -146,7 +157,12 @@ public class PlayerShoot : MonoBehaviour
                 bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
                 bullet = Instantiate(bulletPrefab, transform.position + new Vector3(.2f, .1f, 0), Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 1.5f);
-            }
+				if (saveManager.GetComponent<SaveManager>().sound)
+				{
+					GetComponent<AudioSource>().clip = machinegunSound;
+					GetComponent<AudioSource>().Play();
+				}
+			}
             else if (weapon == "shotgun")
             {
                 int i = 0;
@@ -157,7 +173,12 @@ public class PlayerShoot : MonoBehaviour
                     shell.GetComponent<Rigidbody2D>().velocity = shell.transform.up * (shellSpeed + Random.Range(-.5f, .5f)); // new Vector2(0, shellSpeed + Random.Range(-.5f, .6f));
                     i++;
                 }
-            }
+				if (saveManager.GetComponent<SaveManager>().sound)
+				{
+					GetComponent<AudioSource>().clip = rocketSound;
+					GetComponent<AudioSource>().Play();
+				}
+			}
             else if (weapon == "laser")
             {
                 GameObject laser = Instantiate(laserPrefab, transform.position + new Vector3(0, 7.5f, 0), Quaternion.identity);
@@ -240,27 +261,52 @@ public class PlayerShoot : MonoBehaviour
                     }
                     xOffset += .02f;
                 }
-            }
+				if (saveManager.GetComponent<SaveManager>().sound)
+				{
+					GetComponent<AudioSource>().clip = laserSound;
+					GetComponent<AudioSource>().Play();
+				}
+			}
             else if (weapon == "sniper")
             {
                 GameObject bullet = Instantiate(bulletPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
                 bullet.transform.localScale = new Vector3(1.5f, 1.5f, 1);
                 bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed * 4f);
-            }
+				if (saveManager.GetComponent<SaveManager>().sound)
+				{
+					GetComponent<AudioSource>().clip = rocketSound;
+					GetComponent<AudioSource>().Play();
+				}
+			}
             else if (weapon == "rocket")
             {
                 GameObject rocket = Instantiate(rocketPrefab, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
-            }
+				if (saveManager.GetComponent<SaveManager>().sound)
+				{
+					GetComponent<AudioSource>().clip = rocketSound;
+					GetComponent<AudioSource>().Play();
+				}
+			}
         }
         else if (superWeapon == "super")
         {
             Instantiate(superShot, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
             superWeapon = "";
-        }
+			if (saveManager.GetComponent<SaveManager>().sound)
+			{
+				GetComponent<AudioSource>().clip = rocketSound;
+				GetComponent<AudioSource>().Play();
+			}
+		}
         else
         {
             Instantiate(ultraShot, transform.position + new Vector3(0, .1f, 0), Quaternion.identity);
             superWeapon = "";
-        }
+			if (saveManager.GetComponent<SaveManager>().sound)
+			{
+				GetComponent<AudioSource>().clip = rocketSound;
+				GetComponent<AudioSource>().Play();
+			}
+		}
     }
 }

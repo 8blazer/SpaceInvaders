@@ -41,14 +41,15 @@ public class ShipPreview : MonoBehaviour
     {
         if (direction == "fadeLeft")
         {
-            GetComponent<Image>().color += new Color(0, 0, 0, -.005f);
-            unlockText.GetComponent<Text>().color += new Color(0, 0, 0, -.007f);
-            GetComponent<RectTransform>().position += new Vector3(-3, 0, 0);
-            checkmark.color += new Color(0, 0, 0, -.007f);
+            GetComponent<Image>().color += new Color(0, 0, 0, -5 * Time.deltaTime);
+            unlockText.GetComponent<Text>().color += new Color(0, 0, 0, -7 * Time.deltaTime);
+            GetComponent<RectTransform>().position += new Vector3(-3000 * Time.deltaTime, 0, 0);
+            checkmark.color += new Color(0, 0, 0, -7 * Time.deltaTime);
             if (GetComponent<RectTransform>().localPosition.x < -700)
             {
                 direction = "";
-                GetComponent<Image>().sprite = hiddenPreview;
+				GetComponent<Image>().color = new Color(1, 1, 1, 0);
+				GetComponent<Image>().sprite = hiddenPreview;
                 GetComponent<Button>().interactable = false;
                 unlockText.text = "";
                 checkmark.enabled = false;
@@ -56,14 +57,15 @@ public class ShipPreview : MonoBehaviour
         }
         else if (direction == "fadeRight")
         {
-            GetComponent<Image>().color += new Color(0, 0, 0, -.005f);
-            unlockText.GetComponent<Text>().color += new Color(0, 0, 0, -.007f);
-            GetComponent<RectTransform>().position += new Vector3(3, 0, 0);
-            checkmark.color += new Color(0, 0, 0, -.007f);
-            if (GetComponent<RectTransform>().localPosition.x > 700)
+			GetComponent<Image>().color += new Color(0, 0, 0, -5 * Time.deltaTime);
+			unlockText.GetComponent<Text>().color += new Color(0, 0, 0, -7 * Time.deltaTime);
+			GetComponent<RectTransform>().position += new Vector3(3000 * Time.deltaTime, 0, 0);
+			checkmark.color += new Color(0, 0, 0, -7 * Time.deltaTime);
+			if (GetComponent<RectTransform>().localPosition.x > 700)
             {
                 direction = "";
-                GetComponent<Image>().sprite = hiddenPreview;
+				GetComponent<Image>().color = new Color(1, 1, 1, 0);
+				GetComponent<Image>().sprite = hiddenPreview;
                 GetComponent<Button>().interactable = false;
                 unlockText.text = "";
                 checkmark.enabled = false;
@@ -71,26 +73,28 @@ public class ShipPreview : MonoBehaviour
         }
         else if (direction == "appearRight")
         {
-            GetComponent<Image>().color += new Color(0, 0, 0, .005f);
-            unlockText.GetComponent<Text>().color += new Color(0, 0, 0, .006f);
-            GetComponent<RectTransform>().position += new Vector3(-3, 0, 0);
-            checkmark.color += new Color(0, 0, 0, .006f);
+            GetComponent<Image>().color += new Color(0, 0, 0, 5 * Time.deltaTime);
+            unlockText.GetComponent<Text>().color += new Color(0, 0, 0, 6 * Time.deltaTime);
+            GetComponent<RectTransform>().position += new Vector3(-3000 * Time.deltaTime, 0, 0);
+            checkmark.color += new Color(0, 0, 0, 6 * Time.deltaTime);
             if (GetComponent<RectTransform>().localPosition.x < 0)
             {
                 direction = "";
-                unlockText.GetComponent<Text>().color = new Color(0, 0, 0, 1);
+				GetComponent<Image>().color = new Color(1, 1, 1, 1);
+				unlockText.GetComponent<Text>().color = new Color(0, 0, 0, 1);
                 checkmark.color = new Color(1, 1, 1, 1);
             }
         }
         else if (direction == "appearLeft")
         {
-            GetComponent<Image>().color += new Color(0, 0, 0, .005f);
-            unlockText.GetComponent<Text>().color += new Color(0, 0, 0, .006f);
-            GetComponent<RectTransform>().position += new Vector3(3, 0, 0);
-            checkmark.color += new Color(0, 0, 0, .006f);
+            GetComponent<Image>().color += new Color(0, 0, 0, 5 * Time.deltaTime);
+            unlockText.GetComponent<Text>().color += new Color(0, 0, 0, 6 * Time.deltaTime);
+            GetComponent<RectTransform>().position += new Vector3(3000 * Time.deltaTime, 0, 0);
+            checkmark.color += new Color(0, 0, 0, 6 * Time.deltaTime);
             if (GetComponent<RectTransform>().localPosition.x > 0)
             {
                 direction = "";
+				GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 unlockText.GetComponent<Text>().color = new Color(0, 0, 0, 1);
                 checkmark.color = new Color(1, 1, 1, 1);
             }

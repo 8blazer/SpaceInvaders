@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     public Sprite enemyShip;
     public Sprite goldShip;
 
+	public AudioClip deathSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -229,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (PlayerPrefs.GetString("difficulty") == "Easy")
                 {
-                    if (usedLives)
+                    if (!usedLives)
                     {
                         saveManager.GetComponent<SaveManager>().easyMode = "noLives";
                     }
@@ -244,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (PlayerPrefs.GetString("difficulty") == "Normal")
                 {
-                    if (usedLives)
+                    if (!usedLives)
                     {
                         saveManager.GetComponent<SaveManager>().normalMode = "noLives";
                     }
@@ -259,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    if (usedLives)
+                    if (!usedLives)
                     {
                         saveManager.GetComponent<SaveManager>().hardMode = "noLives";
                     }
@@ -379,7 +381,12 @@ public class PlayerMovement : MonoBehaviour
             lives--;
             canMove = false;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
-            if (lives == 0)
+			if (saveManager.GetComponent<SaveManager>().sound)
+			{
+				GetComponent<AudioSource>().clip = deathSound;
+				GetComponent<AudioSource>().Play();
+			}
+			if (lives == 0)
             {
                 Time.timeScale = 0;
                 if (continues == 0)
